@@ -17,7 +17,25 @@
         "command": "guidedog.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "guidedog-sidebar",
+          "title": "GuideDog",
+          "icon": "./resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "guidedog-sidebar": [
+        {
+          "id": "guidedogView",
+          "name": "GuideDog Tab",
+          "type": "webview"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",

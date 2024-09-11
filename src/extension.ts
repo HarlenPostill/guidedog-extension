@@ -1,26 +1,62 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "guidedog" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('guidedog.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from GuideDog!');
-	});
-
-	context.subscriptions.push(disposable);
+  // Register the Webview View Provider for the custom view
+  const provider = new GuideDogSidebarProvider(context.extensionUri);
+  vscode.window.registerWebviewViewProvider('guidedogView', provider);
 }
 
-// This method is called when your extension is deactivated
+class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
+  private _view?: vscode.WebviewView;
+
+  constructor(private readonly _extensionUri: vscode.Uri) {}
+
+  resolveWebviewView(webviewView: vscode.WebviewView) {
+    this._view = webviewView;
+
+    // Enable scripts in the webview
+    webviewView.webview.options = {
+      enableScripts: true
+    };
+
+    // Set the HTML content of the webview
+    webviewView.webview.html = this.getHtmlContent(webviewView.webview);
+
+    // Handle messages from the webview
+    webviewView.webview.onDidReceiveMessage(async (message) => {
+      switch (message.command) {
+        case 'buttonClick':
+          vscode.window.showInformationMessage(message.text);
+          break;
+      }
+    });
+  }
+
+  // Function to return the HTML content for the webview
+  private getHtmlContent(webview: vscode.Webview): string {
+    return `
+			<!DOCTYPE html>
+			<html lang="en">
+			<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>GuideDog Sidebar</title>
+			</head>
+			<body>
+				<h1>GuideDog Sidebar</h1>
+				<button id="myButton">Click Me!</button>
+
+				<script>
+					const vscode = acquireVsCodeApi();
+					document.getElementById('myButton').addEventListener('click', () => {
+						vscode.postMessage({ command: 'buttonClick', text: 'Hello from Webview!' });
+					});
+				</script>
+			</body>
+			</html>
+		;`;
+  }
+}
+
+// Deactivation function (optional)
 export function deactivate() {}
