@@ -1,16 +1,20 @@
 {
-	"compilerOptions": {
-		"module": "Node16",
-		"target": "ES2022",
-		"lib": [
-			"ES2022"
-		],
-		"sourceMap": true,
-		"rootDir": "src",
-		"strict": true   /* enable all strict type-checking options */
-		/* Additional Checks */
-		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
-		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
-		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
-	}
+  "compilerOptions": {
+    "target": "ES6", // Set to ECMAScript 6 or newer
+    "module": "ESNext", // Use ESNext for module support
+    "jsx": "react", // Enable JSX for React
+    "lib": ["dom", "esnext"], // Include the DOM and ESNext libraries
+    "moduleResolution": "node", // Resolve modules like node.js
+    "esModuleInterop": true, // Interop with CommonJS modules
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true, // Skip type checking for libraries
+    "strict": true, // Enable strict type checking
+    "noEmit": false // Make sure emit is enabled (this is important)
+  },
+  "include": [
+    "src/**/*" // Include all .ts and .tsx files in src/
+  ],
+  "exclude": [
+    "node_modules" // Exclude node_modules
+  ]
 }
