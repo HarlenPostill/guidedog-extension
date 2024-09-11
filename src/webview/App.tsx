@@ -6,11 +6,15 @@ const App = () => {
   const handleClick = () => {
     vscode.postMessage({ command: 'buttonClick' });
   };
+  const handleClickGit = () => {
+    vscode.postMessage({ command: 'buttonGit' });
+  };
 
   return (
     <div>
-      <h1>GuideDog Sidebar (React)</h1>
-      <button onClick={handleClick}>Click Me!</button>
+      <h1>GuideDog Sidebar</h1>
+      <button onClick={handleClick}>Runs Git Branch</button>
+      <button onClick={handleClickGit}>Runs Git</button>
     </div>
   );
 };

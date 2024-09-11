@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
+import { exec } from 'child_process'; // Import child_process to run background commands
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
@@ -14,14 +15,18 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
       enableScripts: true
     };
 
-    // Set the HTML content for the webview, which loads your React app
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
 
-    // Handle messages from the webview
+    // Listen for messages from the webview
     webviewView.webview.onDidReceiveMessage((message) => {
       switch (message.command) {
         case 'buttonClick':
-          vscode.window.showInformationMessage('Button clicked in the GuideDog sidebar (React)!');
+          vscode.window.showInformationMessage('Running git branch in the background...');
+          runGitBranchCommand();
+          break;
+        case 'buttonGit':
+          vscode.window.showInformationMessage('Running git Normal in the background...');
+          runGitCommand();
           break;
         default:
           console.error(`Unknown command: ${message.command}`);
@@ -49,6 +54,37 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
       </html>
     `;
   }
+}
+
+// Function to run the `git branch` command in the background using child_process
+function runGitBranchCommand() {
+  exec('git branch', (error, stdout, stderr) => {
+    if (error) {
+      vscode.window.showErrorMessage(`Error running git branch: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      vscode.window.showErrorMessage(`Git branch stderr: ${stderr}`);
+      return;
+    }
+    // Display the git branches in the VS Code notification
+    vscode.window.showInformationMessage(`Git branches:\n${stdout}`);
+  });
+}
+
+function runGitCommand() {
+  exec('git help -a', (error, stdout, stderr) => {
+    if (error) {
+      vscode.window.showErrorMessage(`Error running git: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      vscode.window.showErrorMessage(`Git stderr: ${stderr}`);
+      return;
+    }
+    // Display the git branches in the VS Code notification
+    vscode.window.showInformationMessage(`Git:\n${stdout}`);
+  });
 }
 
 export function deactivate() {}
