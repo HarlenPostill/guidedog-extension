@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
-import { exec } from 'child_process'; // Import child_process to run background commands
+import { exec } from 'child_process';
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
@@ -17,12 +16,12 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
 
-    // Listen for messages from the webview
+    // Listen for messages from the react end webview
     webviewView.webview.onDidReceiveMessage((message) => {
       switch (message.command) {
         case 'buttonClick':
           vscode.window.showInformationMessage('Running git branch in the background...');
-          runGitBranchCommand();
+          runInstallCommand();
           break;
         case 'buttonGit':
           vscode.window.showInformationMessage('Running git Normal in the background...');
@@ -56,19 +55,18 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
   }
 }
 
-// Function to run the `git branch` command in the background using child_process
-function runGitBranchCommand() {
-  exec('git branch', (error, stdout, stderr) => {
+// Function to run the `npm install guidedog` command in the background using child_process (will not show the terminal)
+function runInstallCommand() {
+  exec('npm install guidedog', (error, stdout, stderr) => {
     if (error) {
-      vscode.window.showErrorMessage(`Error running git branch: ${error.message}`);
+      vscode.window.showErrorMessage(`Error installing GuideDog: ${error.message}`);
       return;
     }
     if (stderr) {
-      vscode.window.showErrorMessage(`Git branch stderr: ${stderr}`);
+      vscode.window.showErrorMessage(`Install stderr: ${stderr}`);
       return;
     }
-    // Display the git branches in the VS Code notification
-    vscode.window.showInformationMessage(`Git branches:\n${stdout}`);
+    vscode.window.showInformationMessage(`Installed Successfully:\n${stdout}`);
   });
 }
 
@@ -82,7 +80,6 @@ function runGitCommand() {
       vscode.window.showErrorMessage(`Git stderr: ${stderr}`);
       return;
     }
-    // Display the git branches in the VS Code notification
     vscode.window.showInformationMessage(`Git:\n${stdout}`);
   });
 }

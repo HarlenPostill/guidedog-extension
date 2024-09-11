@@ -31,7 +31,7 @@
       "guidedog-sidebar": [
         {
           "id": "guidedogView",
-          "name": "GuideDog Tab",
+          "name": "Info",
           "type": "webview"
         }
       ]

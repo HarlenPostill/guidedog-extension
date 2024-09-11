@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div>
       <h1>GuideDog Sidebar</h1>
-      <button onClick={handleClick}>Runs Git Branch</button>
+      <button onClick={handleClick}>Initialise GuideDog</button>
       <button onClick={handleClickGit}>Runs Git</button>
     </div>
   );
