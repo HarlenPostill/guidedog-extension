@@ -15,10 +15,15 @@ const App = () => {
 
   return (
     <div>
-      <Header title="GuideDog Sidebar (React)" />
+      <Header title="Welcome to GuideDog" />
       <SyncData />
-      <button onClick={handleClick}>Initialise GuideDog</button>
-      <button onClick={handleClickGit}>Runs Git</button>
+      <br />
+      <Button
+        text="Manual Sync"
+        onClick={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
     </div>
   );
 };

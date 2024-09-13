@@ -1,19 +1,38 @@
 /* Button.css */
+
 .button {
   border-radius: 5px;
   width: 100%;
   border: none;
-  background: #71bbff;
-  color: white;
   display: flex;
-  padding: 6px 0px 8px 0px;
   justify-content: center;
   align-items: center;
-  box-shadow: inset 0 -2px 0 0 #599cd8;
   transition: box-shadow 0.3s, padding 0.3s;
 }
 
-.button:hover {
+.button.filled {
+  background: #71bbff;
+  color: var(--vscode-editor-background);
+  font-size: 18px;
+  font-weight: 600;
+  padding: 6px 0px 8px 0px;
+  box-shadow: inset 0 -2px 0 0 #599cd8;
+}
+
+.button.filled:hover {
   box-shadow: inset 0 0px 0 0 #599cd8;
   padding: 7px 0px 7px 0px;
+}
+
+.button.outlined {
+  background: transparent;
+  border: 2px solid #71bbff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #71bbff;
+  padding: 5px 0px;
+}
+
+.button.outlined:hover {
+  background: rgba(113, 187, 255, 0.1);
 }

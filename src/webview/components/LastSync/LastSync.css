@@ -1,0 +1,23 @@
+/* LastSync.css */
+
+.lastSync {
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.lastSync .top,
+.lastSync .bot {
+  text-align: right;
+  white-space: nowrap;
+  color: #a3a3a3;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.lastSync .bot {
+  font-weight: 700;
+}
