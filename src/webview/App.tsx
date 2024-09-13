@@ -1,6 +1,7 @@
 import React from 'react';
-import Button from './components/Button';
+import Button from './components/Button/Button';
 import Header from './components/Header';
+import SyncData from './components/SyncData/SyncData';
 
 const vscode = acquireVsCodeApi();
 
@@ -15,7 +16,7 @@ const App = () => {
   return (
     <div>
       <Header title="GuideDog Sidebar (React)" />
-      <Button text="Manual Sync" onClick={handleClick} />
+      <SyncData />
       <button onClick={handleClick}>Initialise GuideDog</button>
       <button onClick={handleClickGit}>Runs Git</button>
     </div>
