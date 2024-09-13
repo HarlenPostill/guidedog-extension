@@ -15,7 +15,7 @@ const App = () => {
   return (
     <div>
       <Header title="GuideDog Sidebar (React)" />
-      <Button text="Click Me!" onClick={handleClick} />
+      <Button text="Manual Sync" onClick={handleClick} />
       <button onClick={handleClick}>Initialise GuideDog</button>
       <button onClick={handleClickGit}>Runs Git</button>
     </div>
