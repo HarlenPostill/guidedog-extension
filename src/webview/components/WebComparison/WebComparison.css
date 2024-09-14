@@ -1,0 +1,15 @@
+.web-comparison-container {
+  margin-bottom: 0.67em;
+  width: 100%;
+
+  gap: 15px;
+  flex-direction: column;
+  display: inline-flex;
+  justify-content: flex-start;
+}
+.web-comparison-label {
+  color: #cccccc;
+  font-size: 18px;
+  font-weight: 700;
+  word-wrap: break-word;
+}

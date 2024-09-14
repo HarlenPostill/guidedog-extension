@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import ActionItems from './components/ActionItems/ActionItems';
 import AccessibilityScore from './components/AccessibilityScore/AccessibilityScore';
+import WebComparison from './components/WebComparison/WebComparison';
 
 const vscode = acquireVsCodeApi();
 
@@ -28,6 +29,7 @@ const App: React.FC = () => {
       <Header title="Welcome to GuideDog" />
       <ActionItems vscode={vscode} />
       <AccessibilityScore score={365} />
+      <WebComparison vscode={vscode} />
 
       {/* DEV ONLY TO SEE WIDTH */}
       <div style={{ marginTop: '1em', color: '#666' }}>
