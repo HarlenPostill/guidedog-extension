@@ -1,0 +1,23 @@
+.accessibility-score-container {
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+  display: inline-flex;
+  margin-bottom: 0.67em;
+}
+
+.accessibility-score-label {
+  color: #cccccc;
+  font-size: 18px;
+  font-weight: 700;
+  word-wrap: break-word;
+}
+
+.accessibility-score-value {
+  color: #71bbff;
+  font-weight: 700;
+  word-wrap: break-word;
+  font-size: 19vw;
+}
