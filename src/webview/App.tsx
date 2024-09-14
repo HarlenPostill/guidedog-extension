@@ -27,7 +27,7 @@ const App: React.FC = () => {
     <div ref={divRef}>
       <Header title="Welcome to GuideDog" />
       <ActionItems vscode={vscode} />
-      <AccessibilityScore />
+      <AccessibilityScore score={365} />
 
       {/* DEV ONLY TO SEE WIDTH */}
       <div style={{ marginTop: '1em', color: '#666' }}>
