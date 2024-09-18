@@ -5,7 +5,7 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
-  return <h1>{title}</h1>;
+  return <h1 style={{ width: '100%', textAlign: 'center' }}>{title}</h1>;
 };
 
 export default Header;
