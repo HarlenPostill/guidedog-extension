@@ -1,0 +1,22 @@
+{
+    "overallScore": 25,
+    "categories": [
+      {
+        "label": "Perceivable",
+        "score": 20
+      },
+      {
+        "label": "Operable",
+        "score": 40
+      },
+      {
+        "label": "Understandable",
+        "score": 30
+      },
+      {
+        "label": "Robust",
+        "score": 10
+      }
+    ]
+  }
+  
