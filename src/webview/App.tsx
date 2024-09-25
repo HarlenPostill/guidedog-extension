@@ -4,6 +4,7 @@ import ActionItems from './components/ActionItems/ActionItems';
 import AccessibilityScore from './components/AccessibilityScore/AccessibilityScore';
 import WebComparison from './components/WebComparison/WebComparison';
 import PawGraph from './components/PawGraph/PawGraph';
+import Icon from './components/Icon/Icon';
 
 const vscode = acquireVsCodeApi();
 
@@ -32,7 +33,7 @@ const App: React.FC = () => {
       <AccessibilityScore score={100} />
       <WebComparison vscode={vscode} />
       <PawGraph aViolations={200} aaViolations={70} aaaViolations={30} />
-
+      <Icon name={'ZoomOutIcon'} />
       {/* DEV ONLY TO SEE WIDTH */}
       <div style={{ marginTop: '1em', color: '#666' }}>
         Current width: {width}px, Ideal is 343px
