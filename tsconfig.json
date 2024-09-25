@@ -5,6 +5,7 @@
     "jsx": "react", // Enable JSX for React
     "lib": ["dom", "esnext"], // Include the DOM and ESNext libraries
     "moduleResolution": "node", // Resolve modules like node.js
+    "resolveJsonModule": true,
     "esModuleInterop": true, // Interop with CommonJS modules
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true, // Skip type checking for libraries

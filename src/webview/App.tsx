@@ -5,12 +5,14 @@ import AccessibilityScore from './components/AccessibilityScore/AccessibilitySco
 import WebComparison from './components/WebComparison/WebComparison';
 import PawGraph from './components/PawGraph/PawGraph';
 import Icon from './components/Icon/Icon';
+import { useDictionary } from './hooks/useDictionary';
 
 const vscode = acquireVsCodeApi();
 
 const App: React.FC = () => {
   const [width, setWidth] = useState(0);
   const divRef = useRef<HTMLDivElement>(null);
+  const d = useDictionary();
 
   // Update width whenever the window is resized for designers
   useEffect(() => {
@@ -28,7 +30,7 @@ const App: React.FC = () => {
 
   return (
     <div ref={divRef}>
-      <Header title="Welcome to GuideDog" />
+      <Header title={d('ui.headers.title')} />
       <ActionItems vscode={vscode} />
       <AccessibilityScore score={100} />
       <WebComparison vscode={vscode} />
