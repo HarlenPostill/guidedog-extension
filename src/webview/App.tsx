@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
-import ActionItems from './components/ActionItems/ActionItems';
-import AccessibilityScore from './components/AccessibilityScore/AccessibilityScore';
-import WebComparison from './components/WebComparison/WebComparison';
-import PawGraph from './components/PawGraph/PawGraph';
-import Icon from './components/Icon/Icon';
 import { useDictionary } from './hooks/useDictionary';
+import Tabs from './components/Tabs/Tabs';
+import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
+import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
+import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay';
 
 const vscode = acquireVsCodeApi();
 
@@ -31,11 +30,12 @@ const App: React.FC = () => {
   return (
     <div ref={divRef}>
       <Header title={d('ui.headers.title')} />
-      <ActionItems vscode={vscode} />
-      <AccessibilityScore score={100} />
-      <WebComparison vscode={vscode} />
-      <PawGraph aViolations={200} aaViolations={70} aaaViolations={30} />
-      <Icon name={'ZoomOutIcon'} />
+      <Tabs headers={['Whole Repo', 'Single File', 'Results']}>
+        <RepoDisplay vscode={vscode} />
+        <SingleDisplay vscode={vscode} />
+        <ResultsDisplay vscode={vscode} />
+      </Tabs>
+
       {/* DEV ONLY TO SEE WIDTH */}
       <div style={{ marginTop: '1em', color: '#666' }}>
         Current width: {width}px, Ideal is 343px

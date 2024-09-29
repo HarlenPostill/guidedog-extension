@@ -1,0 +1,45 @@
+.tab-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.tab-header {
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #718096;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+.tab-button:hover {
+  color: #fda1a2;
+}
+
+.tab-button.active {
+  color: #fda1a2;
+}
+
+.tab-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #fda1a2;
+  transition: all 0.3s ease;
+}
+
+.tab-content {
+  margin-top: 1rem;
+}
