@@ -30,7 +30,12 @@ const App: React.FC = () => {
   return (
     <div ref={divRef}>
       <Header title={d('ui.headers.title')} />
-      <Tabs headers={['Whole Repo', 'Single File', 'Results']}>
+      <Tabs
+        headers={[
+          `${d('ui.headers.tabTitle1')}`,
+          `${d('ui.headers.tabTitle2')}`,
+          `${d('ui.headers.tabTitle3')}`,
+        ]}>
         <RepoDisplay vscode={vscode} />
         <SingleDisplay vscode={vscode} />
         <ResultsDisplay vscode={vscode} />
