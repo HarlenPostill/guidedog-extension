@@ -1,9 +1,9 @@
 import React from 'react';
-import AccessibilityScore from '../../AccessibilityScore/AccessibilityScore';
-import ActionItems from '../../ActionItems/ActionItems';
-import Icon from '../../Icon/Icon';
-import PawGraph from '../../PawGraph/PawGraph';
-import WebComparison from '../../WebComparison/WebComparison';
+import AccessibilityScore from '../../Molecules/AccessibilityScore/AccessibilityScore';
+import ActionItems from '../../Molecules/ActionItems/ActionItems';
+import Icon from '../../Atoms/Icon/Icon';
+import PawGraph from '../../Molecules/PawGraph/PawGraph';
+import WebComparison from '../../Molecules/WebComparison/WebComparison';
 
 const SingleDisplay = (vscode: any) => {
   return (

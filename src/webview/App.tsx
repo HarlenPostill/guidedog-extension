@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Header from './components/Header';
-import { useDictionary } from './hooks/useDictionary';
-import Tabs from './components/Tabs/Tabs';
-import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
-import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
-import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay';
 import './App.css';
+import Header from './components/Atoms/Header';
+import Tabs from './components/Molecules/Tabs/Tabs';
+import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
+import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay';
+import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
+import { useDictionary } from './hooks/useDictionary';
 
 const vscode = acquireVsCodeApi();
 

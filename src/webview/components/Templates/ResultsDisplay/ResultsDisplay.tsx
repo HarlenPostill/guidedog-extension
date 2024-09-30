@@ -1,9 +1,9 @@
 import React from 'react';
-import ActionItems from '../../ActionItems/ActionItems';
-import AccessibilityScore from '../../AccessibilityScore/AccessibilityScore';
-import Icon from '../../Icon/Icon';
-import PawGraph from '../../PawGraph/PawGraph';
-import WebComparison from '../../WebComparison/WebComparison';
+import ActionItems from '../../Molecules/ActionItems/ActionItems';
+import Icon from '../../Atoms/Icon/Icon';
+import PawGraph from '../../Molecules/PawGraph/PawGraph';
+import AccessibilityScore from '../../Molecules/AccessibilityScore/AccessibilityScore';
+import WebComparison from '../../Molecules/WebComparison/WebComparison';
 
 const ResultsDisplay = (vscode: any) => {
   return (

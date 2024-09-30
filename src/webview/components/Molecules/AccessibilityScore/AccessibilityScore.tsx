@@ -1,5 +1,5 @@
 import React from 'react';
-import Divider from '../Divider/Divider';
+import Divider from '../../Atoms/Divider/Divider';
 import './AccessibilityScore.css';
 
 interface AccessibilityScoreProps {
@@ -26,16 +26,14 @@ const AccessibilityScore: React.FC<AccessibilityScoreProps> = ({ score }) => {
       <div className="accessibility-score-value">
         <span
           style={{
-            color: getScoreColor(score)
-          }}
-        >
+            color: getScoreColor(score),
+          }}>
           {score}
         </span>
         <span
           style={{
-            color: '#71BBFF'
-          }}
-        >
+            color: '#71BBFF',
+          }}>
           /400
         </span>
       </div>
