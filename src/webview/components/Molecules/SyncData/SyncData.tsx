@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../Button/Button';
-import LastSync from '../LastSync/LastSync';
+import Button from '../../Atoms/Button/Button';
+import LastSync from '../../Atoms/LastSync/LastSync';
 
 const SyncData = (vscode: any) => {
   const handleClick = () => {

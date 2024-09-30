@@ -1,7 +1,7 @@
 import React from 'react';
 import SyncData from '../SyncData/SyncData';
-import Button from '../Button/Button';
-import Divider from '../Divider/Divider';
+import Button from '../../Atoms/Button/Button';
+import Divider from '../../Atoms/Divider/Divider';
 
 const ActionItems = (vscode: any) => {
   const handleClickGit = () => {

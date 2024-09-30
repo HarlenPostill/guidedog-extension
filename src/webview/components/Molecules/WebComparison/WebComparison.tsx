@@ -1,14 +1,14 @@
 import React from 'react';
-import BarChart from '../BarChart/BarChart';
-import Button from '../Button/Button';
 import './WebComparison.css';
+import BarChart from '../../Atoms/BarChart/BarChart';
+import Button from '../../Atoms/Button/Button';
 
 const WebComparison = (vscode: any) => {
   const websites = [
     { name: 'Amazon.com', score: 364 },
     { name: 'Apple.com', score: 380 },
     { name: 'ebay.com', score: 300 },
-    { name: 'UTS.com.au', score: 260 }
+    { name: 'UTS.com.au', score: 260 },
   ];
 
   const handleClickGit = () => {
