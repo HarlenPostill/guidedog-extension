@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import ZoomOutIcon from './icons/ZoomOutIcon';
+import InfoIcon from './icons/InfoIcon';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   name: keyof typeof icons;
@@ -7,9 +8,10 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 
 const icons = {
   ZoomOutIcon,
+  InfoIcon,
 };
 
-const Icon: FC<IconProps> = ({ name, ...props }) => {
+const Icon = ({ name, ...props }: IconProps) => {
   const IconComponent = icons[name];
 
   if (!IconComponent) return null;

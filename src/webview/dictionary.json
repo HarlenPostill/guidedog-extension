@@ -8,6 +8,12 @@
     },
     "errors": {
       "widthSmall": "Re-size Sidebar to Continue"
+    },
+    "boxes": {
+      "guideLinesViolations": {
+        "title": "WCAG guidelines violations",
+        "suffix": "Violations"
+      }
     }
   }
 }

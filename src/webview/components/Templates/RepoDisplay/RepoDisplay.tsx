@@ -1,11 +1,13 @@
 import React from 'react';
 import WaterLevelPawPrint from '../../Molecules/WaterLevelPawPrint/WaterLevelPawPrint';
+import ViolationsOverview from '../../Organisms/ViolationsOverview/ViolationsOverview';
+import Divider from '../../Atoms/Divider/Divider';
 
 const RepoDisplay = (vscode: any) => {
   return (
     <div>
-      Repo
-      <WaterLevelPawPrint value1={10} value2={10} value3={5} />
+      <ViolationsOverview A={100} AA={100} AAA={150} />
+      <Divider />
     </div>
   );
 };

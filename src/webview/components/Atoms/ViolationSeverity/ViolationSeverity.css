@@ -1,0 +1,18 @@
+.violationText {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.severity-1 {
+  color: #ccc;
+}
+
+.severity-2 {
+  color: #fda1a2;
+}
+
+.severity-3 {
+  color: #ff6d6d;
+}

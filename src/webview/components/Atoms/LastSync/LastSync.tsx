@@ -1,7 +1,7 @@
 import React from 'react';
 import './LastSync.css';
 
-const LastSync: React.FC = () => {
+const LastSync = () => {
   return (
     <div className="lastSync">
       <span className="top">Last Sync:</span>

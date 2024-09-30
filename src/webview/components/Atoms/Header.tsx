@@ -4,7 +4,7 @@ type HeaderProps = {
   title: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ title }) => {
+const Header = ({ title }: HeaderProps) => {
   return <h1 style={{ width: '100%', textAlign: 'center' }}>{title}</h1>;
 };
 

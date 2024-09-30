@@ -6,7 +6,7 @@ interface AccessibilityScoreProps {
   score: number;
 }
 
-const AccessibilityScore: React.FC<AccessibilityScoreProps> = ({ score }) => {
+const AccessibilityScore = ({ score }: AccessibilityScoreProps) => {
   // Function to determine gradient colour based on score
   const getScoreColor = (score: number): string => {
     const maxScore = 400;

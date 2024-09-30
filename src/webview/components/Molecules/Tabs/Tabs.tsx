@@ -6,7 +6,7 @@ interface TabProps {
   children: React.ReactNode[];
 }
 
-const Tabs: React.FC<TabProps> = ({ headers, children }) => {
+const Tabs = ({ headers, children }: TabProps) => {
   const [activeTab, setActiveTab] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const underlineRef = useRef<HTMLDivElement>(null);

@@ -9,7 +9,7 @@ import { useDictionary } from './hooks/useDictionary';
 
 const vscode = acquireVsCodeApi();
 
-const App: React.FC = () => {
+const App = () => {
   const [width, setWidth] = useState(0);
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
@@ -27,7 +27,7 @@ const App: React.FC = () => {
     };
   }, []);
 
-  const isWidthTooSmall = width < 250;
+  const isWidthTooSmall = width < 304;
 
   return (
     <div ref={divRef} className="app-container">

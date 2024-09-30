@@ -7,7 +7,7 @@ interface PawGraphProps {
   aaaViolations: number;
 }
 
-const PawGraph: React.FC<PawGraphProps> = ({ aViolations, aaViolations, aaaViolations }) => {
+const PawGraph = ({ aViolations, aaViolations, aaaViolations }: PawGraphProps) => {
   // Calculate the offset to fill from the bottom
   const aaaWaterlvl = aaaViolations / (aViolations + aaViolations + aaaViolations);
   const aaWaterlvl = (aaViolations + aaaViolations) / (aViolations + aaViolations + aaaViolations);
