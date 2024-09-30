@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
-import ActionItems from './components/ActionItems/ActionItems';
-import AccessibilityScore from './components/AccessibilityScore/AccessibilityScore';
-import WebComparison from './components/WebComparison/WebComparison';
-import PawGraph from './components/PawGraph/PawGraph';
-import Icon from './components/Icon/Icon';
 import { useDictionary } from './hooks/useDictionary';
+import Tabs from './components/Tabs/Tabs';
+import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
+import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
+import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay';
+import './App.css';
 
 const vscode = acquireVsCodeApi();
 
@@ -14,7 +14,6 @@ const App: React.FC = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
 
-  // Update width whenever the window is resized for designers
   useEffect(() => {
     const updateWidth = () => {
       if (divRef.current) {
@@ -28,18 +27,29 @@ const App: React.FC = () => {
     };
   }, []);
 
+  const isWidthTooSmall = width < 250;
+
   return (
-    <div ref={divRef}>
-      <Header title={d('ui.headers.title')} />
-      <ActionItems vscode={vscode} />
-      <AccessibilityScore score={100} />
-      <WebComparison vscode={vscode} />
-      <PawGraph aViolations={200} aaViolations={70} aaaViolations={30} />
-      <Icon name={'ZoomOutIcon'} />
-      {/* DEV ONLY TO SEE WIDTH */}
-      <div style={{ marginTop: '1em', color: '#666' }}>
-        Current width: {width}px, Ideal is 343px
+    <div ref={divRef} className="app-container">
+      <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
+        <Header title={d('ui.headers.title')} />
+        <Tabs
+          headers={[
+            `${d('ui.headers.tabTitle1')}`,
+            `${d('ui.headers.tabTitle2')}`,
+            `${d('ui.headers.tabTitle3')}`,
+          ]}>
+          <RepoDisplay vscode={vscode} />
+          <SingleDisplay vscode={vscode} />
+          <ResultsDisplay vscode={vscode} />
+        </Tabs>
+        <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
       </div>
+      {isWidthTooSmall && (
+        <div className="width-overlay">
+          <p className="width-overlay__message">{d('ui.errors.widthSmall')}</p>
+        </div>
+      )}
     </div>
   );
 };
