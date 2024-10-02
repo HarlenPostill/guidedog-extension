@@ -11,13 +11,27 @@ const Tabs = ({ headers, children }: TabProps) => {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const underlineRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const updateUnderline = () => {
     const activeTabElement = tabRefs.current[activeTab];
     const underlineElement = underlineRef.current;
     if (activeTabElement && underlineElement) {
       underlineElement.style.left = `${activeTabElement.offsetLeft}px`;
       underlineElement.style.width = `${activeTabElement.offsetWidth}px`;
     }
+  };
+
+  useEffect(() => {
+    updateUnderline();
+
+    const handleResize = () => {
+      updateUnderline();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [activeTab]);
 
   return (
