@@ -48,7 +48,8 @@
   left: 0;
   height: 2px;
   background-color: #fda1a2;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, width 0.3s ease;
+  will-change: transform, width;
 }
 
 .tab-content {

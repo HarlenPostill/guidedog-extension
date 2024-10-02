@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './Tabs.css';
 
 interface TabProps {
@@ -11,28 +11,31 @@ const Tabs = ({ headers, children }: TabProps) => {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const underlineRef = useRef<HTMLDivElement>(null);
 
-  const updateUnderline = () => {
+  const updateUnderline = useCallback(() => {
     const activeTabElement = tabRefs.current[activeTab];
     const underlineElement = underlineRef.current;
     if (activeTabElement && underlineElement) {
-      underlineElement.style.left = `${activeTabElement.offsetLeft}px`;
+      underlineElement.style.transform = `translateX(${activeTabElement.offsetLeft}px)`;
       underlineElement.style.width = `${activeTabElement.offsetWidth}px`;
     }
-  };
+  }, [activeTab]);
 
   useEffect(() => {
     updateUnderline();
 
+    let rafId: number;
     const handleResize = () => {
-      updateUnderline();
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateUnderline);
     };
 
     window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(rafId);
     };
-  }, [activeTab]);
+  }, [updateUnderline]);
 
   return (
     <div className="tab-container">
