@@ -11,7 +11,7 @@ interface BarChartProps {
   yourSiteScore: number; // Score for "Your Site"
 }
 
-const BarChart: React.FC<BarChartProps> = ({ websites, yourSiteScore }) => {
+const BarChart = ({ websites, yourSiteScore }: BarChartProps) => {
   const getPercentage = (score: number) => {
     return Math.round((score / 400) * 100);
   };

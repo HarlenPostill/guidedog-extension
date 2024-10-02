@@ -8,7 +8,7 @@ interface WaterLevelPawPrintProps {
   value3: number;
 }
 
-const WaterLevelPawPrint: React.FC<WaterLevelPawPrintProps> = ({ value1, value2, value3 }) => {
+const WaterLevelPawPrint = ({ value1, value2, value3 }: WaterLevelPawPrintProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {

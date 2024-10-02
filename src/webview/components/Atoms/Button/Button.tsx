@@ -7,7 +7,7 @@ type ButtonProps = {
   variant?: 'filled' | 'outlined';
 };
 
-const Button: React.FC<ButtonProps> = ({ text, onClick, variant = 'filled' }) => {
+const Button = ({ text, onClick, variant = 'filled' }: ButtonProps) => {
   return (
     <button className={`button ${variant}`} onClick={onClick}>
       {text}

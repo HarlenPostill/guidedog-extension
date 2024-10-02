@@ -1,0 +1,15 @@
+.link {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  font-family: arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #599cd8;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #295780;
+}
