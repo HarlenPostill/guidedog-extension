@@ -1,0 +1,32 @@
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 10;
+  padding: 5px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  color: #cccccc;
+  border-radius: 5px;
+  border: 1px solid #3b3b3b;
+  background: #242424;
+  width: max-content;
+}
+
+.tooltip-right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 5px;
+}
+
+.tooltip-left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 5px;
+}
