@@ -42,7 +42,9 @@ const StatusIndicator = ({ percentage = 77}) => {
       </div>
       <div className="last-updated">
         last updated <span>2s ago</span>
-        <Icon name="RefreshIcon" width={24} height={24} />
+        <button className="refresh-button">
+                <Icon name="RefreshIcon" width={24} height={24} style={{ fill: 'white' }} />
+            </button>
       </div>
     </div>
   );

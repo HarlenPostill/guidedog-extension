@@ -80,4 +80,16 @@
 .refresh-icon {
   color: var(--vscode-icon-foreground); /* Use the color defined for icons */
   cursor: pointer;
+  margin-left: 5px;
+}
+
+.refresh-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: filter 0.2s ease; /* Smooth transition */
+}
+
+.refresh-button:hover {
+  filter: brightness(0.8); /* Darkens the icon */
 }
