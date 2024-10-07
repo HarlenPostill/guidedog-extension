@@ -19,7 +19,7 @@
   box-sizing: border-box; 
   transition: all 0.3s ease;
   margin: 0 auto;
-  position: relative; /* Ensure positioning context for the divider */
+  position: relative; 
 }
 
 .status {
