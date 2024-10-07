@@ -1,57 +1,83 @@
+:root {
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+}
+
 .status-indicator {
-    display: flex;
-    align-items: center;
-    background-color: #1e1e1e; 
-    color: #c0c0c0; 
-    padding: 10px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .status {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-  }
-  
-  .paw-icon {
-    display: flex;
-    align-items: center;
-    margin-right: 5px;
-  }
-  
-  .paw-icon img {
-    height: 20px;
-    width: 20px;
-  }
-  
-  /* Define color classes for different statuses */
-  .perceivable .status {
-    color: #ffd700; 
-  }
-  
-  .operable .status {
-    color: #ff6b6b;
-  }
-  
-  .understandable .status {
-    color: #ff8c42;
-  }
-  
-  .critical .status {
-    color: #ff6b6b;
-  }
-  
-  .last-updated {
-    color: #c0c0c0;
-    margin-right: 15px;
-  }
-  
-  .last-updated span {
-    color: #77b3ff; 
-  }
-  
-  .refresh-icon {
-    color: #77b3ff;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; /* Space out items */
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+  padding: 10px;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%; 
+  max-width: 800px; 
+  height: 80%; 
+  box-sizing: border-box; 
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  position: relative; /* Ensure positioning context for the divider */
+}
+
+.status {
+  display: flex;
+  align-items: center; 
+  margin-left: 15px;
+}
+
+.paw-icon {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.paw-icon img {
+  height: 20px;
+  width: 20px;
+}
+
+/* Divider styles */
+.divider {
+  height: 40%; 
+  width: 1px; 
+  background-color: #445A6E; 
+  position: absolute; /* Position it absolutely */
+  left: 50%; /* Center it horizontally */
+  transform: translateX(-50%); /* Shift it back by half its width */
+}
+
+/* Define color classes for different statuses */
+.perceivable .status {
+  color: #FFF568; 
+}
+
+.operable .status {
+  color: #FDA1A2; 
+}
+
+.understandable .status {
+  color: #FF9E68; 
+}
+
+.critical .status {
+  color: #FF6D6D; 
+}
+
+.last-updated {
+  color: var(--vscode-editor-foreground);
+  margin-left: 15px; 
+  display: flex; 
+}
+
+.last-updated span {
+  color: var(--vscode-textLink-foreground); /* Use link color defined by VS Code */
+  margin-left: 5px; /* Space between "last updated" and time */
+}
+
+.refresh-icon {
+  color: var(--vscode-icon-foreground); /* Use the color defined for icons */
+  cursor: pointer;
+}
