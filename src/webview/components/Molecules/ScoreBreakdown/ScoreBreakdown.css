@@ -1,0 +1,84 @@
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    gap: 50px;
+  }
+  
+  .score-container {
+    position: relative;
+  }
+  
+  .circle {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(
+      #FFD700 0% 20%,    /* Perceivable - Yellow */
+      #FF6F61 20% 60%,   /* Operable - Pink */
+      #FFB74D 60% 90%,   /* Understandable - Orange */
+      #F48FB1 90% 100%   /* Critical - Light Pink */
+    );
+  }
+  
+  .circle::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #1a1a1a; /* This cuts out the inner portion of the ring */
+  }
+  
+  .score-text {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .score-text h2 {
+    font-size: 1.75rem;
+    margin: 0;
+  }
+  
+  .score-text p {
+    font-size: 1.25rem;
+    color: #888;
+  }
+  
+  .details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .item p {
+    flex-grow: 1;
+    margin: 0;
+    color: #bbb;
+  }
+  
+  .item span {
+    color: #fff;
+    font-weight: bold;
+  }
+  

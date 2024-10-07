@@ -7,6 +7,7 @@ import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay
 import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
 import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
+import ScoreBreakdown from './components/Molecules/ScoreBreakdown/ScoreBreakdown';
 
 const vscode = acquireVsCodeApi();
 
@@ -14,6 +15,12 @@ const App = () => {
   const [width, setWidth] = useState(0);
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
+  const segments = [
+    { label: 'Perceivable', value: 20, color: '#FFD700' },  
+    { label: 'Operable', value: 40, color: '#FF6F61' },      
+    { label: 'Understandable', value: 30, color: '#FFB74D' },
+    { label: 'Critical', value: 10, color: '#F48FB1' }       
+  ];
 
   useEffect(() => {
     const updateWidth = () => {
@@ -45,6 +52,7 @@ const App = () => {
           <SingleDisplay vscode={vscode} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
+        <ScoreBreakdown segments = {segments} />
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
       </div>
       {isWidthTooSmall && (

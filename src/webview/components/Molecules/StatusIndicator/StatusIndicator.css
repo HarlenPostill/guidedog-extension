@@ -19,7 +19,7 @@
   box-sizing: border-box; 
   transition: all 0.3s ease;
   margin: 0 auto;
-  position: relative; /* Ensure positioning context for the divider */
+  position: relative; 
 }
 
 .status {
@@ -39,15 +39,6 @@
   width: 20px;
 }
 
-/* Divider styles */
-.divider {
-  height: 40%; 
-  width: 1px; 
-  background-color: #445A6E; 
-  position: absolute; /* Position it absolutely */
-  left: 50%; /* Center it horizontally */
-  transform: translateX(-50%); /* Shift it back by half its width */
-}
 
 /* Define color classes for different statuses */
 .perceivable .status {
