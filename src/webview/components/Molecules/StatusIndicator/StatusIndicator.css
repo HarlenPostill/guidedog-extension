@@ -1,0 +1,57 @@
+.status-indicator {
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e; 
+    color: #c0c0c0; 
+    padding: 10px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .status {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+  }
+  
+  .paw-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 5px;
+  }
+  
+  .paw-icon img {
+    height: 20px;
+    width: 20px;
+  }
+  
+  /* Define color classes for different statuses */
+  .perceivable .status {
+    color: #ffd700; 
+  }
+  
+  .operable .status {
+    color: #ff6b6b;
+  }
+  
+  .understandable .status {
+    color: #ff8c42;
+  }
+  
+  .critical .status {
+    color: #ff6b6b;
+  }
+  
+  .last-updated {
+    color: #c0c0c0;
+    margin-right: 15px;
+  }
+  
+  .last-updated span {
+    color: #77b3ff; 
+  }
+  
+  .refresh-icon {
+    color: #77b3ff;
+    cursor: pointer;
+  }
+  
