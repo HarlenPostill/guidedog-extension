@@ -1,7 +1,6 @@
 import React from 'react';
 import './RepoIssuesList.css';
 import Link from '../../Atoms/Link/Link';
-import ToolTip from '../../Atoms/ToolTip/ToolTip';
 import { useDictionary } from '../../../hooks/useDictionary';
 
 const RepoIssuesList = () => {
@@ -10,12 +9,10 @@ const RepoIssuesList = () => {
   return (
     <div>
       <div className="headerGroup">
-        <div className="title">
-          <div>{d('ui.boxes.guideLinesViolations.title')}</div>
-          <ToolTip text={d('ui.toolTips.WCAG')} />
-        </div>
+        <div className="title">{d('ui.boxes.issueList.title')}</div>
         <Link
-          name={'See All'}
+          name={d('ui.links.history')}
+          hasIcon={true}
           action={function (): void {
             throw new Error('Function not implemented.');
           }}

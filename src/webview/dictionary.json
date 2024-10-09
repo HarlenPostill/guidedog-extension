@@ -12,10 +12,17 @@
     "errors": {
       "widthSmall": "Expand Sidebar to Continue"
     },
+    "links": {
+      "seeAll": "see all",
+      "history": "history"
+    },
     "boxes": {
       "guideLinesViolations": {
         "title": "WCAG guidelines violations",
         "suffix": "Violations"
+      },
+      "issueList": {
+        "title": "LIST OF ISSUES"
       }
     }
   }

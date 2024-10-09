@@ -6,8 +6,9 @@ import RepoIssuesList from '../../Organisms/RepoIssuesList/RepoIssuesList';
 
 const RepoDisplay = (vscode: any) => {
   return (
-    <div>
-      <ViolationsOverview A={100} AA={100} AAA={100} />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      <ViolationsOverview A={100} AA={50} AAA={100} />
+      <Divider />
       <RepoIssuesList />
       <Divider />
     </div>
