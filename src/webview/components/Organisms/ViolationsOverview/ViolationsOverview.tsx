@@ -5,6 +5,7 @@ import Link from '../../Atoms/Link/Link';
 import './ViolationsOverview.css';
 import ViolationSeverity from '../../Atoms/ViolationSeverity/ViolationSeverity';
 import { useDictionary } from '../../../hooks/useDictionary';
+import ToolTip from '../../Atoms/ToolTip/ToolTip';
 
 interface ViolationsOverview {
   A: number;
@@ -19,7 +20,7 @@ const ViolationsOverview = ({ A, AA, AAA }: ViolationsOverview) => {
       <div className="headerGroup">
         <div className="title">
           <div>{d('ui.boxes.guideLinesViolations.title')}</div>
-          <Icon name={'InfoIcon'} />
+          <ToolTip text={d('ui.toolTips.WCAG')} />
         </div>
         <Link
           name={'See All'}
