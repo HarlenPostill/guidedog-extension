@@ -21,12 +21,6 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: conic-gradient(
-      #FFD700 0% 20%,    /* Perceivable - Yellow */
-      #FF6F61 20% 60%,   /* Operable - Pink */
-      #FFB74D 60% 90%,   /* Understandable - Orange */
-      #F48FB1 90% 100%   /* Critical - Light Pink */
-    );
   }
   
   .circle::before {
