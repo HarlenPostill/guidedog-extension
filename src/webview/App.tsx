@@ -17,9 +17,9 @@ const App = () => {
   const d = useDictionary();
   const segments = [
     { label: 'Perceivable', value: 20, color: '#FFD700' },  
-    { label: 'Operable', value: 40, color: '#FF6F61' },      
+    { label: 'Operable', value: 10, color: '#F48FB1 ' },     
     { label: 'Understandable', value: 30, color: '#FFB74D' },
-    { label: 'Critical', value: 10, color: '#F48FB1' }       
+    { label: 'Critical', value: 40, color: '#FF6F61' }       
   ];
 
   useEffect(() => {
