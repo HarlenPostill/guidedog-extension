@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import './StatusIndicator.css';
 import Icon from '../../Atoms/Icon/Icon';
 
-const StatusIndicator = ({ percentage = 77}) => {
+interface StatusIndicatorProps {
+  percentage?: number;
+  lastUpdated: string; 
+}
+
+const StatusIndicator: React.FC<StatusIndicatorProps> = ({ percentage, lastUpdated }) => {
   const [themeBackground, setThemeBackground] = useState('');
   const [themeForeground, setThemeForeground] = useState('');
 
@@ -14,7 +19,8 @@ const StatusIndicator = ({ percentage = 77}) => {
 
   let status = '';
   let colorClass = '';
-
+if(percentage){
+  
   if (percentage <= 25) {
     status = 'Perceivable';
     colorClass = 'perceivable';
@@ -28,6 +34,7 @@ const StatusIndicator = ({ percentage = 77}) => {
     status = 'Critical';
     colorClass = 'critical';
   }
+}
 
   return (
     <div
@@ -41,10 +48,10 @@ const StatusIndicator = ({ percentage = 77}) => {
         </span>
       </div>
       <div className="last-updated">
-        last updated <span>2s ago</span>
+        last updated <span>{lastUpdated}</span> {/* Use the lastUpdated prop */}
         <button className="refresh-button">
-                <Icon name="RefreshIcon" width={24} height={24} style={{ fill: 'white' }} />
-            </button>
+          <Icon name="RefreshIcon" width={24} height={24} style={{ fill: 'white' }} />
+        </button>
       </div>
     </div>
   );

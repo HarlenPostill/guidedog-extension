@@ -29,12 +29,16 @@ const App = () => {
   }, []);
 
   const isWidthTooSmall = width < 304;
+  const config = {
+    lastUpdated: '5m ago',
+    percentage: 77
+  };
 
   return (
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
         <Header title={d('ui.headers.title')} />
-        <StatusIndicator/>
+        <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
         <Tabs
           headers={[
             `${d('ui.headers.tabTitle1')}`,

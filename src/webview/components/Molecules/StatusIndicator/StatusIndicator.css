@@ -11,7 +11,7 @@
   color: var(--vscode-editor-foreground);
   padding: 10px;
   font-family: Inter;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   width: 100%; 
   max-width: 800px; 
@@ -39,15 +39,6 @@
   width: 20px;
 }
 
-/* Divider styles */
-.divider {
-  height: 40%; 
-  width: 1px; 
-  background-color: #445A6E; 
-  position: absolute; /* Position it absolutely */
-  left: 50%; /* Center it horizontally */
-  transform: translateX(-50%); /* Shift it back by half its width */
-}
 
 /* Define color classes for different statuses */
 .perceivable .status {
@@ -69,16 +60,17 @@
 .last-updated {
   color: var(--vscode-editor-foreground);
   margin-left: 15px; 
+  margin-top: 7px;
   display: flex; 
 }
 
 .last-updated span {
-  color: var(--vscode-textLink-foreground); /* Use link color defined by VS Code */
-  margin-left: 5px; /* Space between "last updated" and time */
+  color: var(--vscode-textLink-foreground);
+  margin-left: 5px; 
 }
 
 .refresh-icon {
-  color: var(--vscode-icon-foreground); /* Use the color defined for icons */
+  color: var(--vscode-icon-foreground);
   cursor: pointer;
   margin-left: 5px;
 }
