@@ -10,7 +10,7 @@
       "WCAG": "This graph represents the overall quantity of violations present across your entire project"
     },
     "errors": {
-      "widthSmall": "Re-size Sidebar to Continue"
+      "widthSmall": "Expand Sidebar to Continue"
     },
     "boxes": {
       "guideLinesViolations": {

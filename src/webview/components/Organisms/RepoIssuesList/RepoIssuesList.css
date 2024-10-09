@@ -1,0 +1,19 @@
+.paw {
+  transform: scale(25%);
+}
+
+.headerGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+.title {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+}

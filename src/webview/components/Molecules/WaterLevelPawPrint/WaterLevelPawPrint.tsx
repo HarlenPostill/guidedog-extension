@@ -6,9 +6,10 @@ interface WaterLevelPawPrintProps {
   value1: number;
   value2: number;
   value3: number;
+  speed?: number;
 }
 
-const WaterLevelPawPrint = ({ value1, value2, value3 }: WaterLevelPawPrintProps) => {
+const WaterLevelPawPrint = ({ value1, value2, value3, speed = 1000 }: WaterLevelPawPrintProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const WaterLevelPawPrint = ({ value1, value2, value3 }: WaterLevelPawPrintProps)
       ctx.fillStyle = color;
       ctx.beginPath();
       for (let x = 0; x < canvas.width; x++) {
-        const y = startY + Math.sin((x / 30 + Date.now() / 200 + offset) * 0.5) * 5;
+        const y = startY + Math.sin((x / 50 + Date.now() / speed + offset) * 5) * 5;
         ctx.lineTo(x, y);
       }
       ctx.lineTo(canvas.width, canvas.height);
