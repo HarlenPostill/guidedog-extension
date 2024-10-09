@@ -44,8 +44,8 @@ const WaterLevelPawPrint = ({ value1, value2, value3 }: WaterLevelPawPrintProps)
       );
       ctx.clip(pawPath);
 
-      drawWater(percentage2, '#FF6D6D', canvas.height * (1 - percentage2), Math.PI); // Add offset here
-      drawWater(percentage1, '#FDA1A2', canvas.height * (1 - percentage1));
+      drawWater(percentage2, '#FDA1A2', canvas.height * (1 - percentage2), Math.PI);
+      drawWater(percentage1, '#FF6D6D', canvas.height * (1 - percentage1));
 
       ctx.restore();
 

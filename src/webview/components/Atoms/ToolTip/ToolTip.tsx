@@ -20,7 +20,7 @@ const ToolTip = ({ text }: ToolTipProps) => {
       const rightSpace = window.innerWidth - containerRect.right;
 
       if (rightSpace < 200) {
-        setMaxWidth(Math.max(100, rightSpace - 20));
+        setMaxWidth(Math.max(80, rightSpace - 20));
         if (rightSpace < 110) {
           setPosition('left');
           const leftSpace = containerRect.left;
