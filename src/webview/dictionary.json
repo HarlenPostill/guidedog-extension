@@ -10,6 +10,14 @@
       "widthSmall": "Re-size Sidebar to Continue"
     },
     "boxes": {
+      "breakdowns": {
+        "title": "BREAKDOWNS",
+        "total": "overall score",
+        "perceivable": "Perceivable",
+        "operable": "Operable",
+        "understandable": "Understandable",
+        "robust": "Robust"
+      },
       "guideLinesViolations": {
         "title": "WCAG guidelines violations",
         "suffix": "Violations"

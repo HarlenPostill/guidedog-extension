@@ -15,10 +15,10 @@ const App = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
   const segments = [
-    { label: 'Perceivable', value: 20, color: '#FFD700' },  
-    { label: 'Operable', value: 10, color: '#F48FB1 ' },     
+    { label: 'Perceivable', value: 20, color: '#FFD700' },
+    { label: 'Operable', value: 10, color: '#F48FB1 ' },
     { label: 'Understandable', value: 30, color: '#FFB74D' },
-    { label: 'Critical', value: 40, color: '#FF6F61' }       
+    { label: 'Critical', value: 40, color: '#FF6F61' },
   ];
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const App = () => {
           <SingleDisplay vscode={vscode} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
-        <ScoreBreakdown segments = {segments} />
+        <ScoreBreakdown perc={20} oper={40} unde={30} robu={10} />
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
       </div>
       {isWidthTooSmall && (

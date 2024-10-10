@@ -1,76 +1,111 @@
-body {
-    background-color: #1a1a1a;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .container {
+.breakdownContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+
+.chart {
+  position: relative;
+
+  width: 140px;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 5px;
+  flex: 1 0 0;
+}
+
+.issueCatP {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #fff568;
+}
+
+.issueCatO {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #fda1a2;
+}
+
+.issueCatU {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #ff9e68;
+}
+
+.issueCatR {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #ff6d6d;
+}
+.descText {
+  color: #a3a3a3;
+  flex: 1 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.percText {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+}
+.scoreWrapper {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.scoreContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .percentage {
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 50px;
-    gap: 50px;
+    align-items: flex-end;
+    align-self: stretch;
+
+    .largeNum {
+      color: #ccc;
+      text-align: center;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+    .sign {
+      color: #ccc;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+    }
   }
-  
-  .score-container {
-    position: relative;
+
+  .overall {
+    color: #a3a3a3;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    white-space: nowrap;
   }
-  
-  .circle {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-  }
-  
-  .circle::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background-color: #1a1a1a; /* This cuts out the inner portion of the ring */
-  }
-  
-  .score-text {
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-  
-  .score-text h2 {
-    font-size: 1.75rem;
-    margin: 0;
-  }
-  
-  .score-text p {
-    font-size: 1.25rem;
-    color: #888;
-  }
-  
-  .details {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  
-  .item p {
-    flex-grow: 1;
-    margin: 0;
-  }
-  
-  .item span {
-    font-weight: bold;
-  }
-  
+}
