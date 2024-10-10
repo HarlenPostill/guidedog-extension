@@ -56,14 +56,12 @@
   flex: 1 0 0;
   font-size: 12px;
   font-weight: 700;
-  line-height: normal;
 }
 
 .percText {
   color: #ccc;
   font-size: 12px;
   font-weight: 700;
-  line-height: normal;
 }
 .scoreWrapper {
   position: absolute;
@@ -87,14 +85,11 @@
       color: #ccc;
       text-align: center;
       font-size: 40px;
-      font-style: normal;
       font-weight: 700;
-      line-height: normal;
     }
     .sign {
       color: #ccc;
       font-size: 10px;
-      font-style: normal;
       font-weight: 700;
       line-height: 28px;
     }
@@ -103,9 +98,7 @@
   .overall {
     color: #a3a3a3;
     font-size: 12px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
     white-space: nowrap;
   }
 }
