@@ -6,7 +6,6 @@ import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
 import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay';
 import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
 import { useDictionary } from './hooks/useDictionary';
-import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import ScoreBreakdown from './components/Molecules/ScoreBreakdown/ScoreBreakdown';
 
 const vscode = acquireVsCodeApi();
@@ -41,7 +40,6 @@ const App = () => {
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
         <Header title={d('ui.headers.title')} />
-        <StatusIndicator/>
         <Tabs
           headers={[
             `${d('ui.headers.tabTitle1')}`,

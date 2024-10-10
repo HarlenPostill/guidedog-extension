@@ -14,16 +14,13 @@ const Breakdown = ({ segments }: { segments: Segment[] }) => {
     let gradientString = '';
     let currentAngle = 0;
     const gapSize = 2; // Size of the gap between segments (in percentage)
-
+  
     segments.forEach((segment, index) => {
       const nextAngle = currentAngle + segment.value;
-
-      if (index === segments.length - 1) {
-        gradientString += `${segment.color} ${currentAngle}% ${nextAngle}%, transparent ${nextAngle}% 100%, transparent 0% ${gapSize}%, `;
-      } else {
-        gradientString += `${segment.color} ${currentAngle}% ${nextAngle}%, transparent ${nextAngle}% ${nextAngle + gapSize}%, `;
-      }
-
+  
+      // For all segments, including the last one
+      gradientString += `${segment.color} ${currentAngle}% ${nextAngle}%, transparent ${nextAngle}% ${nextAngle + gapSize}%, `;
+      
       currentAngle = nextAngle + gapSize;
     });
 
