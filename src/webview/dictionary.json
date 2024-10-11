@@ -4,7 +4,13 @@
       "title": "Guidedog Summary",
       "tabTitle1": "Whole Repo",
       "tabTitle2": "Single File",
-      "tabTitle3": "Results"
+      "tabTitle3": "Results",
+      "status": {
+        "Perceivable": "Perceivable",
+        "Operable": "Operable",
+        "Understandable": "Understandable",
+        "Critical": "Critical"
+      }
     },
     "toolTips": {
       "WCAG": "This graph represents the overall quantity of violations present across your entire project"
@@ -24,6 +30,9 @@
       "issueList": {
         "title": "LIST OF ISSUES"
       }
+    },
+    "text": {
+      "lastUpdated": "Last Updated"
     }
   }
 }
