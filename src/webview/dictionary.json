@@ -28,7 +28,9 @@
         "suffix": "Violations"
       },
       "issueList": {
-        "title": "LIST OF ISSUES"
+        "title": "LIST OF ISSUES",
+        "linePrefix": "Line ",
+        "issuePillSuffix": " issues"
       }
     },
     "text": {

@@ -53,8 +53,8 @@
 
 .issueFrame.hovered .issueDesc {
   opacity: 1;
-  max-height: 1.5em; /* Adjust based on your font-size and line-height */
-  margin-top: 4px; /* Add some space above the description when visible */
+  max-height: 1.5em;
+  margin-top: 4px;
 }
 
 .fileName {

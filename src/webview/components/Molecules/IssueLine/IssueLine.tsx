@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { InsertDriveFileOutlined, MoreHoriz } from '@mui/icons-material';
 import './IssueLine.css';
+import { useDictionary } from '../../../hooks/useDictionary';
 
 interface IssueLineProps {
   fileName: string;
@@ -11,6 +12,8 @@ interface IssueLineProps {
 
 const IssueLine = ({ fileName, lineNum, issueString, onMoreClick }: IssueLineProps) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  const d = useDictionary();
 
   return (
     <div
@@ -23,7 +26,10 @@ const IssueLine = ({ fileName, lineNum, issueString, onMoreClick }: IssueLinePro
           <div className="fileName">{fileName}</div>
         </div>
         <div className="issueLine">
-          <div className="fileName">Line {lineNum}</div>
+          <div className="fileName">
+            {d('ui.boxes.issueList.linePrefix')}
+            {lineNum}
+          </div>
           <div className="issueDesc">{issueString}</div>
         </div>
         <MoreHoriz
