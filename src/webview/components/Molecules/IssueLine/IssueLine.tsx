@@ -7,19 +7,26 @@ interface IssueLineProps {
   fileName: string;
   lineNum: number;
   issueString: string;
-  vscode: any;
   onMoreClick: () => void;
 }
 
-const IssueLine = ({ vscode, fileName, lineNum, issueString, onMoreClick }: IssueLineProps) => {
+declare const acquireVsCodeApi: () => {
+  postMessage: (message: any) => void;
+};
+
+const vscode = acquireVsCodeApi();
+
+const IssueLine = ({ fileName, lineNum, issueString, onMoreClick }: IssueLineProps) => {
   const [isHovered, setIsHovered] = useState(false);
-
   const d = useDictionary();
-
   const extractedFileName = fileName.split('/').pop();
 
   const handleClick = () => {
-    vscode.postMessage({ command: 'buttonGit' });
+    vscode.postMessage({
+      command: 'openFile',
+      fileName: fileName,
+      lineNumber: lineNum,
+    });
   };
 
   return (
@@ -42,7 +49,10 @@ const IssueLine = ({ vscode, fileName, lineNum, issueString, onMoreClick }: Issu
         </div>
         <MoreHoriz
           style={{ width: '16px', height: '16px', cursor: 'pointer' }}
-          onClick={onMoreClick}
+          onClick={e => {
+            e.stopPropagation();
+            onMoreClick();
+          }}
         />
       </div>
     </div>

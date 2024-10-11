@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
+import path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
@@ -11,13 +12,13 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
   resolveWebviewView(webviewView: vscode.WebviewView) {
     webviewView.webview.options = {
-      enableScripts: true
+      enableScripts: true,
     };
 
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
 
     // Listen for messages from the react end webview
-    webviewView.webview.onDidReceiveMessage((message) => {
+    webviewView.webview.onDidReceiveMessage(message => {
       switch (message.command) {
         case 'buttonClick':
           vscode.window.showInformationMessage('Running git branch in the background...');
@@ -27,10 +28,37 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
           vscode.window.showInformationMessage('Running git Normal in the background...');
           runGitCommand();
           break;
+        case 'openFile':
+          this._openFile(message.fileName, message.lineNumber);
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
     });
+  }
+
+  private async _openFile(fileName: string, lineNumber: number) {
+    try {
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if (!workspaceFolders) {
+        vscode.window.showErrorMessage('No workspace folder is open');
+        return;
+      }
+
+      const rootPath = workspaceFolders[0].uri.fsPath;
+      const fullPath = path.join(rootPath, fileName);
+
+      const document = await vscode.workspace.openTextDocument(fullPath);
+      const editor = await vscode.window.showTextDocument(document);
+
+      const range = editor.document.lineAt(lineNumber - 1).range;
+      editor.selection = new vscode.Selection(range.start, range.end);
+      editor.revealRange(range, vscode.TextEditorRevealType.InCenter);
+
+      vscode.window.showInformationMessage(`Opened ${fileName} at line ${lineNumber}`);
+    } catch (error) {
+      vscode.window.showErrorMessage(`Failed to open file: ${error}`);
+    }
   }
 
   private getHtmlForWebview(webview: vscode.Webview): string {

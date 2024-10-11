@@ -86,7 +86,6 @@ const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListP
             </div>
             {group.issues.map((item, index) => (
               <IssueLine
-                vscode={vscode}
                 key={`${issueType}-${index}`}
                 fileName={item.fileName}
                 lineNum={item.issue.location}
