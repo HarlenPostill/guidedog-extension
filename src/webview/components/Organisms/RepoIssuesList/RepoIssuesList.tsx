@@ -3,8 +3,10 @@ import './RepoIssuesList.css';
 import Link from '../../Atoms/Link/Link';
 import { useDictionary } from '../../../hooks/useDictionary';
 import PetsIcon from '@mui/icons-material/Pets';
-import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 
+import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
+import { MoreHoriz, InsertDriveFileOutlined } from '@mui/icons-material';
+import IssueLine from '../../Molecules/IssueLine/IssueLine';
 interface RepoIssuesListProps {
   hasSort?: boolean;
 }
@@ -13,7 +15,7 @@ const RepoIssuesList = ({ hasSort = false }: RepoIssuesListProps) => {
   const d = useDictionary();
 
   return (
-    <div>
+    <div className="repoIssuesList">
       <div className="headerGroup">
         <div className="title">
           {d('ui.boxes.issueList.title')}
@@ -36,8 +38,31 @@ const RepoIssuesList = ({ hasSort = false }: RepoIssuesListProps) => {
             </div>
             <div className="issuePill">5 issues</div>
           </div>
-          <span>random text</span>
-          <span>random text 2</span>
+          {/* the component will go here*/}
+          <IssueLine
+            fileName={'Page.js'}
+            lineNum={47}
+            issueString={'big long issue here'}
+            onMoreClick={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
+          <IssueLine
+            fileName={'Page.js'}
+            lineNum={47}
+            issueString={'super long issue desctipions is here and you know what i mean'}
+            onMoreClick={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
+          <IssueLine
+            fileName={'Page.js'}
+            lineNum={47}
+            issueString={'big long issue here'}
+            onMoreClick={function (): void {
+              throw new Error('Function not implemented.');
+            }}
+          />
         </div>
       </div>
     </div>

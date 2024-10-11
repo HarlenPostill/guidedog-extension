@@ -1,0 +1,65 @@
+.issueFrame {
+  display: flex;
+  padding: 5px 10px;
+  align-items: flex-start;
+  gap: 2px;
+  align-self: stretch;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.issueFrame.hovered {
+  background-color: rgba(36, 36, 36, 0.8);
+}
+
+.issueInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0 0;
+}
+
+.issueFile {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  align-self: stretch;
+}
+
+.issueLine {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2px;
+  flex: 1 0 0;
+}
+
+.issueDesc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  align-self: stretch;
+  overflow: hidden;
+  color: #fff;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
+  margin-top: 0;
+}
+
+.issueFrame.hovered .issueDesc {
+  opacity: 1;
+  max-height: 1.5em; /* Adjust based on your font-size and line-height */
+  margin-top: 4px; /* Add some space above the description when visible */
+}
+
+.fileName {
+  color: #ccc;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}

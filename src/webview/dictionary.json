@@ -24,7 +24,7 @@
     },
     "boxes": {
       "guideLinesViolations": {
-        "title": "WCAG guidelines violations",
+        "title": "WCAG GUIDELINE VIOLATIONS",
         "suffix": "Violations"
       },
       "issueList": {
