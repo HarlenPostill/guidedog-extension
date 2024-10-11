@@ -4,7 +4,13 @@
       "title": "Guidedog Summary",
       "tabTitle1": "Whole Repo",
       "tabTitle2": "Single File",
-      "tabTitle3": "Results"
+      "tabTitle3": "Results",
+      "status": {
+        "Perceivable": "Perceivable",
+        "Operable": "Operable",
+        "Understandable": "Understandable",
+        "Critical": "Critical"
+      }
     },
     "errors": {
       "widthSmall": "Re-size Sidebar to Continue"
@@ -15,7 +21,7 @@
         "suffix": "Violations"
       }
     },
-    "text":{
+    "text": {
       "lastUpdated": "Last Updated"
     }
   }
