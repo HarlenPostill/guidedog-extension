@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './StatusIndicator.css';
 import Icon from '../../Atoms/Icon/Icon';
+import { useDictionary } from '../../../hooks/useDictionary';
 
 interface StatusIndicatorProps {
   percentage?: number;
@@ -8,15 +9,6 @@ interface StatusIndicatorProps {
 }
 
 const StatusIndicator: React.FC<StatusIndicatorProps> = ({ percentage, lastUpdated }) => {
-  const [themeBackground, setThemeBackground] = useState('');
-  const [themeForeground, setThemeForeground] = useState('');
-
-  useEffect(() => {
-    const rootStyles = getComputedStyle(document.documentElement);
-    setThemeBackground(rootStyles.getPropertyValue('--vscode-editor-background'));
-    setThemeForeground(rootStyles.getPropertyValue('--vscode-editor-foreground'));
-  }, []);
-
   let status = '';
   let colorClass = '';
 if(percentage){
@@ -36,11 +28,11 @@ if(percentage){
   }
 }
 
+const d = useDictionary();
+
   return (
     <div
-      className={`status-indicator ${colorClass}`}
-      style={{ backgroundColor: themeBackground, color: themeForeground }}
-    >
+      className={`status-indicator ${colorClass}`}>
       <div className="status">
         <span>{status}</span>
         <span className="paw-icon">
@@ -48,7 +40,7 @@ if(percentage){
         </span>
       </div>
       <div className="last-updated">
-        last updated <span>{lastUpdated}</span> {/* Use the lastUpdated prop */}
+        {d("ui.text.lastUpdated")} <span>{lastUpdated}</span> {/* Use the lastUpdated prop */}
         <button className="refresh-button">
           <Icon name="RefreshIcon" width={24} height={24} style={{ fill: 'white' }} />
         </button>

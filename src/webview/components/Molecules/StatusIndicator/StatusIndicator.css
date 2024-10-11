@@ -1,17 +1,10 @@
-:root {
-  background-color: var(--vscode-editor-background);
-  color: var(--vscode-editor-foreground);
-}
 
 .status-indicator {
   display: flex;
   align-items: center; 
   justify-content: space-between; /* Space out items */
-  background-color: var(--vscode-editor-background);
-  color: var(--vscode-editor-foreground);
   padding: 10px;
-  font-family: Inter;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   width: 100%; 
   max-width: 800px; 
@@ -58,19 +51,17 @@
 }
 
 .last-updated {
-  color: var(--vscode-editor-foreground);
   margin-left: 15px; 
-  margin-top: 7px;
+  align-items: center;
   display: flex; 
 }
 
 .last-updated span {
-  color: var(--vscode-textLink-foreground);
+
   margin-left: 5px; 
 }
 
 .refresh-icon {
-  color: var(--vscode-icon-foreground);
   cursor: pointer;
   margin-left: 5px;
 }
