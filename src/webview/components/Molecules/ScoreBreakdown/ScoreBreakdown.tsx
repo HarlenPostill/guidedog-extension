@@ -15,19 +15,19 @@ interface BreakdownProps {
 const Breakdown = ({ perc, oper, unde, robu }: BreakdownProps) => {
   const d = useDictionary();
 
-  const totalPercentage = (perc + oper + unde + robu) / 400;
+  const totalPercentage = (perc + oper + unde + robu) / 4;
 
   return (
     <div className="breakdownContainer">
       <div className="chart">
         <PieChart
-          lineWidth={16}
-          paddingAngle={18}
+          lineWidth={14}
+          paddingAngle={10}
           data={[
-            { value: 10, color: '#fff568' },
-            { value: 15, color: '#fda1a2' },
-            { value: 20, color: '#ff9e68' },
-            { value: 20, color: '#ff6d6d' },
+            { value: perc, color: '#fff568' },
+            { value: oper, color: '#fda1a2' },
+            { value: unde, color: '#ff9e68' },
+            { value: robu, color: '#ff6d6d' },
           ]}
         />
         <div className="scoreWrapper">

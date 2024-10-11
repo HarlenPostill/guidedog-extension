@@ -3,6 +3,7 @@
   align-items: center;
   gap: 16px;
   align-self: stretch;
+  margin-top: 20px;
 }
 
 .chart {
@@ -16,6 +17,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  margin-left: 15px;
   gap: 5px;
   flex: 1 0 0;
 }
