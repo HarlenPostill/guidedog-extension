@@ -7,23 +7,31 @@ interface IssueLineProps {
   fileName: string;
   lineNum: number;
   issueString: string;
+  vscode: any;
   onMoreClick: () => void;
 }
 
-const IssueLine = ({ fileName, lineNum, issueString, onMoreClick }: IssueLineProps) => {
+const IssueLine = ({ vscode, fileName, lineNum, issueString, onMoreClick }: IssueLineProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const d = useDictionary();
+
+  const extractedFileName = fileName.split('/').pop();
+
+  const handleClick = () => {
+    vscode.postMessage({ command: 'buttonGit' });
+  };
 
   return (
     <div
       className={`issueFrame ${isHovered ? 'hovered' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}>
       <div className="issueInfo">
         <div className="issueFile">
           <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />
-          <div className="fileName">{fileName}</div>
+          <div className="fileName">{extractedFileName}</div>
         </div>
         <div className="issueLine">
           <div className="fileName">
