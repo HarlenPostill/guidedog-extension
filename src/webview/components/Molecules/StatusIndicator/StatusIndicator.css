@@ -1,0 +1,74 @@
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  font-weight: 700;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  position: relative;
+}
+
+.status {
+  display: flex;
+  font-size: 18px;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.paw-icon {
+  display: flex;
+  align-items: center;
+}
+
+.paw-icon img {
+  height: 20px;
+  width: 20px;
+}
+
+/* Define color classes for different statuses */
+.perceivable .status {
+  color: #fff568;
+}
+
+.operable .status {
+  color: #fda1a2;
+}
+
+.understandable .status {
+  color: #ff9e68;
+}
+
+.critical .status {
+  color: #ff6d6d;
+}
+
+.last-updated {
+  margin-left: 15px;
+  font-size: 12px;
+  align-items: center;
+  display: flex;
+}
+
+.last-updated span {
+  margin-left: 5px;
+}
+
+.refresh-icon {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.refresh-button {
+  border: none;
+  width: 24px;
+  height: 24px;
+  background: none;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.refresh-button:hover {
+  filter: brightness(0.6);
+}
