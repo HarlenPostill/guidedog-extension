@@ -162,7 +162,7 @@ const RepoIssuesList = ({
                   key={item.id}
                   fileName={item.fileName}
                   lineNum={item.issue.location}
-                  issueString={`${item.issue.impact} impact - ${item.issue.improvement}`}
+                  issueString={item.issue.improvement}
                   onMoreClick={() => {
                     console.log('More clicked for', item.fileName, item.issue);
                   }}
