@@ -1,0 +1,40 @@
+{
+  "ui": {
+    "headers": {
+      "title": "Ringkasan Guidedog",
+      "tabTitle1": "Seluruh Repo",
+      "tabTitle2": "File Tunggal",
+      "tabTitle3": "Hasil",
+      "status": {
+        "Perceivable": "Terlihat",
+        "Operable": "Dapat Dioperasikan",
+        "Understandable": "Dapat Dipahami",
+        "Critical": "Kritis"
+      }
+    },
+    "toolTips": {
+      "WCAG": "Grafik ini menunjukkan jumlah pelanggaran yang terjadi di seluruh proyek Anda"
+    },
+    "errors": {
+      "widthSmall": "Perluas Sidebar untuk Melanjutkan"
+    },
+    "links": {
+      "seeAll": "lihat semua",
+      "history": "riwayat"
+    },
+    "boxes": {
+      "guideLinesViolations": {
+        "title": "PELANGGARAN PEDOMAN WCAG",
+        "suffix": "Pelanggaran"
+      },
+      "issueList": {
+        "title": "DAFTAR MASALAH",
+        "linePrefix": "Baris ",
+        "issuePillSuffix": " masalah"
+      }
+    },
+    "text": {
+      "lastUpdated": "Terakhir Diperbarui"
+    }
+  }
+}

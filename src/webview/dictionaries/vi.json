@@ -1,0 +1,40 @@
+{
+  "ui": {
+    "headers": {
+      "title": "Tóm tắt Guidedog",
+      "tabTitle1": "Toàn bộ Kho",
+      "tabTitle2": "Tệp đơn",
+      "tabTitle3": "Kết quả",
+      "status": {
+        "Perceivable": "Có thể nhận biết",
+        "Operable": "Có thể vận hành",
+        "Understandable": "Có thể hiểu được",
+        "Critical": "Nghiêm trọng"
+      }
+    },
+    "toolTips": {
+      "WCAG": "Biểu đồ này đại diện cho tổng số lượng vi phạm có trong toàn bộ dự án của bạn"
+    },
+    "errors": {
+      "widthSmall": "Mở rộng thanh bên để tiếp tục"
+    },
+    "links": {
+      "seeAll": "xem tất cả",
+      "history": "lịch sử"
+    },
+    "boxes": {
+      "guideLinesViolations": {
+        "title": "VI PHẠM NGUYÊN TẮC WCAG",
+        "suffix": "Vi phạm"
+      },
+      "issueList": {
+        "title": "DANH SÁCH CÁC VẤN ĐỀ",
+        "linePrefix": "Dòng ",
+        "issuePillSuffix": " vấn đề"
+      }
+    },
+    "text": {
+      "lastUpdated": "Cập nhật lần cuối"
+    }
+  }
+}
