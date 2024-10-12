@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "गाइडडॉग सारांश",
+            "tabTitle1": "संपूर्ण रेपो",
+            "tabTitle2": "एक फाइल",
+            "tabTitle3": "परिणाम",
+            "status": {
+                "Perceivable": "समझ योग्य",
+                "Operable": "प्रचलित",
+                "Understandable": "बोधगम्य",
+                "Critical": "गंभीर"
+            }
+        },
+        "toolTips": {
+            "WCAG": "यह ग्राफ़ आपके संपूर्ण प्रोजेक्ट में मौजूद उल्लंघनों की कुल मात्रा को दर्शाता है"
+        },
+        "errors": {
+            "widthSmall": "जारी रखने के लिए साइडबार का विस्तार करें"
+        },
+        "links": {
+            "seeAll": "सभी देखें",
+            "history": "इतिहास"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "WCAG दिशानिर्देश उल्लंघन",
+                "suffix": "उल्लंघन"
+            },
+            "issueList": {
+                "title": "मुद्दों की सूची",
+                "linePrefix": "रेखा",
+                "issuePillSuffix": "समस्याएँ"
+            }
+        },
+        "text": {
+            "lastUpdated": "आखरी अपडेट"
+        }
+    }
+}

@@ -1,6 +1,5 @@
 import React from 'react';
 import WaterLevelPawPrint from '../../Molecules/WaterLevelPawPrint/WaterLevelPawPrint';
-import Icon from '../../Atoms/Icon/Icon';
 import Link from '../../Atoms/Link/Link';
 import './ViolationsOverview.css';
 import ViolationSeverity from '../../Atoms/ViolationSeverity/ViolationSeverity';
@@ -23,7 +22,7 @@ const ViolationsOverview = ({ A, AA, AAA }: ViolationsOverview) => {
           <ToolTip text={d('ui.toolTips.WCAG')} />
         </div>
         <Link
-          name={'See All'}
+          name={d('ui.links.seeAll')}
           action={function (): void {
             throw new Error('Function not implemented.');
           }}

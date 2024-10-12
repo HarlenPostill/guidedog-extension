@@ -31,7 +31,7 @@
       "guidedog-sidebar": [
         {
           "id": "guidedogView",
-          "name": "Info",
+          "name": "Summary",
           "type": "webview"
         }
       ]
@@ -75,6 +75,10 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.2",
+    "@mui/material": "^6.1.2",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

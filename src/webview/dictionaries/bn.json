@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "গাইডডগ সারাংশ",
+            "tabTitle1": "পুরো রেপো",
+            "tabTitle2": "একক ফাইল",
+            "tabTitle3": "ফলাফল",
+            "status": {
+                "Perceivable": "উপলব্ধিযোগ্য",
+                "Operable": "পরিচালনাযোগ্য",
+                "Understandable": "বোধগম্য",
+                "Critical": "সমালোচনামূলক"
+            }
+        },
+        "toolTips": {
+            "WCAG": "This graph represents the overall quantity of violations present across your entire project"
+        },
+        "errors": {
+            "widthSmall": "চালিয়ে যেতে সাইডবার প্রসারিত করুন"
+        },
+        "links": {
+            "seeAll": "সব দেখুন",
+            "history": "ইতিহাস"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "WCAG নির্দেশিকা লঙ্ঘন",
+                "suffix": "লঙ্ঘন"
+            },
+            "issueList": {
+                "title": "সমস্যার তালিকা",
+                "linePrefix": "লাইন",
+                "issuePillSuffix": "সমস্যা"
+            }
+        },
+        "text": {
+            "lastUpdated": "সর্বশেষ আপডেট"
+        }
+    }
+}

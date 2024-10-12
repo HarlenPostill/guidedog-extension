@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "Краткое описание собаки-поводыря",
+            "tabTitle1": "Весь репо",
+            "tabTitle2": "Один файл",
+            "tabTitle3": "Результаты",
+            "status": {
+                "Perceivable": "Воспринимаемый",
+                "Operable": "Работоспособный",
+                "Understandable": "Понятно",
+                "Critical": "Критический"
+            }
+        },
+        "toolTips": {
+            "WCAG": "На этом графике показано общее количество нарушений во всем проекте."
+        },
+        "errors": {
+            "widthSmall": "Разверните боковую панель, чтобы продолжить"
+        },
+        "links": {
+            "seeAll": "увидеть все",
+            "history": "история"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "Нарушения руководства WCAG",
+                "suffix": "Нарушения"
+            },
+            "issueList": {
+                "title": "СПИСОК ПРОБЛЕМ",
+                "linePrefix": "Линия",
+                "issuePillSuffix": "проблемы"
+            }
+        },
+        "text": {
+            "lastUpdated": "Последнее обновление"
+        }
+    }
+}

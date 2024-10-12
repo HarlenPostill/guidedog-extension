@@ -1,6 +1,4 @@
 import React from 'react';
-import ZoomOutIcon from './icons/ZoomOutIcon';
-import InfoIcon from './icons/InfoIcon';
 import Paw from './icons/Paw';
 import RefreshIcon from './icons/RefreshIcon';
 
@@ -9,8 +7,6 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 }
 
 const icons = {
-  ZoomOutIcon,
-  InfoIcon,
   Paw,
   RefreshIcon,
 };

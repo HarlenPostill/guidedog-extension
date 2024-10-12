@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "Resumo do cão-guia",
+            "tabTitle1": "Repositório inteiro",
+            "tabTitle2": "Arquivo Único",
+            "tabTitle3": "Resultados",
+            "status": {
+                "Perceivable": "Perceptível",
+                "Operable": "Operável",
+                "Understandable": "Compreensível",
+                "Critical": "Crítico"
+            }
+        },
+        "toolTips": {
+            "WCAG": "Este gráfico representa a quantidade geral de violações presentes em todo o seu projeto"
+        },
+        "errors": {
+            "widthSmall": "Expanda a barra lateral para continuar"
+        },
+        "links": {
+            "seeAll": "ver tudo",
+            "history": "história"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "VIOLAÇÕES DAS DIRETRIZES WCAG",
+                "suffix": "Violações"
+            },
+            "issueList": {
+                "title": "LISTA DE QUESTÕES",
+                "linePrefix": "Linha",
+                "issuePillSuffix": "problemas"
+            }
+        },
+        "text": {
+            "lastUpdated": "Última atualização"
+        }
+    }
+}

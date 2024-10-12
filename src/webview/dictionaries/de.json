@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "Zusammenfassung des Blindenhundes",
+            "tabTitle1": "Ganzes Repo",
+            "tabTitle2": "Einzelne Datei",
+            "tabTitle3": "Ergebnisse",
+            "status": {
+                "Perceivable": "Spürbar",
+                "Operable": "Bedienbar",
+                "Understandable": "Verständlich",
+                "Critical": "Kritisch"
+            }
+        },
+        "toolTips": {
+            "WCAG": "Dieses Diagramm stellt die Gesamtzahl der Verstöße in Ihrem gesamten Projekt dar"
+        },
+        "errors": {
+            "widthSmall": "Erweitern Sie die Seitenleiste, um fortzufahren"
+        },
+        "links": {
+            "seeAll": "alles sehen",
+            "history": "Geschichte"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "Verstöße gegen die WCAG-Richtlinien",
+                "suffix": "Verstöße"
+            },
+            "issueList": {
+                "title": "LISTE DER PROBLEME",
+                "linePrefix": "Linie",
+                "issuePillSuffix": "Probleme"
+            }
+        },
+        "text": {
+            "lastUpdated": "Zuletzt aktualisiert"
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "Resumen del perro guía",
+            "tabTitle1": "Repositorio completo",
+            "tabTitle2": "Fila india",
+            "tabTitle3": "Resultados",
+            "status": {
+                "Perceivable": "Perceptible",
+                "Operable": "Operable",
+                "Understandable": "Comprensible",
+                "Critical": "Crítico"
+            }
+        },
+        "toolTips": {
+            "WCAG": "Este gráfico representa la cantidad total de infracciones presentes en todo el proyecto."
+        },
+        "errors": {
+            "widthSmall": "Expanda la barra lateral para continuar"
+        },
+        "links": {
+            "seeAll": "ver todo",
+            "history": "historia"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "VIOLACIONES DE LAS DIRECTRICES WCAG",
+                "suffix": "Violaciones"
+            },
+            "issueList": {
+                "title": "LISTA DE CUESTIONES",
+                "linePrefix": "Línea",
+                "issuePillSuffix": "asuntos"
+            }
+        },
+        "text": {
+            "lastUpdated": "Última actualización"
+        }
+    }
+}

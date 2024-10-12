@@ -7,8 +7,9 @@ import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay
 import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
 import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
+import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
 
-const vscode = acquireVsCodeApi();
+const vscode = 1;
 
 const App = () => {
   const [width, setWidth] = useState(0);
@@ -31,13 +32,17 @@ const App = () => {
   const isWidthTooSmall = width < 304;
   const config = {
     lastUpdated: '5m ago',
-    percentage: 77
+    percentage: 77,
   };
 
   return (
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
+        <div className="language">
+          <LanguageSelector />
+        </div>
         <Header title={d('ui.headers.title')} />
+
         <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
         <Tabs
           headers={[

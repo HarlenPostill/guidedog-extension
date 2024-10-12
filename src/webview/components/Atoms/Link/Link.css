@@ -6,8 +6,16 @@
   font-size: 12px;
   font-weight: 700;
   color: #599cd8;
+  line-height: normal;
+
   text-decoration: underline;
   cursor: pointer;
+}
+.link-icon {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  gap: 1px;
 }
 
 .link:hover {

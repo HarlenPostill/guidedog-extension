@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import Icon from '../Icon/Icon';
+import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 import './ToolTip.css';
 
 interface ToolTipProps {
@@ -41,7 +41,7 @@ const ToolTip = ({ text }: ToolTipProps) => {
       className="tooltip-container"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
-      <Icon name={'InfoIcon'} />
+      <HelpOutlinedIcon sx={{ fontSize: 12 }} htmlColor="#FFF568" />
       {isHovered && (
         <div
           ref={tooltipRef}
