@@ -20,7 +20,7 @@ type LanguageProviderProps = {
 
 const defaultLanguage: Language = { code: 'EN', name: 'English' };
 
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
+export const LanguageProvider = ({ children }: LanguageProviderProps) => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>(() => {
     const savedLanguage = localStorage.getItem('preferredLanguage');
     return savedLanguage ? JSON.parse(savedLanguage) : defaultLanguage;

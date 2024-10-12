@@ -19,7 +19,7 @@ const languages = [
   { code: 'DE', name: 'German' },
 ];
 
-const LanguageSelector: React.FC = () => {
+const LanguageSelector = () => {
   const { currentLanguage, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = React.useState(false);
 

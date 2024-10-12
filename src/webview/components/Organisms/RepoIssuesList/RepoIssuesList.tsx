@@ -31,7 +31,7 @@ interface GroupedIssues {
   };
 }
 
-const RepoIssuesList: React.FC<RepoIssuesListProps> = ({ hasSort = false, issuesData, vscode }) => {
+const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListProps) => {
   const d = useDictionary();
   const [removedIssues, setRemovedIssues] = useState<Set<string>>(new Set());
 
