@@ -2,6 +2,12 @@
   position: relative;
 }
 
+.language {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
 .app-content {
   transition: filter 0.3s ease;
 }
