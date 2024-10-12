@@ -13,6 +13,8 @@ const vscode = 1;
 
 const App = () => {
   const [width, setWidth] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
+
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
 
@@ -35,6 +37,10 @@ const App = () => {
     percentage: 77,
   };
 
+  const switchToSingleDisplay = () => {
+    setActiveTab(1); // SingleDisplay is 1
+  };
+
   return (
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
@@ -49,8 +55,10 @@ const App = () => {
             `${d('ui.headers.tabTitle1')}`,
             `${d('ui.headers.tabTitle2')}`,
             `${d('ui.headers.tabTitle3')}`,
-          ]}>
-          <RepoDisplay vscode={vscode} />
+          ]}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}>
+          <RepoDisplay vscode={vscode} switchToSingleDisplay={switchToSingleDisplay} />
           <SingleDisplay vscode={vscode} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>

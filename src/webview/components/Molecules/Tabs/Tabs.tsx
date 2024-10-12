@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import './Tabs.css';
 
 interface TabProps {
   headers: string[];
   children: React.ReactNode[];
+  activeTab: number;
+  setActiveTab: (index: number) => void;
 }
 
-const Tabs = ({ headers, children }: TabProps) => {
-  const [activeTab, setActiveTab] = useState(0);
+const Tabs = ({ headers, children, activeTab, setActiveTab }: TabProps) => {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const underlineRef = useRef<HTMLDivElement>(null);
 
@@ -22,15 +23,12 @@ const Tabs = ({ headers, children }: TabProps) => {
 
   useEffect(() => {
     updateUnderline();
-
     let rafId: number;
     const handleResize = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(updateUnderline);
     };
-
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(rafId);

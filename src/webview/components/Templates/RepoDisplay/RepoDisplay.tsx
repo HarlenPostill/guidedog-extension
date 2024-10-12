@@ -4,13 +4,19 @@ import ViolationsOverview from '../../Organisms/ViolationsOverview/ViolationsOve
 import Divider from '../../Atoms/Divider/Divider';
 import RepoIssuesList from '../../Organisms/RepoIssuesList/RepoIssuesList';
 
-const RepoDisplay = (vscode: any) => {
+interface RepoDisplayProps {
+  vscode: any;
+  switchToSingleDisplay: () => void;
+}
+
+const RepoDisplay = ({ vscode, switchToSingleDisplay }: RepoDisplayProps) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
       <ViolationsOverview A={100} AA={50} AAA={100} />
       <Divider />
       <RepoIssuesList
         vscode={vscode}
+        switchToSingleDisplay={switchToSingleDisplay}
         issuesData={[
           {
             fileName: 'src/pages/HomePage.tsx',

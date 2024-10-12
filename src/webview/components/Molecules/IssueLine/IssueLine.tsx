@@ -10,6 +10,7 @@ interface IssueLineProps {
   issueString: string;
   onMoreClick: () => void;
   onRemove: () => void;
+  switchToSingleDisplay: () => void;
 }
 declare const acquireVsCodeApi: () => {
   postMessage: (message: any) => void;
@@ -17,7 +18,14 @@ declare const acquireVsCodeApi: () => {
 
 const vscode = acquireVsCodeApi();
 
-const IssueLine = ({ fileName, lineNum, issueString, onMoreClick, onRemove }: IssueLineProps) => {
+const IssueLine = ({
+  fileName,
+  lineNum,
+  issueString,
+  onMoreClick,
+  onRemove,
+  switchToSingleDisplay,
+}: IssueLineProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const d = useDictionary();
@@ -31,6 +39,7 @@ const IssueLine = ({ fileName, lineNum, issueString, onMoreClick, onRemove }: Is
       fileName: fileName,
       lineNumber: lineNum,
     });
+    switchToSingleDisplay();
   };
 
   const handleMoreClick = (e: React.MouseEvent) => {

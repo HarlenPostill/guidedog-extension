@@ -21,6 +21,8 @@ interface FileIssues {
 interface RepoIssuesListProps {
   hasSort?: boolean;
   vscode: any;
+  switchToSingleDisplay: () => void;
+
   issuesData: FileIssues[];
 }
 
@@ -31,7 +33,12 @@ interface GroupedIssues {
   };
 }
 
-const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListProps) => {
+const RepoIssuesList = ({
+  hasSort = false,
+  issuesData,
+  vscode,
+  switchToSingleDisplay,
+}: RepoIssuesListProps) => {
   const d = useDictionary();
   const [removedIssues, setRemovedIssues] = useState<Set<string>>(new Set());
 
@@ -114,6 +121,7 @@ const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListP
                 onMoreClick={() => {
                   console.log('More clicked for', item.fileName, item.issue);
                 }}
+                switchToSingleDisplay={switchToSingleDisplay}
                 onRemove={() => handleRemoveIssue(item.id, issueType)}
               />
             ))}
