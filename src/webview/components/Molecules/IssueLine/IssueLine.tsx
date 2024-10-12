@@ -10,13 +10,9 @@ interface IssueLineProps {
   issueString: string;
   onMoreClick: () => void;
   onRemove: () => void;
+  vscode: any;
   switchToSingleDisplay: () => void;
 }
-declare const acquireVsCodeApi: () => {
-  postMessage: (message: any) => void;
-};
-
-const vscode = acquireVsCodeApi();
 
 const IssueLine = ({
   fileName,
@@ -24,6 +20,7 @@ const IssueLine = ({
   issueString,
   onMoreClick,
   onRemove,
+  vscode,
   switchToSingleDisplay,
 }: IssueLineProps) => {
   const [isHovered, setIsHovered] = useState(false);

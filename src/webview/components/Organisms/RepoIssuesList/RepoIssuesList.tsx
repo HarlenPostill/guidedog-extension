@@ -122,6 +122,7 @@ const RepoIssuesList = ({
                   console.log('More clicked for', item.fileName, item.issue);
                 }}
                 switchToSingleDisplay={switchToSingleDisplay}
+                vscode={vscode}
                 onRemove={() => handleRemoveIssue(item.id, issueType)}
               />
             ))}

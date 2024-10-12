@@ -9,7 +9,11 @@ import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
 
-const vscode = 1;
+declare const acquireVsCodeApi: () => {
+  postMessage: (message: any) => void;
+};
+
+const vscode = acquireVsCodeApi();
 
 const App = () => {
   const [width, setWidth] = useState(0);
