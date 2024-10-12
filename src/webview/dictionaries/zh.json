@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "导盲犬总结",
+            "tabTitle1": "整个回购协议",
+            "tabTitle2": "单个文件",
+            "tabTitle3": "结果",
+            "status": {
+                "Perceivable": "可感知的",
+                "Operable": "可操作",
+                "Understandable": "可以理解",
+                "Critical": "批判的"
+            }
+        },
+        "toolTips": {
+            "WCAG": "该图代表整个项目中存在的违规总数"
+        },
+        "errors": {
+            "widthSmall": "展开侧边栏以继续"
+        },
+        "links": {
+            "seeAll": "查看全部",
+            "history": "历史"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "违反 WCAG 准则",
+                "suffix": "违规行为"
+            },
+            "issueList": {
+                "title": "问题清单",
+                "linePrefix": "线",
+                "issuePillSuffix": "问题"
+            }
+        },
+        "text": {
+            "lastUpdated": "最后更新"
+        }
+    }
+}

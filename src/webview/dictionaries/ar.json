@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "ملخص المرشد",
+            "tabTitle1": "الريبو كله",
+            "tabTitle2": "ملف واحد",
+            "tabTitle3": "نتائج",
+            "status": {
+                "Perceivable": "يمكن إدراكه",
+                "Operable": "قابلة للتشغيل",
+                "Understandable": "مفهومة",
+                "Critical": "شديد الأهمية"
+            }
+        },
+        "toolTips": {
+            "WCAG": "يمثل هذا الرسم البياني إجمالي عدد الانتهاكات الموجودة في مشروعك بأكمله"
+        },
+        "errors": {
+            "widthSmall": "قم بتوسيع الشريط الجانبي للمتابعة"
+        },
+        "links": {
+            "seeAll": "رؤية الكل",
+            "history": "تاريخ"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "انتهاكات إرشادات WCAG",
+                "suffix": "الانتهاكات"
+            },
+            "issueList": {
+                "title": "قائمة القضايا",
+                "linePrefix": "خط",
+                "issuePillSuffix": "مشاكل"
+            }
+        },
+        "text": {
+            "lastUpdated": "آخر تحديث"
+        }
+    }
+}

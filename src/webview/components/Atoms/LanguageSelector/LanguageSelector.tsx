@@ -8,6 +8,15 @@ const languages = [
   { code: 'VI', name: 'Vietnamese' },
   { code: 'KO', name: 'Korean' },
   { code: 'MS', name: 'Malay' },
+  { code: 'ZH', name: 'Mandarin' },
+  { code: 'ES', name: 'Spanish' },
+  { code: 'HI', name: 'Hindi' },
+  { code: 'AR', name: 'Arabic' },
+  { code: 'PT', name: 'Portuguese' },
+  { code: 'BN', name: 'Bengali' },
+  { code: 'RU', name: 'Russian' },
+  { code: 'JA', name: 'Japanese' },
+  { code: 'DE', name: 'German' },
 ];
 
 const LanguageSelector: React.FC = () => {

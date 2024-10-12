@@ -1,0 +1,40 @@
+{
+    "ui": {
+        "headers": {
+            "title": "盲導犬の概要",
+            "tabTitle1": "リポジトリ全体",
+            "tabTitle2": "単一ファイル",
+            "tabTitle3": "結果",
+            "status": {
+                "Perceivable": "知覚可能",
+                "Operable": "操作可能",
+                "Understandable": "理解できる",
+                "Critical": "致命的"
+            }
+        },
+        "toolTips": {
+            "WCAG": "このグラフは、プロジェクト全体に存在する違反の総量を表します。"
+        },
+        "errors": {
+            "widthSmall": "サイドバーを展開して続行してください"
+        },
+        "links": {
+            "seeAll": "すべて見る",
+            "history": "歴史"
+        },
+        "boxes": {
+            "guideLinesViolations": {
+                "title": "WCAG ガイドライン違反",
+                "suffix": "違反"
+            },
+            "issueList": {
+                "title": "問題のリスト",
+                "linePrefix": "ライン",
+                "issuePillSuffix": "問題"
+            }
+        },
+        "text": {
+            "lastUpdated": "最終更新日"
+        }
+    }
+}
