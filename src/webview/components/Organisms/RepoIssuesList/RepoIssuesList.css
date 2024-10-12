@@ -48,7 +48,7 @@
 }
 
 .issueTitle {
-  color: #ff6d6d;
+  /* color: #ff6d6d; */
   font-size: 12px;
   font-weight: 700;
   line-height: normal;
@@ -64,8 +64,8 @@
   align-items: center;
   gap: 10px;
   border-radius: 5px;
-  background: rgba(255, 109, 109, 0.4);
-  color: #fda1a2;
+  /* background: rgba(255, 109, 109, 0.4); */
+  /* color: #fda1a2; */
   text-align: center;
   font-size: 12px;
   font-style: normal;

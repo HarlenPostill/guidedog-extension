@@ -35,6 +35,59 @@ const App = () => {
     };
   }, []);
 
+  const dummyData = [
+    {
+      fileName: 'src/pages/HomePage.tsx',
+      issues: [
+        {
+          location: 13,
+          impact: 'moderate',
+          type: 'landmark-one-main',
+          improvement: '<div className="main w-screen h-screen bg-poke-lemon-yellow">',
+        },
+      ],
+    },
+    {
+      fileName: 'src/pages/PokemonPage.tsx',
+      issues: [
+        {
+          location: 12,
+          impact: 'serious',
+          type: 'page-has-heading-one',
+          improvement: "<h1 className='text-4xl mr-4 font-bold'>Pokemon Details</h1>",
+        },
+        {
+          location: 30,
+          impact: 'critical',
+          type: 'region',
+          improvement: "<main className='pt-24 flex flex-col justify-start items-center'>",
+        },
+      ],
+    },
+    {
+      fileName: 'src/pages/PageNotFound.tsx',
+      issues: [
+        {
+          location: 3,
+          impact: 'moderate',
+          type: 'landmark-one-main',
+          improvement: "<main className='flex flex-col justify-center items-center pt-32'>",
+        },
+      ],
+    },
+    {
+      fileName: 'src/components/NavBar.tsx',
+      issues: [
+        {
+          location: 1,
+          impact: 'critical',
+          type: 'region',
+          improvement: "<nav className='w-full'>{/* Navbar items */}</nav>",
+        },
+      ],
+    },
+  ];
+
   const isWidthTooSmall = width < 304;
   const config = {
     lastUpdated: '5m ago',
@@ -62,7 +115,11 @@ const App = () => {
           ]}
           activeTab={activeTab}
           setActiveTab={setActiveTab}>
-          <RepoDisplay vscode={vscode} switchToSingleDisplay={switchToSingleDisplay} />
+          <RepoDisplay
+            vscode={vscode}
+            switchToSingleDisplay={switchToSingleDisplay}
+            issuesData={dummyData}
+          />
           <SingleDisplay vscode={vscode} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
