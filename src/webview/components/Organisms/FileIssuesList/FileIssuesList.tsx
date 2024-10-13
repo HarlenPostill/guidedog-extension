@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import './FileIssuesList.css';
 import Link from '../../Atoms/Link/Link';
 import { useDictionary } from '../../../hooks/useDictionary';
 import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 import { InsertDriveFileOutlined } from '@mui/icons-material';
+import IssueLine from '../../Molecules/IssueLine/IssueLine';
 
 interface Issue {
   location: number;
@@ -34,6 +35,13 @@ const FileIssuesList = ({
 }: FileIssuesListProps) => {
   const d = useDictionary();
 
+  const fileIssues = useMemo(() => {
+    const file = issuesData.find(file => file.fileName === filePath);
+    return file ? file.issues : [];
+  }, [issuesData, filePath]);
+
+  const fileName = filePath.split('/').pop() || '';
+
   return (
     <div className="fileIssuesList">
       <div className="headerGroup">
@@ -52,11 +60,30 @@ const FileIssuesList = ({
       <div className="fileNameContainer">
         <div className="fileName">
           <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />
-          <div>main.js</div>
+          <div>{fileName}</div>
         </div>
-        <div className="issuePill">1 {d('ui.boxes.issueList.issuePillSuffix')}</div>
+        <div className="issuePill">
+          {fileIssues.length} {d('ui.boxes.issueList.issuePillSuffix')}
+        </div>
       </div>
-      <div className="issuesContainer">{/* where the issue lines will go */}</div>
+      <div className="issuesContainer">
+        {fileIssues.map((issue, index) => (
+          <IssueLine
+            key={index}
+            fileName={filePath}
+            lineNum={issue.location}
+            issueString={issue.improvement}
+            onMoreClick={() => {
+              console.log('More clicked for', filePath, issue);
+            }}
+            switchToSingleDisplay={switchToSingleDisplay}
+            vscode={vscode}
+            onRemove={() => {
+              console.log('Remove clicked for', filePath, issue);
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };

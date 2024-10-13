@@ -45,6 +45,18 @@ const App = () => {
           type: 'landmark-one-main',
           improvement: '<div className="main w-screen h-screen bg-poke-lemon-yellow">',
         },
+        {
+          location: 11,
+          impact: 'minor',
+          type: 'major-aria-issue',
+          improvement: '<header className="main w-screen h-screen bg-poke-lemon-yellow">',
+        },
+        {
+          location: 5,
+          impact: 'minor',
+          type: 'major-aria-issue',
+          improvement: '<footer className="main w-screen h-screen bg-poke-lemon-yellow">',
+        },
       ],
     },
     {
