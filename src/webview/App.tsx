@@ -8,6 +8,7 @@ import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
 import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
+import ScoreBreakdown from './components/Molecules/ScoreBreakdown/ScoreBreakdown';
 
 const vscode = 1;
 
@@ -54,6 +55,7 @@ const App = () => {
           <SingleDisplay vscode={vscode} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
+        <ScoreBreakdown perc={10} oper={25} unde={20} robu={30} />
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
       </div>
       {isWidthTooSmall && (
