@@ -1,0 +1,132 @@
+.breakdownContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+  align-self: stretch;
+  margin-top: 20px;
+}
+
+.headerGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
+.title {
+  font-size: 16px;
+  color: #ccc;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.breakdownWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
+.chart {
+  position: relative;
+  width: 140px;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 15px;
+  gap: 5px;
+  flex: 1 0 0;
+}
+
+.issueCatP {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #fff568;
+}
+
+.issueCatO {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #fda1a2;
+}
+
+.issueCatU {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #ff9e68;
+}
+
+.issueCatR {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+  color: #ff6d6d;
+}
+.descText {
+  color: #a3a3a3;
+  flex: 1 0 0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+.percText {
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+}
+.scoreWrapper {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.scoreContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .percentage {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    align-self: stretch;
+
+    .largeNum {
+      color: #ccc;
+      text-align: center;
+      font-size: 40px;
+      font-weight: 700;
+    }
+    .sign {
+      color: #ccc;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 28px;
+    }
+  }
+
+  .overall {
+    color: #a3a3a3;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
