@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FileIssuesList from '../../Organisms/FileIssuesList/FileIssuesList';
 
 interface Issue {
@@ -20,6 +20,17 @@ interface SingleDisplayProps {
 }
 
 const SingleDisplay = ({ vscode, switchToSingleDisplay, issuesData }: SingleDisplayProps) => {
+  const [filePath, setFilePath] = useState<string>('');
+
+  useEffect(() => {
+    window.addEventListener('message', event => {
+      const message = event.data;
+      if (message.command === 'setFilePath') {
+        setFilePath(message.filePath);
+      }
+    });
+  }, []);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
       <FileIssuesList
@@ -27,7 +38,7 @@ const SingleDisplay = ({ vscode, switchToSingleDisplay, issuesData }: SingleDisp
         vscode={vscode}
         switchToSingleDisplay={switchToSingleDisplay}
         issuesData={issuesData}
-        filePath="src/pages/HomePage.tsx"
+        filePath={filePath}
       />
     </div>
   );

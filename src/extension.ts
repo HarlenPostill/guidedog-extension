@@ -17,6 +17,13 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
 
+    this._postActiveFilePath(webviewView);
+
+    // scan for active editor changes
+    vscode.window.onDidChangeActiveTextEditor(() => {
+      this._postActiveFilePath(webviewView);
+    });
+
     // Listen for messages from the react end webview
     webviewView.webview.onDidReceiveMessage(message => {
       switch (message.command) {
@@ -58,6 +65,24 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
       vscode.window.showInformationMessage(`Opened ${fileName} at line ${lineNumber}`);
     } catch (error) {
       vscode.window.showErrorMessage(`Failed to open file: ${error}`);
+    }
+  }
+
+  private _postActiveFilePath(webviewView: vscode.WebviewView) {
+    const activeEditor = vscode.window.activeTextEditor;
+
+    if (activeEditor) {
+      const fullPath = activeEditor.document.uri.fsPath;
+      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+      if (workspaceFolder) {
+        const relativePath = vscode.workspace.asRelativePath(fullPath, false);
+        webviewView.webview.postMessage({ command: 'setFilePath', filePath: relativePath });
+        console.log('Sent relative file path:', relativePath); // Debugs delete after
+      } else {
+        console.log('No workspace folder found');
+      }
+    } else {
+      console.log('No active editor');
     }
   }
 
