@@ -1,15 +1,35 @@
 import React from 'react';
-import AccessibilityScore from '../../Molecules/AccessibilityScore/AccessibilityScore';
-import ActionItems from '../../Molecules/ActionItems/ActionItems';
-import WebComparison from '../../Molecules/WebComparison/WebComparison';
+import FileIssuesList from '../../Organisms/FileIssuesList/FileIssuesList';
 
-const SingleDisplay = (vscode: any) => {
+interface Issue {
+  location: number;
+  impact: string;
+  type: string;
+  improvement: string;
+}
+
+interface FileIssues {
+  fileName: string;
+  issues: Issue[];
+}
+
+interface SingleDisplayProps {
+  vscode: any;
+  switchToSingleDisplay: () => void;
+  issuesData: FileIssues[];
+}
+
+const SingleDisplay = ({ vscode, switchToSingleDisplay, issuesData }: SingleDisplayProps) => {
   return (
-    <>
-      <ActionItems vscode={vscode} />
-      <AccessibilityScore score={100} />
-      <WebComparison vscode={vscode} />
-    </>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+      <FileIssuesList
+        hasSort={true}
+        vscode={vscode}
+        switchToSingleDisplay={switchToSingleDisplay}
+        issuesData={issuesData}
+        filePath="src/pages/HomePage.tsx"
+      />
+    </div>
   );
 };
 

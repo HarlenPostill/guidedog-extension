@@ -1,0 +1,84 @@
+.fileIssuesList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.headerGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
+.title {
+  font-size: 16px;
+  font-style: normal;
+  color: #ccc;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.issuesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  align-self: stretch;
+}
+
+.issueGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  align-self: stretch;
+}
+
+.issueHeader {
+  display: flex;
+  align-items: flex-end;
+  gap: 13px;
+}
+
+.issueTitle {
+  /* color: #ff6d6d; */
+  font-size: 12px;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.issuePill {
+  display: flex;
+  padding: 0px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  background: rgba(255, 109, 109, 0.4);
+  color: #fda1a2;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.fileNameContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  align-self: stretch;
+}
+
+.fileName {
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  align-self: stretch;
+}

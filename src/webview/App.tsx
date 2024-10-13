@@ -120,7 +120,11 @@ const App = () => {
             switchToSingleDisplay={switchToSingleDisplay}
             issuesData={dummyData}
           />
-          <SingleDisplay vscode={vscode} />
+          <SingleDisplay
+            vscode={vscode}
+            switchToSingleDisplay={switchToSingleDisplay}
+            issuesData={dummyData}
+          />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
