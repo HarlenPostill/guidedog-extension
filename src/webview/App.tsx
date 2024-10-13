@@ -9,10 +9,16 @@ import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
 
-const vscode = 1;
+declare const acquireVsCodeApi: () => {
+  postMessage: (message: any) => void;
+};
+
+const vscode = acquireVsCodeApi();
 
 const App = () => {
   const [width, setWidth] = useState(0);
+  const [activeTab, setActiveTab] = useState(0);
+
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
 
@@ -29,10 +35,67 @@ const App = () => {
     };
   }, []);
 
+  const dummyData = [
+    {
+      fileName: 'src/pages/HomePage.tsx',
+      issues: [
+        {
+          location: 13,
+          impact: 'moderate',
+          type: 'landmark-one-main',
+          improvement: '<div className="main w-screen h-screen bg-poke-lemon-yellow">',
+        },
+      ],
+    },
+    {
+      fileName: 'src/pages/PokemonPage.tsx',
+      issues: [
+        {
+          location: 12,
+          impact: 'serious',
+          type: 'page-has-heading-one',
+          improvement: "<h1 className='text-4xl mr-4 font-bold'>Pokemon Details</h1>",
+        },
+        {
+          location: 30,
+          impact: 'critical',
+          type: 'region',
+          improvement: "<main className='pt-24 flex flex-col justify-start items-center'>",
+        },
+      ],
+    },
+    {
+      fileName: 'src/pages/PageNotFound.tsx',
+      issues: [
+        {
+          location: 3,
+          impact: 'moderate',
+          type: 'landmark-one-main',
+          improvement: "<main className='flex flex-col justify-center items-center pt-32'>",
+        },
+      ],
+    },
+    {
+      fileName: 'src/components/NavBar.tsx',
+      issues: [
+        {
+          location: 1,
+          impact: 'critical',
+          type: 'region',
+          improvement: "<nav className='w-full'>{/* Navbar items */}</nav>",
+        },
+      ],
+    },
+  ];
+
   const isWidthTooSmall = width < 304;
   const config = {
     lastUpdated: '5m ago',
     percentage: 77,
+  };
+
+  const switchToSingleDisplay = () => {
+    setActiveTab(1); // SingleDisplay is 1
   };
 
   return (
@@ -49,8 +112,14 @@ const App = () => {
             `${d('ui.headers.tabTitle1')}`,
             `${d('ui.headers.tabTitle2')}`,
             `${d('ui.headers.tabTitle3')}`,
-          ]}>
-          <RepoDisplay vscode={vscode} />
+          ]}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}>
+          <RepoDisplay
+            vscode={vscode}
+            switchToSingleDisplay={switchToSingleDisplay}
+            issuesData={dummyData}
+          />
           <SingleDisplay vscode={vscode} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>

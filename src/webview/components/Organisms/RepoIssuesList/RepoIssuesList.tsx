@@ -21,6 +21,7 @@ interface FileIssues {
 interface RepoIssuesListProps {
   hasSort?: boolean;
   vscode: any;
+  switchToSingleDisplay: () => void;
   issuesData: FileIssues[];
 }
 
@@ -31,7 +32,47 @@ interface GroupedIssues {
   };
 }
 
-const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListProps) => {
+const impactStyles = {
+  critical: {
+    icon: '#FF6D6D',
+    title: '#FF6D6D',
+    pillBackground: '#743A3A',
+    pillText: '#FDA1A2',
+  },
+  serious: {
+    icon: '#FF9D68',
+    title: '#FF9D68',
+    pillBackground: '#734E39',
+    pillText: '#FF9D68',
+  },
+  moderate: {
+    icon: '#FDA1A2',
+    title: '#FDA1A2',
+    pillBackground: '#744F4F',
+    pillText: '#FDA1A2',
+  },
+  minor: {
+    icon: '#FFF568',
+    title: '#FFF568',
+    pillBackground: '#747038',
+    pillText: '#FEFEB8',
+  },
+  default: {
+    icon: '#CCCCCC',
+    title: '#CCCCCC',
+    pillBackground: '#444444',
+    pillText: '#FFFFFF',
+  },
+};
+
+type ImpactKey = keyof typeof impactStyles;
+
+const RepoIssuesList = ({
+  hasSort = false,
+  issuesData,
+  vscode,
+  switchToSingleDisplay,
+}: RepoIssuesListProps) => {
   const d = useDictionary();
   const [removedIssues, setRemovedIssues] = useState<Set<string>>(new Set());
 
@@ -49,13 +90,11 @@ const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListP
         }
       });
     });
-
     Object.keys(groups).forEach(key => {
       if (groups[key].count === 0) {
         delete groups[key];
       }
     });
-
     return groups;
   }, [issuesData, removedIssues]);
 
@@ -73,9 +112,13 @@ const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListP
       if (updatedGroupIssues.length === 0) {
         setTimeout(() => setRemovedIssues(new Set(newSet)), 0);
       }
-
       return newSet;
     });
+  };
+
+  const getImpactStyle = (impact: string): ImpactKey => {
+    const lowerImpact = impact.toLowerCase();
+    return (impactStyles.hasOwnProperty(lowerImpact) ? lowerImpact : 'default') as ImpactKey;
   };
 
   return (
@@ -94,31 +137,43 @@ const RepoIssuesList = ({ hasSort = false, issuesData, vscode }: RepoIssuesListP
         />
       </div>
       <div className="issuesContainer">
-        {Object.entries(groupedIssues).map(([issueType, group]) => (
-          <div key={issueType} className="issueGroup">
-            <div className="issueHeader">
-              <div className="issueTitle">
-                <PetsIcon sx={{ fontSize: 12 }} htmlColor="FF6D6D" />
-                <div>{formatIssueType(issueType)}</div>
+        {Object.entries(groupedIssues).map(([issueType, group]) => {
+          const firstIssueImpact = group.issues[0]?.issue.impact || 'default';
+          const styleKey = getImpactStyle(firstIssueImpact);
+
+          return (
+            <div key={issueType} className="issueGroup">
+              <div className="issueHeader">
+                <div className="issueTitle" style={{ color: impactStyles[styleKey].title }}>
+                  <PetsIcon sx={{ fontSize: 12 }} htmlColor={impactStyles[styleKey].icon} />
+                  <div>{formatIssueType(issueType)}</div>
+                </div>
+                <div
+                  className="issuePill"
+                  style={{
+                    backgroundColor: impactStyles[styleKey].pillBackground,
+                    color: impactStyles[styleKey].pillText,
+                  }}>
+                  {group.count} {d('ui.boxes.issueList.issuePillSuffix')}
+                </div>
               </div>
-              <div className="issuePill">
-                {group.count} {d('ui.boxes.issueList.issuePillSuffix')}
-              </div>
+              {group.issues.map(item => (
+                <IssueLine
+                  key={item.id}
+                  fileName={item.fileName}
+                  lineNum={item.issue.location}
+                  issueString={item.issue.improvement}
+                  onMoreClick={() => {
+                    console.log('More clicked for', item.fileName, item.issue);
+                  }}
+                  switchToSingleDisplay={switchToSingleDisplay}
+                  vscode={vscode}
+                  onRemove={() => handleRemoveIssue(item.id, issueType)}
+                />
+              ))}
             </div>
-            {group.issues.map(item => (
-              <IssueLine
-                key={item.id}
-                fileName={item.fileName}
-                lineNum={item.issue.location}
-                issueString={`${item.issue.impact} impact - ${item.issue.improvement}`}
-                onMoreClick={() => {
-                  console.log('More clicked for', item.fileName, item.issue);
-                }}
-                onRemove={() => handleRemoveIssue(item.id, issueType)}
-              />
-            ))}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
