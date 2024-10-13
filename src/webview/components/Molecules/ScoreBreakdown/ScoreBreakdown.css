@@ -1,14 +1,37 @@
 .breakdownContainer {
   display: flex;
   align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 15px;
   align-self: stretch;
   margin-top: 20px;
 }
 
+.headerGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
+.title {
+  font-size: 16px;
+  color: #ccc;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.breakdownWrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+}
+
 .chart {
   position: relative;
-
   width: 140px;
 }
 
@@ -57,6 +80,9 @@
   color: #a3a3a3;
   flex: 1 0 0;
   font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 700;
 }
 

@@ -23,6 +23,14 @@
       "history": "history"
     },
     "boxes": {
+      "breakdowns": {
+        "title": "BREAKDOWNS",
+        "total": "Overall score",
+        "perceivable": "Perceivable",
+        "operable": "Operable",
+        "understandable": "Understandable",
+        "robust": "Robust"
+      },
       "guideLinesViolations": {
         "title": "WCAG GUIDELINE VIOLATIONS",
         "suffix": "Violations"
