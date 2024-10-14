@@ -61,6 +61,10 @@
     transform: scale(0.5);
 }
 
+.text{
+    opacity: 0;
+    transform: translateY(20px);
+}
 .paw.animate {
     animation:
         bouncyEnlarge 500ms ease-out forwards 0ms,
