@@ -1,0 +1,44 @@
+.onboarding-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.title{
+    color: #ccc;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.placeholder{
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-indent: 10px;
+    background-color: transparent;
+    color: #ccc;
+}
+
+.placeholder:focus{
+    border-color: #71bbff;
+    outline: none;
+}
+
+.placeholder::placeholder{
+    color: #445A6E;
+}
+
+.error-message{
+    color: #FF0000;
+    margin-top: 10px;
+}
+
+.success-message{
+    color: #00FF00;
+    margin-top: 10px;
+}

@@ -32,7 +32,8 @@
         "robust": "Robust"
       },
       "guideOnboarding": {
-        "title": "Introducing Guidedog",
+        "titlePart1": "Introducing ",
+        "titlePart2": "GuideDog",
         "subtitle": "Your personal AI Accessibility Assistant",
         "text": "Your AI-powered assistant for building accessible and inclusive web experiences.",
         "description": "GuideDog uses AI to help you find and fix accessibility issues in your codebase. Say goodbye to manual checks and ensure your projects meet WCAG standards without a hassle.",
@@ -46,6 +47,14 @@
           ]
         },
         "button": "Ask GuideDog"
+      },
+      "keyDisplay": {
+        "title": "GuideDog uses an API Key to access your codebase",
+        "input": "Please enter your API Key...",
+        "keyStatus": {
+          "empty": "Empty key!",
+          "error": "Invalid key!"
+        }
       },
       "guideLinesViolations": {
         "title": "WCAG GUIDELINE VIOLATIONS",

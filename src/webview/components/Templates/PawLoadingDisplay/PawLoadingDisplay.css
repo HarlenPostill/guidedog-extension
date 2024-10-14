@@ -1,0 +1,32 @@
+.paw-loading-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: conic-gradient(from 100deg at -45.56% 83.37%, #FDA1A2 46.44578039646149deg, #FDA1A2 98.27995777130127deg, #FDA1A2 260.27995347976685deg, #FDA1A2 313.76006841659546deg, #FDA1A2 360deg);
+    background-blend-mode: difference;
+    animation: rotateBackground 5s linear infinite;
+}
+
+@keyframes rotateBackground {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.paw-logo {
+    scale: 0.5;
+    animation: paw-bounce 1s infinite;
+}
+
+@keyframes paw-bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
