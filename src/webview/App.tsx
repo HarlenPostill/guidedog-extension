@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Header from './components/Atoms/Header';
 import Tabs from './components/Molecules/Tabs/Tabs';
+import OnboardingDisplay from './components/Templates/OnboardingDisplay/OnboardingDisplay';
 import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
 import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay';
 import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
@@ -20,6 +21,7 @@ const App = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const divRef = useRef<HTMLDivElement>(null);
+  const [showOnboarding, setShowOnboarding] = useState(true);
   const d = useDictionary();
 
   useEffect(() => {
@@ -89,6 +91,10 @@ const App = () => {
   ];
 
   const isWidthTooSmall = width < 304;
+
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false); 
+  };
   const config = {
     lastUpdated: '5m ago',
     percentage: 77,
@@ -101,29 +107,33 @@ const App = () => {
   return (
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
+      {showOnboarding ? <OnboardingDisplay vscode={vscode} onboardingComplete={handleOnboardingComplete} /> :
+      <div>
         <div className="language">
-          <LanguageSelector />
-        </div>
-        <Header title={d('ui.headers.title')} />
+            <LanguageSelector />
+          </div>
+          <Header title={d('ui.headers.title')} />
 
-        <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
-        <Tabs
-          headers={[
-            `${d('ui.headers.tabTitle1')}`,
-            `${d('ui.headers.tabTitle2')}`,
-            `${d('ui.headers.tabTitle3')}`,
-          ]}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}>
-          <RepoDisplay
-            vscode={vscode}
-            switchToSingleDisplay={switchToSingleDisplay}
-            issuesData={dummyData}
-          />
-          <SingleDisplay vscode={vscode} />
-          <ResultsDisplay vscode={vscode} />
-        </Tabs>
-        <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
+          <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
+          <Tabs
+            headers={[
+              `${d('ui.headers.tabTitle1')}`,
+              `${d('ui.headers.tabTitle2')}`,
+              `${d('ui.headers.tabTitle3')}`,
+            ]}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}>
+            <RepoDisplay
+              vscode={vscode}
+              switchToSingleDisplay={switchToSingleDisplay}
+              issuesData={dummyData}
+            />
+            <SingleDisplay vscode={vscode} />
+            <ResultsDisplay vscode={vscode} />
+          </Tabs>
+          <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
+          </div>
+          }
       </div>
       {isWidthTooSmall && (
         <div className="width-overlay">
@@ -133,5 +143,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;
