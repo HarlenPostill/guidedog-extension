@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import './FileIssuesList.css';
 import Link from '../../Atoms/Link/Link';
 import { useDictionary } from '../../../hooks/useDictionary';
@@ -21,26 +21,26 @@ interface FileIssue {
 interface FileIssuesListProps {
   hasSort?: boolean;
   vscode: any;
-  switchToSingleDisplay: () => void;
   issuesData: FileIssue[];
   filePath: string;
 }
 
-const FileIssuesList = ({
-  hasSort = false,
-  issuesData,
-  vscode,
-  switchToSingleDisplay,
-  filePath,
-}: FileIssuesListProps) => {
+const FileIssuesList = ({ hasSort = false, issuesData, vscode, filePath }: FileIssuesListProps) => {
   const d = useDictionary();
+  const [localIssues, setLocalIssues] = useState<Issue[]>([]);
 
-  const fileIssues = useMemo(() => {
+  useEffect(() => {
     const file = issuesData.find(file => file.fileName === filePath);
-    return file ? file.issues : [];
+    setLocalIssues(file ? file.issues : []);
   }, [issuesData, filePath]);
 
   const fileName = filePath.split('/').pop() || '';
+
+  const handleRemove = (issueToRemove: Issue) => {
+    setLocalIssues(prevIssues => prevIssues.filter(issue => issue !== issueToRemove));
+    console.log('Removed issue:', issueToRemove);
+    // TODO remove the stored issue from the original data. Will happen when data is linked properly
+  };
 
   return (
     <div className="fileIssuesList">
@@ -63,26 +63,20 @@ const FileIssuesList = ({
           <div>{fileName}</div>
         </div>
         <div className="issuePill">
-          {fileIssues.length} {d('ui.boxes.issueList.issuePillSuffix')}
+          {localIssues.length} {d('ui.boxes.issueList.issuePillSuffix')}
         </div>
       </div>
       <div className="issuesContainer">
-        {fileIssues.map((issue, index) => (
+        {localIssues.map((issue, index) => (
           <IssueFix
-            key={index}
+            key={`${issue.location}-${index}`}
             fileName={filePath}
             issue={issue.type}
             impact={issue.impact}
             lineNum={issue.location}
             issueString={issue.improvement}
-            onMoreClick={() => {
-              console.log('More clicked for', filePath, issue);
-            }}
-            switchToSingleDisplay={switchToSingleDisplay}
             vscode={vscode}
-            onRemove={() => {
-              console.log('Remove clicked for', filePath, issue);
-            }}
+            onRemove={() => handleRemove(issue)}
           />
         ))}
       </div>

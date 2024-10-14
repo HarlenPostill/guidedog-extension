@@ -15,11 +15,10 @@ interface FileIssues {
 
 interface SingleDisplayProps {
   vscode: any;
-  switchToSingleDisplay: () => void;
   issuesData: FileIssues[];
 }
 
-const SingleDisplay = ({ vscode, switchToSingleDisplay, issuesData }: SingleDisplayProps) => {
+const SingleDisplay = ({ vscode, issuesData }: SingleDisplayProps) => {
   const [filePath, setFilePath] = useState<string>('');
 
   useEffect(() => {
@@ -33,13 +32,7 @@ const SingleDisplay = ({ vscode, switchToSingleDisplay, issuesData }: SingleDisp
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-      <FileIssuesList
-        hasSort={true}
-        vscode={vscode}
-        switchToSingleDisplay={switchToSingleDisplay}
-        issuesData={issuesData}
-        filePath={filePath}
-      />
+      <FileIssuesList hasSort={true} vscode={vscode} issuesData={issuesData} filePath={filePath} />
     </div>
   );
 };

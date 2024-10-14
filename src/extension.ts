@@ -41,6 +41,9 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
         case 'openFile':
           this._openFile(message.fileName, message.lineNumber);
           break;
+        case 'replaceLine':
+          this._replaceLine(message.fileName, message.lineNumber, message.newContent);
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
@@ -97,6 +100,47 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
       }
     } else {
       console.log('No active editor');
+    }
+  }
+
+  private async _replaceLine(fileName: string, lineNumber: number, newContent: string) {
+    try {
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if (!workspaceFolders) {
+        vscode.window.showErrorMessage('No workspace folder is open');
+        return;
+      }
+
+      const rootPath = workspaceFolders[0].uri.fsPath;
+      const fullPath = path.join(rootPath, fileName);
+
+      const document = await vscode.workspace.openTextDocument(fullPath);
+      const editor = await vscode.window.showTextDocument(document);
+
+      const range = editor.document.lineAt(lineNumber - 1).range;
+      const originalLine = editor.document.lineAt(lineNumber - 1).text;
+
+      const indentationMatch = originalLine.match(/^(\s*)/);
+      const indentation = indentationMatch ? indentationMatch[1] : '';
+
+      const indentedNewContent = indentation + newContent.trim();
+
+      await editor.edit(editBuilder => {
+        editBuilder.replace(range, indentedNewContent);
+      });
+
+      if (this._view) {
+        this._view.webview.postMessage({
+          command: 'lineReplaced',
+          fileName,
+          lineNumber,
+          newContent: indentedNewContent,
+        });
+      }
+
+      vscode.window.showInformationMessage(`Replaced line ${lineNumber} in ${fileName}`);
+    } catch (error) {
+      vscode.window.showErrorMessage(`Failed to replace line: ${error}`);
     }
   }
 

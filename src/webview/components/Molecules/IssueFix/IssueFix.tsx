@@ -10,10 +10,8 @@ interface IssueFixProps {
   issue: string;
   impact: string;
   issueString: string;
-  onMoreClick: () => void;
   onRemove: () => void;
   vscode: any;
-  switchToSingleDisplay: () => void;
 }
 
 const IssueFix = ({
@@ -22,13 +20,12 @@ const IssueFix = ({
   issue,
   impact,
   issueString,
-  onMoreClick,
   onRemove,
   vscode,
-  switchToSingleDisplay,
 }: IssueFixProps) => {
   const [isActive, setIsActive] = useState(false);
   const [lineContent, setLineContent] = useState('');
+  const [isFixed, setIsFixed] = useState(false);
   const componentRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
@@ -64,16 +61,28 @@ const IssueFix = ({
             setLineContent(message.lineContent);
           }
           break;
+        case 'lineReplaced':
+          if (message.fileName === fileName && message.lineNumber === lineNum) {
+            setIsFixed(true);
+            setLineContent(issueString);
+          }
+          break;
       }
     };
 
     window.addEventListener('message', messageListener);
     return () => window.removeEventListener('message', messageListener);
-  }, [fileName, lineNum]);
+  }, [fileName, lineNum, issueString]);
 
   const handleFixClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log('Fix clicked');
+    vscode.postMessage({
+      command: 'replaceLine',
+      fileName: fileName,
+      lineNumber: lineNum,
+      newContent: issueString,
+    });
+    onRemove();
   };
 
   const handleIgnoreClick = (e: React.MouseEvent) => {
