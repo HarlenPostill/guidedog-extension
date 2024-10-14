@@ -1,14 +1,14 @@
-import { InsertDriveFileOutlined, MoreHoriz } from '@mui/icons-material';
-import React, { useRef, useState } from 'react';
 import './IssueFix.css';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import React, { useRef, useState, useEffect } from 'react';
+import { CloseRounded, DoneRounded } from '@mui/icons-material';
 import { useDictionary } from '../../../hooks/useDictionary';
 import IssueButton from '../../Atoms/IssueButton/IssueButton';
 
 interface IssueFixProps {
   fileName: string;
   lineNum: number;
+  issue: string;
+  impact: string;
   issueString: string;
   onMoreClick: () => void;
   onRemove: () => void;
@@ -16,74 +16,110 @@ interface IssueFixProps {
   switchToSingleDisplay: () => void;
 }
 
-const IssueFix = ({
+const IssueFix: React.FC<IssueFixProps> = ({
   fileName,
   lineNum,
+  issue,
+  impact,
   issueString,
   onMoreClick,
   onRemove,
   vscode,
   switchToSingleDisplay,
-}: IssueFixProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+}) => {
+  const [isActive, setIsActive] = useState(false);
+  const componentRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  const extractedFileName = fileName.split('/').pop();
 
   const handleClick = () => {
+    if (!isActive) {
+      setIsActive(true);
+    }
     vscode.postMessage({
       command: 'openFile',
       fileName: fileName,
       lineNumber: lineNum,
     });
-    switchToSingleDisplay();
   };
 
-  const handleMoreClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsDropdownOpen(!isDropdownOpen);
-    onMoreClick();
-  };
-
-  const handleActionClick = (action: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    switch (action) {
-      case 'Navigate':
-        handleClick();
-        break;
-      case 'Ignore':
-        onRemove();
-        break;
-      case 'Fix':
-        // nothing for now
-        console.log('Fix clicked');
-        break;
+  const handleClickOutside = (event: MouseEvent) => {
+    if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
+      setIsActive(false);
     }
   };
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleFixClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    console.log('Fix clicked');
+  };
+
+  const handleIgnoreClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onRemove();
+  };
+
+  const impactStyles = {
+    critical: {
+      title: '#FF6D6D',
+    },
+    serious: {
+      title: '#FF9D68',
+    },
+    moderate: {
+      title: '#FDA1A2',
+    },
+    minor: {
+      title: '#FFF568',
+    },
+    default: {
+      title: '#CCCCCC',
+    },
+  };
+
+  type ImpactKey = keyof typeof impactStyles;
+
+  const getImpactStyle = (impact: string): ImpactKey => {
+    const lowerImpact = impact.toLowerCase();
+    return (impactStyles.hasOwnProperty(lowerImpact) ? lowerImpact : 'default') as ImpactKey;
+  };
+
   return (
-    <div className="issueFix">
+    <div
+      ref={componentRef}
+      className={`issueFix ${isActive ? 'active' : ''}`}
+      onClick={handleClick}>
       <div className="issueContents">
         <div className="issueInfo">
-          <div className="lineNo">Ln. 45</div>
-          <div className="issueType">no label provided</div>
-        </div>
-        <div className="fixInfo">
-          <div className="fixLine">
-            <CloseRoundedIcon htmlColor="#FDA1A2" style={{ width: '16', height: '16' }} />
-            <div className="issueText">old line text goes here</div>
-          </div>
-          <div className="fixLine">
-            <DoneRoundedIcon htmlColor="#4FED95" style={{ width: '16', height: '16' }} />
-            <div className="issueText">new line text goes here</div>
+          <div className="lineNo">Ln. {lineNum}</div>
+          <div className="issueType" style={{ color: impactStyles[getImpactStyle(impact)].title }}>
+            {issue}
           </div>
         </div>
-        <div className="buttons">
-          <IssueButton variant="fix" />
-          <IssueButton variant="ignore" />
-        </div>
+        {isActive && (
+          <>
+            <div className="fixInfo">
+              <div className="fixLine">
+                <CloseRounded style={{ color: '#FDA1A2', width: 16, height: 16 }} />
+                <div className="issueText">{issueString}</div>
+              </div>
+              <div className="fixLine">
+                <DoneRounded style={{ color: '#4FED95', width: 16, height: 16 }} />
+                <div className="issueText">{issueString}</div>
+              </div>
+            </div>
+            <div className="buttons">
+              <IssueButton variant="fix" onClick={handleFixClick} />
+              <IssueButton variant="ignore" onClick={handleIgnoreClick} />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

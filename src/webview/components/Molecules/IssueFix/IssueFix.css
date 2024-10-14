@@ -1,62 +1,59 @@
 .issueFix {
-  display: flex;
   padding: 5px 10px;
-  flex-direction: column;
-  align-items: flex-end;
-  align-self: stretch;
   border-radius: 5px;
-  background: rgba(54, 54, 54, 0.4);
+  width: -webkit-fill-available;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.issueFix:not(.active):hover {
+  background-color: rgba(54, 54, 54, 0.2);
+}
+
+.issueFix.active {
+  background-color: rgba(54, 54, 54, 0.4);
 }
 
 .issueContents {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 9px;
-  align-self: stretch;
 }
 
 .issueInfo {
   display: flex;
-  align-items: flex-start;
   gap: 18px;
-  align-self: stretch;
+}
+
+.lineNo,
+.issueType {
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .lineNo {
   color: #a3a3a3;
-  text-align: center;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.issueType {
-  text-align: center;
-  font-size: 12px;
-  font-weight: 700;
 }
 
 .fixInfo {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 10px;
-  align-self: stretch;
 }
 
 .fixLine {
   display: flex;
   align-items: center;
   gap: 4px;
-  align-self: stretch;
 }
 
 .issueText {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1 0 0;
-  align-self: stretch;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: #ccc;
   font-size: 12px;
   font-weight: 700;
@@ -66,5 +63,4 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  align-self: stretch;
 }

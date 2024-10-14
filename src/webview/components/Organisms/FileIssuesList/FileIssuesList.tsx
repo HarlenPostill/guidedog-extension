@@ -71,6 +71,8 @@ const FileIssuesList = ({
           <IssueFix
             key={index}
             fileName={filePath}
+            issue={issue.type}
+            impact={issue.impact}
             lineNum={issue.location}
             issueString={issue.improvement}
             onMoreClick={() => {
