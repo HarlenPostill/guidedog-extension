@@ -16,7 +16,7 @@ interface IssueFixProps {
   switchToSingleDisplay: () => void;
 }
 
-const IssueFix: React.FC<IssueFixProps> = ({
+const IssueFix = ({
   fileName,
   lineNum,
   issue,
@@ -26,10 +26,10 @@ const IssueFix: React.FC<IssueFixProps> = ({
   onRemove,
   vscode,
   switchToSingleDisplay,
-}) => {
+}: IssueFixProps) => {
   const [isActive, setIsActive] = useState(false);
+  const [lineContent, setLineContent] = useState('');
   const componentRef = useRef<HTMLDivElement>(null);
-  const d = useDictionary();
 
   const handleClick = () => {
     if (!isActive) {
@@ -54,6 +54,22 @@ const IssueFix: React.FC<IssueFixProps> = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    const messageListener = (event: MessageEvent) => {
+      const message = event.data;
+      switch (message.command) {
+        case 'fileOpened':
+          if (message.fileName === fileName && message.lineNumber === lineNum) {
+            setLineContent(message.lineContent);
+          }
+          break;
+      }
+    };
+
+    window.addEventListener('message', messageListener);
+    return () => window.removeEventListener('message', messageListener);
+  }, [fileName, lineNum]);
 
   const handleFixClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -114,7 +130,7 @@ const IssueFix: React.FC<IssueFixProps> = ({
             <div className="fixInfo">
               <div className="fixLine">
                 <CloseRounded style={{ color: '#FDA1A2', width: 16, height: 16 }} />
-                <div className="issueText">{issueString}</div>
+                <div className="issueText">{lineContent}</div>
               </div>
               <div className="fixLine">
                 <DoneRounded style={{ color: '#4FED95', width: 16, height: 16 }} />

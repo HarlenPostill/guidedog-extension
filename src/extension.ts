@@ -4,13 +4,16 @@ import path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
-  vscode.window.registerWebviewViewProvider('guidedogView', provider);
+  context.subscriptions.push(vscode.window.registerWebviewViewProvider('guidedogView', provider));
 }
 
 class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
+  private _view?: vscode.WebviewView;
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
   resolveWebviewView(webviewView: vscode.WebviewView) {
+    this._view = webviewView;
+
     webviewView.webview.options = {
       enableScripts: true,
     };
@@ -62,6 +65,17 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
       editor.selection = new vscode.Selection(range.start, range.end);
       editor.revealRange(range, vscode.TextEditorRevealType.InCenter);
 
+      const lineContent = document.lineAt(lineNumber - 1).text;
+
+      if (this._view) {
+        this._view.webview.postMessage({
+          command: 'fileOpened',
+          fileName,
+          lineNumber,
+          lineContent,
+        });
+      }
+
       vscode.window.showInformationMessage(`Opened ${fileName} at line ${lineNumber}`);
     } catch (error) {
       vscode.window.showErrorMessage(`Failed to open file: ${error}`);
@@ -71,7 +85,7 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
   private _postActiveFilePath(webviewView: vscode.WebviewView) {
     const activeEditor = vscode.window.activeTextEditor;
 
-    if (activeEditor) {
+    if (activeEditor && this._view) {
       const fullPath = activeEditor.document.uri.fsPath;
       const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
       if (workspaceFolder) {

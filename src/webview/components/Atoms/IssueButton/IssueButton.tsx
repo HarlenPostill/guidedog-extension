@@ -8,7 +8,7 @@ interface IssueButtonProps {
   onClick: (e: React.MouseEvent) => void;
 }
 
-const IssueButton: React.FC<IssueButtonProps> = ({ variant = 'fix', onClick }) => {
+const IssueButton = ({ variant = 'fix', onClick }: IssueButtonProps) => {
   const buttonClass = variant === 'fix' ? 'issueButtonFix' : 'issueButtonDelete';
   const ButtonIcon = variant === 'fix' ? AutoFixNormalOutlinedIcon : DeleteOutlineRoundedIcon;
   const buttonText = variant === 'fix' ? 'Fix' : 'Ignore';
