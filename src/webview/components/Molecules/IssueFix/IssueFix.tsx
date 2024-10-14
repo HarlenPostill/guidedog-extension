@@ -85,6 +85,13 @@ const IssueFix: React.FC<IssueFixProps> = ({
 
   type ImpactKey = keyof typeof impactStyles;
 
+  const formatIssueType = (type: string) => {
+    return type
+      .split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   const getImpactStyle = (impact: string): ImpactKey => {
     const lowerImpact = impact.toLowerCase();
     return (impactStyles.hasOwnProperty(lowerImpact) ? lowerImpact : 'default') as ImpactKey;
@@ -99,7 +106,7 @@ const IssueFix: React.FC<IssueFixProps> = ({
         <div className="issueInfo">
           <div className="lineNo">Ln. {lineNum}</div>
           <div className="issueType" style={{ color: impactStyles[getImpactStyle(impact)].title }}>
-            {issue}
+            {formatIssueType(issue)}
           </div>
         </div>
         {isActive && (
