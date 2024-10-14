@@ -1,0 +1,70 @@
+.issueFix {
+  display: flex;
+  padding: 5px 10px;
+  flex-direction: column;
+  align-items: flex-end;
+  align-self: stretch;
+  border-radius: 5px;
+  background: rgba(54, 54, 54, 0.4);
+}
+
+.issueContents {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  align-self: stretch;
+}
+
+.issueInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  align-self: stretch;
+}
+
+.lineNo {
+  color: #a3a3a3;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.issueType {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fixInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.fixLine {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.issueText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 0 0;
+  align-self: stretch;
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}

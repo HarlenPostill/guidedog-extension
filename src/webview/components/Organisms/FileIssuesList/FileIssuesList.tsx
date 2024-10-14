@@ -4,7 +4,7 @@ import Link from '../../Atoms/Link/Link';
 import { useDictionary } from '../../../hooks/useDictionary';
 import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 import { InsertDriveFileOutlined } from '@mui/icons-material';
-import IssueLine from '../../Molecules/IssueLine/IssueLine';
+import IssueFix from '../../Molecules/IssueFix/IssueFix';
 
 interface Issue {
   location: number;
@@ -68,7 +68,7 @@ const FileIssuesList = ({
       </div>
       <div className="issuesContainer">
         {fileIssues.map((issue, index) => (
-          <IssueLine
+          <IssueFix
             key={index}
             fileName={filePath}
             lineNum={issue.location}

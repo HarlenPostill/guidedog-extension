@@ -1,0 +1,33 @@
+.issueButtonFix,
+.issueButtonDelete {
+  display: flex;
+  padding: 5px 10px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.issueButtonFix {
+  border: 1px solid #599cd8;
+  color: #71bbff;
+}
+
+.issueButtonFix:hover {
+  background-color: #599cd8;
+  color: #fff;
+}
+
+.issueButtonDelete {
+  border: 1px solid #fda1a2;
+  color: #fda1a2;
+}
+
+.issueButtonDelete:hover {
+  background-color: #fda1a2;
+  color: #fff;
+}
