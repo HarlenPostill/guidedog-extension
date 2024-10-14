@@ -12,7 +12,7 @@ interface BreakdownProps {
 }
 
 const Breakdown = ({ perc, oper, unde, robu }: BreakdownProps) => {
-  const totalPercentage = (perc + oper + unde + robu) / 4;
+  const totalPercentage = Math.round((perc + oper + unde + robu) / 4);
   const d = useDictionary();
   return (
     <div className="breakdownContainer">
