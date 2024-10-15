@@ -31,14 +31,10 @@ const Breakdown = ({ perc, oper, unde, robu }: BreakdownProps) => {
               { value: robu, color: '#ff6d6d' },
             ]}
           />
-          <div className="scoreWrapper">
-            <div className="scoreContainer">
-              <div className="percentage">
-                <div className="largeNum">{totalPercentage}</div>
-                <div className="sign">%</div>
-              </div>
-              <div className="overall">{d('ui.boxes.breakdowns.total')}</div>
-            </div>
+          <div className="largeNum">
+            {totalPercentage}
+            <span className="sign">%</span>
+            <div className="overall">{d('ui.boxes.breakdowns.total')}</div>
           </div>
         </div>
         <div className="scores">

@@ -1,20 +1,21 @@
-.status-indicator {
+.status-indicator-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
   font-weight: 700;
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
   margin: 0 auto;
   position: relative;
 }
 
-.status {
+.status-bar {
   display: flex;
   font-size: 18px;
   align-items: center;
-  margin-left: 15px;
+  gap: 5px;
 }
 
 .paw-icon {
@@ -27,25 +28,23 @@
   width: 20px;
 }
 
-/* Define color classes for different statuses */
-.perceivable .status {
-  color: #fff568;
+.perfect .status-bar {
+  color: #FDA1A2;
 }
 
-.operable .status {
-  color: #fda1a2;
+.acceptable .status-bar {
+  color: #4FED95;
 }
 
-.understandable .status {
-  color: #ff9e68;
+.moderate .status-bar {
+  color: #FFF568;
 }
 
-.critical .status {
+.critical .status-bar {
   color: #ff6d6d;
 }
 
 .last-updated {
-  margin-left: 15px;
   font-size: 12px;
   align-items: center;
   display: flex;
@@ -60,12 +59,22 @@
   margin-left: 5px;
 }
 
+.divider {
+  width: 2px;
+  height: 24px; 
+  background: #445A6E;
+  border-radius: 99px;
+  margin: 0 15px;
+  align-self: stretch;
+}
+
 .refresh-button {
   border: none;
   width: 24px;
   height: 24px;
   background: none;
   cursor: pointer;
+  color: #599CD8;
   transition: filter 0.2s ease;
 }
 
