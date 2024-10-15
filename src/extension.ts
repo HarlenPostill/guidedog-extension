@@ -4,18 +4,28 @@ import path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
-  vscode.window.registerWebviewViewProvider('guidedogView', provider);
+  context.subscriptions.push(vscode.window.registerWebviewViewProvider('guidedogView', provider));
 }
 
 class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
+  private _view?: vscode.WebviewView;
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
   resolveWebviewView(webviewView: vscode.WebviewView) {
+    this._view = webviewView;
+
     webviewView.webview.options = {
       enableScripts: true,
     };
 
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
+
+    this._postActiveFilePath(webviewView);
+
+    // scan for active editor changes
+    vscode.window.onDidChangeActiveTextEditor(() => {
+      this._postActiveFilePath(webviewView);
+    });
 
     // Listen for messages from the react end webview
     webviewView.webview.onDidReceiveMessage(message => {
@@ -30,6 +40,9 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
           break;
         case 'openFile':
           this._openFile(message.fileName, message.lineNumber);
+          break;
+        case 'replaceLine':
+          this._replaceLine(message.fileName, message.lineNumber, message.newContent);
           break;
         default:
           console.error(`Unknown command: ${message.command}`);
@@ -55,9 +68,79 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
       editor.selection = new vscode.Selection(range.start, range.end);
       editor.revealRange(range, vscode.TextEditorRevealType.InCenter);
 
+      const lineContent = document.lineAt(lineNumber - 1).text;
+
+      if (this._view) {
+        this._view.webview.postMessage({
+          command: 'fileOpened',
+          fileName,
+          lineNumber,
+          lineContent,
+        });
+      }
+
       vscode.window.showInformationMessage(`Opened ${fileName} at line ${lineNumber}`);
     } catch (error) {
       vscode.window.showErrorMessage(`Failed to open file: ${error}`);
+    }
+  }
+
+  private _postActiveFilePath(webviewView: vscode.WebviewView) {
+    const activeEditor = vscode.window.activeTextEditor;
+
+    if (activeEditor && this._view) {
+      const fullPath = activeEditor.document.uri.fsPath;
+      const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+      if (workspaceFolder) {
+        const relativePath = vscode.workspace.asRelativePath(fullPath, false);
+        webviewView.webview.postMessage({ command: 'setFilePath', filePath: relativePath });
+        console.log('Sent relative file path:', relativePath); // Debugs delete after
+      } else {
+        console.log('No workspace folder found');
+      }
+    } else {
+      console.log('No active editor');
+    }
+  }
+
+  private async _replaceLine(fileName: string, lineNumber: number, newContent: string) {
+    try {
+      const workspaceFolders = vscode.workspace.workspaceFolders;
+      if (!workspaceFolders) {
+        vscode.window.showErrorMessage('No workspace folder is open');
+        return;
+      }
+
+      const rootPath = workspaceFolders[0].uri.fsPath;
+      const fullPath = path.join(rootPath, fileName);
+
+      const document = await vscode.workspace.openTextDocument(fullPath);
+      const editor = await vscode.window.showTextDocument(document);
+
+      const range = editor.document.lineAt(lineNumber - 1).range;
+      const originalLine = editor.document.lineAt(lineNumber - 1).text;
+
+      const indentationMatch = originalLine.match(/^(\s*)/);
+      const indentation = indentationMatch ? indentationMatch[1] : '';
+
+      const indentedNewContent = indentation + newContent.trim();
+
+      await editor.edit(editBuilder => {
+        editBuilder.replace(range, indentedNewContent);
+      });
+
+      if (this._view) {
+        this._view.webview.postMessage({
+          command: 'lineReplaced',
+          fileName,
+          lineNumber,
+          newContent: indentedNewContent,
+        });
+      }
+
+      vscode.window.showInformationMessage(`Replaced line ${lineNumber} in ${fileName}`);
+    } catch (error) {
+      vscode.window.showErrorMessage(`Failed to replace line: ${error}`);
     }
   }
 

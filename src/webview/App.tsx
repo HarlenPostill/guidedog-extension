@@ -45,6 +45,18 @@ const App = () => {
           type: 'landmark-one-main',
           improvement: '<div className="main w-screen h-screen bg-poke-lemon-yellow">',
         },
+        {
+          location: 11,
+          impact: 'minor',
+          type: 'major-aria-issue',
+          improvement: '<header className="main w-screen h-screen bg-poke-lemon-yellow">',
+        },
+        {
+          location: 5,
+          impact: 'minor',
+          type: 'major-aria-issue',
+          improvement: '<footer className="main w-screen h-screen bg-poke-lemon-yellow">',
+        },
       ],
     },
     {
@@ -120,7 +132,7 @@ const App = () => {
             switchToSingleDisplay={switchToSingleDisplay}
             issuesData={dummyData}
           />
-          <SingleDisplay vscode={vscode} />
+          <SingleDisplay vscode={vscode} issuesData={dummyData} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>

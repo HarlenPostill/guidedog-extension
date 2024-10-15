@@ -1,0 +1,67 @@
+.issueFix {
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: -webkit-fill-available;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.issueFix:not(.active):hover {
+  background-color: rgba(54, 54, 54, 0.2);
+}
+
+.issueFix.active {
+  background-color: rgba(54, 54, 54, 0.4);
+}
+
+.issueContents {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.issueInfo {
+  display: flex;
+  gap: 18px;
+}
+
+.lineNo,
+.issueType {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lineNo {
+  color: #a3a3a3;
+}
+
+.fixInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fixLine {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.issueText {
+  flex: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #ccc;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
