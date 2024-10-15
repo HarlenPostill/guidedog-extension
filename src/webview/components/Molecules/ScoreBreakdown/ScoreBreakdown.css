@@ -4,7 +4,6 @@
   flex-direction: column;
   gap: 15px;
   align-self: stretch;
-  margin-top: 20px;
 }
 
 .headerGroup {
@@ -26,22 +25,62 @@
 
 .breakdownWrapper {
   display: flex;
+  align-items: center;
+  gap: 24px;
   width: 100%;
-  flex-direction: row;
 }
 
 .chart {
   position: relative;
   width: 140px;
+  height: 140px;
+  flex: 0 0 auto;
+}
+
+.chart svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.largeNum {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-size: 40px;
+  font-weight: 700;
+  color: #ccc;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  text-align: center;
+}
+
+.sign {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ccc;
+  bottom: 30px;
+}
+
+.overall {
+  position: absolute;
+  font-size: 12px;
+  font-weight: 700;
+  color: #a3a3a3;
+  top: 45px;
 }
 
 .scores {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: flex-start;
-  margin-left: 15px;
-  gap: 5px;
+  gap: 10px;
   flex: 1 0 0;
 }
 
@@ -77,6 +116,8 @@
   color: #ff6d6d;
 }
 .descText {
+  display: flex;
+  align-items: flex-start;
   color: #a3a3a3;
   flex: 1 0 0;
   font-size: 12px;
@@ -91,42 +132,4 @@
   font-size: 12px;
   font-weight: 700;
 }
-.scoreWrapper {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
-.scoreContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .percentage {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    align-self: stretch;
-
-    .largeNum {
-      color: #ccc;
-      text-align: center;
-      font-size: 40px;
-      font-weight: 700;
-    }
-    .sign {
-      color: #ccc;
-      font-size: 10px;
-      font-weight: 700;
-      line-height: 28px;
-    }
-  }
-
-  .overall {
-    color: #a3a3a3;
-    font-size: 12px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-}
