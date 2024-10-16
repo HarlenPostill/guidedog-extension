@@ -32,7 +32,7 @@ const Breakdown = ({ perc, oper, unde, robu }: BreakdownProps) => {
             ]}
           />
           <div className="largeNum">
-            {totalPercentage}
+            <span className="letter-spacing">{totalPercentage}</span>
             <span className="sign">%</span>
             <div className="overall">{d('ui.boxes.breakdowns.total')}</div>
           </div>
