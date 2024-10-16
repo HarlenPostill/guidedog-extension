@@ -56,16 +56,23 @@
   color: #ccc;
   line-height: 1;
   display: flex;
-  justify-content: center;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
+.largeNum .letter-spacing {
+  letter-spacing: 1px; 
+}
+
 .sign {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 70%;
+  top: 80%;
   font-size: 12px;
   font-weight: 700;
   color: #ccc;
-  bottom: 30px;
 }
 
 .overall {
