@@ -84,6 +84,7 @@
     width: 100%;
     text-align: center;
     opacity: 0;
+    margin-top: 5px;
 }
 
 .paw.animate {

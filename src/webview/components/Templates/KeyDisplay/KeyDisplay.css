@@ -21,16 +21,20 @@
     letter-spacing: 1px;
     text-indent: 10px;
     background-color: transparent;
+    border: none;
     color: #ccc;
 }
 
 .placeholder:focus{
     border-color: #71bbff;
+    border-width: 2px;;
     outline: none;
 }
 
 .placeholder::placeholder{
     color: #445A6E;
+    border-color: #445A6E;
+    border-width: 2px;
 }
 
 .error-message{

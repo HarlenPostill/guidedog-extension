@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { useDictionary } from '../../../hooks/useDictionary';
 import './KeyDisplay.css';
 
-const KeyDisplay = (vscode: any) => {
+interface KeyDisplayProps {
+    vscode: any;
+    keyDisplayComplete: (isValid: boolean) => void; 
+}
+
+const KeyDisplay = ({ vscode, keyDisplayComplete }: KeyDisplayProps) => {
     const d = useDictionary();
     const [key, setKey] = useState('');
     const [isValid, setIsValid] = useState<boolean | null>(null); 
@@ -42,10 +47,10 @@ const KeyDisplay = (vscode: any) => {
                 className="placeholder"
             />
             {isValid === false && (
-                <div className="error-message">{d('ui.boxes.keyDisplay.keyStatus.error')}</div>
+                <div className="error-message">{d('ui.keyDisplay.keyStatus.error')}</div>
             )}
             {isValid === true && (
-                <div className="success-message">{d('ui.boxes.keyDisplay.keyStatus.valid')}</div>
+                <div className="success-message">{d('ui.keyDisplay.keyStatus.valid')}</div>
             )}
         </div>
     );
