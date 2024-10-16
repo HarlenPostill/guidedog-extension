@@ -105,7 +105,12 @@ const RepoIssuesList = ({
       .join(' ');
   };
 
-  const handleRemoveIssue = (id: string, issueType: string) => {
+  const handleRemoveIssue = (
+    id: string,
+    issueType: string,
+    fileName: string,
+    lineNumber: number
+  ) => {
     setRemovedIssues(prev => {
       const newSet = new Set(prev).add(id);
       const updatedGroupIssues = groupedIssues[issueType].issues.filter(item => item.id !== id);
@@ -113,6 +118,13 @@ const RepoIssuesList = ({
         setTimeout(() => setRemovedIssues(new Set(newSet)), 0);
       }
       return newSet;
+    });
+
+    vscode.postMessage({
+      command: 'removeIssue',
+      fileName: fileName,
+      lineNumber: lineNumber,
+      issueType: issueType,
     });
   };
 
@@ -168,7 +180,9 @@ const RepoIssuesList = ({
                   }}
                   switchToSingleDisplay={switchToSingleDisplay}
                   vscode={vscode}
-                  onRemove={() => handleRemoveIssue(item.id, issueType)}
+                  onRemove={() =>
+                    handleRemoveIssue(item.id, issueType, item.fileName, item.issue.lineNumber)
+                  }
                 />
               ))}
             </div>

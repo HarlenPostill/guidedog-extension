@@ -38,8 +38,12 @@ const FileIssuesList = ({ hasSort = false, issuesData, vscode, filePath }: FileI
 
   const handleRemove = (issueToRemove: Issue) => {
     setLocalIssues(prevIssues => prevIssues.filter(issue => issue !== issueToRemove));
-    console.log('Removed issue:', issueToRemove);
-    // TODO remove the stored issue from the original data. Will happen when data is linked properly
+    vscode.postMessage({
+      command: 'removeIssue',
+      fileName: filePath,
+      lineNumber: issueToRemove.lineNumber,
+      issueType: issueToRemove.type,
+    });
   };
 
   return (

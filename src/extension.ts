@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import path from 'path';
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
@@ -11,6 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
   private _suggestions: any = null;
+  private _resultsPath: string = '';
 
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
@@ -51,13 +52,16 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
         case 'getSuggestions':
           this._sendSuggestions(webviewView);
           break;
+        case 'removeIssue':
+          this._removeIssue(message.fileName, message.lineNumber, message.issueType);
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
     });
   }
 
-  private _loadSuggestions(webviewView: vscode.WebviewView) {
+  private async _loadSuggestions(webviewView: vscode.WebviewView) {
     const workspaceFolders = vscode.workspace.workspaceFolders;
     if (!workspaceFolders) {
       vscode.window.showErrorMessage('No workspace folder is open');
@@ -66,20 +70,77 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
     const rootPath = workspaceFolders[0].uri.fsPath;
     const suggestionsPath = path.join(rootPath, '.guidedog', 'suggestions.json');
+    this._resultsPath = path.join(rootPath, '.guidedog', 'results.json');
 
-    fs.readFile(suggestionsPath, 'utf8', (err, data) => {
-      if (err) {
-        console.error(`Error reading suggestions file: ${err}`);
-        return;
-      }
+    try {
+      const data = await fs.readFile(suggestionsPath, 'utf8');
+      this._suggestions = JSON.parse(data);
+      this._sendSuggestions(webviewView);
+    } catch (error) {
+      console.error(`Error reading or parsing suggestions file: ${error}`);
+    }
+  }
 
+  private async _removeIssue(fileName: string, lineNumber: number, issueType: string) {
+    if (!this._suggestions) {
+      return;
+    }
+
+    const fileIndex = this._suggestions.findIndex((file: any) => file.fileName === fileName);
+    if (fileIndex === -1) {
+      return;
+    }
+
+    const issueIndex = this._suggestions[fileIndex].issues.findIndex(
+      (issue: any) => issue.lineNumber === lineNumber && issue.type === issueType
+    );
+    if (issueIndex === -1) {
+      return;
+    }
+
+    const removedIssue = this._suggestions[fileIndex].issues.splice(issueIndex, 1)[0];
+
+    if (this._suggestions[fileIndex].issues.length === 0) {
+      this._suggestions.splice(fileIndex, 1);
+    }
+
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+      return;
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const suggestionsPath = path.join(rootPath, '.guidedog', 'suggestions.json');
+
+    try {
+      await fs.writeFile(suggestionsPath, JSON.stringify(this._suggestions, null, 2));
+    } catch (error) {
+      console.error(`Error updating suggestions file: ${error}`);
+    }
+
+    // Add to results.json stuff
+    try {
+      let results = [];
       try {
-        this._suggestions = JSON.parse(data);
-        this._sendSuggestions(webviewView);
-      } catch (parseError) {
-        console.error(`Error parsing suggestions JSON: ${parseError}`);
+        const resultsData = await fs.readFile(this._resultsPath, 'utf8');
+        results = JSON.parse(resultsData);
+      } catch (error) {}
+
+      const fileResult = results.find((file: any) => file.fileName === fileName);
+      if (fileResult) {
+        fileResult.issues.push(removedIssue);
+      } else {
+        results.push({ fileName, issues: [removedIssue] });
       }
-    });
+
+      await fs.writeFile(this._resultsPath, JSON.stringify(results, null, 2));
+    } catch (error) {
+      console.error(`Error updating results file: ${error}`);
+    }
+
+    if (this._view) {
+      this._sendSuggestions(this._view);
+    }
   }
 
   private _sendSuggestions(webviewView: vscode.WebviewView) {
