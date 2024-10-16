@@ -103,7 +103,7 @@ const App = () => {
   const isWidthTooSmall = width < 304;
   const config = {
     lastUpdated: '5m ago',
-    percentage: 77,
+    percentage: 25,
   };
 
   const switchToSingleDisplay = () => {

@@ -6,10 +6,10 @@
             "tabTitle2": "ملف واحد",
             "tabTitle3": "نتائج",
             "status": {
-                "Perceivable": "يمكن إدراكه",
-                "Operable": "قابلة للتشغيل",
-                "Understandable": "مفهومة",
-                "Critical": "شديد الأهمية"
+                "critical": "شديد الأهمية",
+                "moderate": "معتدل",
+                "acceptable": "مقبول",
+                "perfect": "ممتاز"
             }
         },
         "toolTips": {
@@ -23,6 +23,14 @@
             "history": "تاريخ"
         },
         "boxes": {
+            "breakdowns": {
+                "title": "الأعطال",
+                "total": "النتيجة الإجمالية",
+                "perceivable": "يمكن إدراكه",
+                "operable": "قابلة للتشغيل",
+                "understandable": "مفهومة",
+                "robust": "قوي"
+            },
             "guideLinesViolations": {
                 "title": "انتهاكات إرشادات WCAG",
                 "suffix": "الانتهاكات"

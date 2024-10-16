@@ -6,10 +6,10 @@
             "tabTitle2": "单个文件",
             "tabTitle3": "结果",
             "status": {
-                "Perceivable": "可感知的",
-                "Operable": "可操作",
-                "Understandable": "可以理解",
-                "Critical": "批判的"
+                "critical": "批判的",
+                "moderate": "缓和",
+                "acceptable": "可以接受",
+                "perfect": "完美的"
             }
         },
         "toolTips": {
@@ -23,6 +23,14 @@
             "history": "历史"
         },
         "boxes": {
+            "breakdowns": {
+                "title": "故障",
+                "total": "总分",
+                "perceivable": "可感知的",
+                "operable": "可操作",
+                "understandable": "可以理解",
+                "robust": "强壮的"
+            },
             "guideLinesViolations": {
                 "title": "违反 WCAG 准则",
                 "suffix": "违规行为"

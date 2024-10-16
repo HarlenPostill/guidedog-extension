@@ -170,7 +170,7 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 function runInstallCommand() {
   exec('npm install guidedog', (error, stdout, stderr) => {
     if (error) {
-      vscode.window.showErrorMessage(`Error installing GuideDog: ${error.message}`);
+      vscode.window.showErrorMessage(`Error installing GuideDog you need NPM: ${error.message}`);
       return;
     }
     if (stderr) {

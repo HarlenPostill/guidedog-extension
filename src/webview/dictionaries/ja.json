@@ -6,10 +6,10 @@
             "tabTitle2": "単一ファイル",
             "tabTitle3": "結果",
             "status": {
-                "Perceivable": "知覚可能",
-                "Operable": "操作可能",
-                "Understandable": "理解できる",
-                "Critical": "致命的"
+                "critical": "致命的",
+                "moderate": "適度",
+                "acceptable": "許容できる",
+                "perfect": "完璧"
             }
         },
         "toolTips": {
@@ -23,6 +23,14 @@
             "history": "歴史"
         },
         "boxes": {
+            "breakdowns": {
+                "title": "故障",
+                "total": "総合スコア",
+                "perceivable": "知覚可能",
+                "operable": "操作可能",
+                "understandable": "理解できる",
+                "robust": "屈強"
+            },
             "guideLinesViolations": {
                 "title": "WCAG ガイドライン違反",
                 "suffix": "違反"

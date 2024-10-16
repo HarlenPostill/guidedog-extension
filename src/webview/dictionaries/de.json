@@ -6,14 +6,14 @@
             "tabTitle2": "Einzelne Datei",
             "tabTitle3": "Ergebnisse",
             "status": {
-                "Perceivable": "Spürbar",
-                "Operable": "Bedienbar",
-                "Understandable": "Verständlich",
-                "Critical": "Kritisch"
+                "critical": "Kritisch",
+                "moderate": "Mäßig",
+                "acceptable": "Akzeptabel",
+                "perfect": "Perfekt"
             }
         },
         "toolTips": {
-            "WCAG": "Dieses Diagramm stellt die Gesamtzahl der Verstöße in Ihrem gesamten Projekt dar"
+            "WCAG": "Dieses Diagramm stellt die Gesamtzahl der in Ihrem gesamten Projekt vorhandenen Verstöße dar"
         },
         "errors": {
             "widthSmall": "Erweitern Sie die Seitenleiste, um fortzufahren"
@@ -23,6 +23,14 @@
             "history": "Geschichte"
         },
         "boxes": {
+            "breakdowns": {
+                "title": "Pannen",
+                "total": "Gesamtpunktzahl",
+                "perceivable": "Spürbar",
+                "operable": "Bedienbar",
+                "understandable": "Verständlich",
+                "robust": "Robust"
+            },
             "guideLinesViolations": {
                 "title": "Verstöße gegen die WCAG-Richtlinien",
                 "suffix": "Verstöße"
