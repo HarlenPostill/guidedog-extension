@@ -7,7 +7,7 @@ import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 import IssueLine from '../../Molecules/IssueLine/IssueLine';
 
 interface Issue {
-  location: number;
+  lineNumber: number;
   impact: string;
   type: string;
   improvement: string;
@@ -161,7 +161,7 @@ const RepoIssuesList = ({
                 <IssueLine
                   key={item.id}
                   fileName={item.fileName}
-                  lineNum={item.issue.location}
+                  lineNum={item.issue.lineNumber}
                   issueString={item.issue.improvement}
                   onMoreClick={() => {
                     console.log('More clicked for', item.fileName, item.issue);

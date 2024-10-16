@@ -18,6 +18,7 @@ const vscode = acquireVsCodeApi();
 const App = () => {
   const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
+  const [suggestionsData, setSuggestionsData] = useState([]);
 
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
@@ -30,75 +31,39 @@ const App = () => {
     };
     updateWidth();
     window.addEventListener('resize', updateWidth);
+
+    vscode.postMessage({ command: 'getSuggestions' });
+
+    const messageListener = (event: MessageEvent) => {
+      const message = event.data;
+      switch (message.command) {
+        case 'updateSuggestions':
+          setSuggestionsData(message.suggestions);
+          break;
+      }
+    };
+
+    window.addEventListener('message', messageListener);
+
     return () => {
       window.removeEventListener('resize', updateWidth);
+      window.removeEventListener('message', messageListener);
     };
   }, []);
 
-  const dummyData = [
-    {
-      fileName: 'src/pages/HomePage.tsx',
-      issues: [
-        {
-          location: 13,
-          impact: 'moderate',
-          type: 'landmark-one-main',
-          improvement: '<div className="main w-screen h-screen bg-poke-lemon-yellow">',
-        },
-        {
-          location: 11,
-          impact: 'minor',
-          type: 'major-aria-issue',
-          improvement: '<header className="main w-screen h-screen bg-poke-lemon-yellow">',
-        },
-        {
-          location: 5,
-          impact: 'minor',
-          type: 'major-aria-issue',
-          improvement: '<footer className="main w-screen h-screen bg-poke-lemon-yellow">',
-        },
-      ],
-    },
-    {
-      fileName: 'src/pages/PokemonPage.tsx',
-      issues: [
-        {
-          location: 12,
-          impact: 'serious',
-          type: 'page-has-heading-one',
-          improvement: "<h1 className='text-4xl mr-4 font-bold'>Pokemon Details</h1>",
-        },
-        {
-          location: 30,
-          impact: 'critical',
-          type: 'region',
-          improvement: "<main className='pt-24 flex flex-col justify-start items-center'>",
-        },
-      ],
-    },
-    {
-      fileName: 'src/pages/PageNotFound.tsx',
-      issues: [
-        {
-          location: 3,
-          impact: 'moderate',
-          type: 'landmark-one-main',
-          improvement: "<main className='flex flex-col justify-center items-center pt-32'>",
-        },
-      ],
-    },
-    {
-      fileName: 'src/components/NavBar.tsx',
-      issues: [
-        {
-          location: 1,
-          impact: 'critical',
-          type: 'region',
-          improvement: "<nav className='w-full'>{/* Navbar items */}</nav>",
-        },
-      ],
-    },
-  ];
+  useEffect(() => {
+    const visibilityListener = () => {
+      if (!document.hidden) {
+        vscode.postMessage({ command: 'getSuggestions' });
+      }
+    };
+
+    document.addEventListener('visibilitychange', visibilityListener);
+
+    return () => {
+      document.removeEventListener('visibilitychange', visibilityListener);
+    };
+  }, []);
 
   const isWidthTooSmall = width < 304;
   const config = {
@@ -130,9 +95,9 @@ const App = () => {
           <RepoDisplay
             vscode={vscode}
             switchToSingleDisplay={switchToSingleDisplay}
-            issuesData={dummyData}
+            issuesData={suggestionsData}
           />
-          <SingleDisplay vscode={vscode} issuesData={dummyData} />
+          <SingleDisplay vscode={vscode} issuesData={suggestionsData} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>

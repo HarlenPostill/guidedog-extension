@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
 import path from 'path';
+import * as fs from 'fs';
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
@@ -9,6 +10,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView;
+  private _suggestions: any = null;
+
   constructor(private readonly _extensionUri: vscode.Uri) {}
 
   resolveWebviewView(webviewView: vscode.WebviewView) {
@@ -21,6 +24,7 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
 
     this._postActiveFilePath(webviewView);
+    this._loadSuggestions(webviewView);
 
     // scan for active editor changes
     vscode.window.onDidChangeActiveTextEditor(() => {
@@ -44,10 +48,47 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
         case 'replaceLine':
           this._replaceLine(message.fileName, message.lineNumber, message.newContent);
           break;
+        case 'getSuggestions':
+          this._sendSuggestions(webviewView);
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
     });
+  }
+
+  private _loadSuggestions(webviewView: vscode.WebviewView) {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+      vscode.window.showErrorMessage('No workspace folder is open');
+      return;
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const suggestionsPath = path.join(rootPath, '.guidedog', 'suggestions.json');
+
+    fs.readFile(suggestionsPath, 'utf8', (err, data) => {
+      if (err) {
+        console.error(`Error reading suggestions file: ${err}`);
+        return;
+      }
+
+      try {
+        this._suggestions = JSON.parse(data);
+        this._sendSuggestions(webviewView);
+      } catch (parseError) {
+        console.error(`Error parsing suggestions JSON: ${parseError}`);
+      }
+    });
+  }
+
+  private _sendSuggestions(webviewView: vscode.WebviewView) {
+    if (this._suggestions) {
+      webviewView.webview.postMessage({
+        command: 'updateSuggestions',
+        suggestions: this._suggestions,
+      });
+    }
   }
 
   private async _openFile(fileName: string, lineNumber: number) {

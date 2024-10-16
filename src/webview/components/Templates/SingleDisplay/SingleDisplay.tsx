@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FileIssuesList from '../../Organisms/FileIssuesList/FileIssuesList';
 
 interface Issue {
-  location: number;
+  lineNumber: number;
   impact: string;
   type: string;
   improvement: string;

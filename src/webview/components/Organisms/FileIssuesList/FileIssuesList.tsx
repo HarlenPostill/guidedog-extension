@@ -7,7 +7,7 @@ import { InsertDriveFileOutlined } from '@mui/icons-material';
 import IssueFix from '../../Molecules/IssueFix/IssueFix';
 
 interface Issue {
-  location: number;
+  lineNumber: number;
   impact: string;
   type: string;
   improvement: string;
@@ -69,11 +69,11 @@ const FileIssuesList = ({ hasSort = false, issuesData, vscode, filePath }: FileI
       <div className="issuesContainer">
         {localIssues.map((issue, index) => (
           <IssueFix
-            key={`${issue.location}-${index}`}
+            key={`${issue.lineNumber}-${index}`}
             fileName={filePath}
             issue={issue.type}
             impact={issue.impact}
-            lineNum={issue.location}
+            lineNum={issue.lineNumber}
             issueString={issue.improvement}
             vscode={vscode}
             onRemove={() => handleRemove(issue)}

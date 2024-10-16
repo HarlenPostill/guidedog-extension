@@ -6,7 +6,7 @@ import RepoIssuesList from '../../Organisms/RepoIssuesList/RepoIssuesList';
 import ScoreBreakdown from '../../Molecules/ScoreBreakdown/ScoreBreakdown';
 
 interface Issue {
-  location: number;
+  lineNumber: number;
   impact: string;
   type: string;
   improvement: string;
