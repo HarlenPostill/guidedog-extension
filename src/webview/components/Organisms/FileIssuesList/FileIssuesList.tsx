@@ -7,7 +7,7 @@ import { InsertDriveFileOutlined } from '@mui/icons-material';
 import IssueFix from '../../Molecules/IssueFix/IssueFix';
 
 interface Issue {
-  location: number;
+  lineNumber: number;
   impact: string;
   type: string;
   improvement: string;
@@ -38,8 +38,12 @@ const FileIssuesList = ({ hasSort = false, issuesData, vscode, filePath }: FileI
 
   const handleRemove = (issueToRemove: Issue) => {
     setLocalIssues(prevIssues => prevIssues.filter(issue => issue !== issueToRemove));
-    console.log('Removed issue:', issueToRemove);
-    // TODO remove the stored issue from the original data. Will happen when data is linked properly
+    vscode.postMessage({
+      command: 'removeIssue',
+      fileName: filePath,
+      lineNumber: issueToRemove.lineNumber,
+      issueType: issueToRemove.type,
+    });
   };
 
   return (
@@ -69,11 +73,11 @@ const FileIssuesList = ({ hasSort = false, issuesData, vscode, filePath }: FileI
       <div className="issuesContainer">
         {localIssues.map((issue, index) => (
           <IssueFix
-            key={`${issue.location}-${index}`}
+            key={`${issue.lineNumber}-${index}`}
             fileName={filePath}
             issue={issue.type}
             impact={issue.impact}
-            lineNum={issue.location}
+            lineNum={issue.lineNumber}
             issueString={issue.improvement}
             vscode={vscode}
             onRemove={() => handleRemove(issue)}

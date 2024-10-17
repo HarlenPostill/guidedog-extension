@@ -6,10 +6,10 @@
             "tabTitle2": "एक फाइल",
             "tabTitle3": "परिणाम",
             "status": {
-                "Perceivable": "समझ योग्य",
-                "Operable": "प्रचलित",
-                "Understandable": "बोधगम्य",
-                "Critical": "गंभीर"
+                "critical": "गंभीर",
+                "moderate": "मध्यम",
+                "acceptable": "स्वीकार्य",
+                "perfect": "उत्तम"
             }
         },
         "toolTips": {
@@ -23,6 +23,14 @@
             "history": "इतिहास"
         },
         "boxes": {
+            "breakdowns": {
+                "title": "ब्रेकडाउन",
+                "total": "समग्र प्राप्तांक",
+                "perceivable": "समझ योग्य",
+                "operable": "प्रचलित",
+                "understandable": "बोधगम्य",
+                "robust": "मज़बूत"
+            },
             "guideLinesViolations": {
                 "title": "WCAG दिशानिर्देश उल्लंघन",
                 "suffix": "उल्लंघन"

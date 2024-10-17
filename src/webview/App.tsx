@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './App.css';
 import Header from './components/Atoms/Header';
 import Tabs from './components/Molecules/Tabs/Tabs';
@@ -18,7 +18,8 @@ const vscode = acquireVsCodeApi();
 const App = () => {
   const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
-
+  const [suggestionsData, setSuggestionsData] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState(new Date());
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
 
@@ -30,81 +31,73 @@ const App = () => {
     };
     updateWidth();
     window.addEventListener('resize', updateWidth);
+    vscode.postMessage({ command: 'getSuggestions' });
+
+    const messageListener = (event: MessageEvent) => {
+      const message = event.data;
+      switch (message.command) {
+        case 'updateSuggestions':
+          setSuggestionsData(message.suggestions);
+          setLastUpdated(new Date());
+          break;
+      }
+    };
+    window.addEventListener('message', messageListener);
+
     return () => {
       window.removeEventListener('resize', updateWidth);
+      window.removeEventListener('message', messageListener);
     };
   }, []);
 
-  const dummyData = [
-    {
-      fileName: 'src/pages/HomePage.tsx',
-      issues: [
-        {
-          location: 13,
-          impact: 'moderate',
-          type: 'landmark-one-main',
-          improvement: '<div className="main w-screen h-screen bg-poke-lemon-yellow">',
-        },
-        {
-          location: 11,
-          impact: 'minor',
-          type: 'major-aria-issue',
-          improvement: '<header className="main w-screen h-screen bg-poke-lemon-yellow">',
-        },
-        {
-          location: 5,
-          impact: 'minor',
-          type: 'major-aria-issue',
-          improvement: '<footer className="main w-screen h-screen bg-poke-lemon-yellow">',
-        },
-      ],
-    },
-    {
-      fileName: 'src/pages/PokemonPage.tsx',
-      issues: [
-        {
-          location: 12,
-          impact: 'serious',
-          type: 'page-has-heading-one',
-          improvement: "<h1 className='text-4xl mr-4 font-bold'>Pokemon Details</h1>",
-        },
-        {
-          location: 30,
-          impact: 'critical',
-          type: 'region',
-          improvement: "<main className='pt-24 flex flex-col justify-start items-center'>",
-        },
-      ],
-    },
-    {
-      fileName: 'src/pages/PageNotFound.tsx',
-      issues: [
-        {
-          location: 3,
-          impact: 'moderate',
-          type: 'landmark-one-main',
-          improvement: "<main className='flex flex-col justify-center items-center pt-32'>",
-        },
-      ],
-    },
-    {
-      fileName: 'src/components/NavBar.tsx',
-      issues: [
-        {
-          location: 1,
-          impact: 'critical',
-          type: 'region',
-          improvement: "<nav className='w-full'>{/* Navbar items */}</nav>",
-        },
-      ],
-    },
-  ];
+  useEffect(() => {
+    const visibilityListener = () => {
+      if (!document.hidden) {
+        vscode.postMessage({ command: 'getSuggestions' });
+      }
+    };
+    document.addEventListener('visibilitychange', visibilityListener);
+    return () => {
+      document.removeEventListener('visibilitychange', visibilityListener);
+    };
+  }, []);
+
+  const config = useMemo(() => {
+    let totalValue = 0;
+    let issueCount = 0;
+
+    suggestionsData.forEach((file: any) => {
+      file.issues.forEach((issue: any) => {
+        issueCount++;
+        switch (issue.impact) {
+          case 'critical':
+            totalValue += 10;
+            break;
+          case 'serious':
+            totalValue += 7;
+            break;
+          case 'moderate':
+            totalValue += 5;
+            break;
+          case 'minor':
+            totalValue += 3;
+            break;
+        }
+      });
+    });
+
+    const percentage = Math.min(Math.round((totalValue / issueCount) * 10), 100);
+
+    const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
+    const lastUpdatedString = timeDiff === 0 ? 'Just now' : `${timeDiff}m ago`;
+
+    return {
+      lastUpdated: lastUpdatedString,
+      percentage: percentage,
+    };
+  }, [suggestionsData, lastUpdated]);
 
   const isWidthTooSmall = width < 304;
-  const config = {
-    lastUpdated: '5m ago',
-    percentage: 77,
-  };
 
   const switchToSingleDisplay = () => {
     setActiveTab(1); // SingleDisplay is 1
@@ -117,7 +110,6 @@ const App = () => {
           <LanguageSelector />
         </div>
         <Header title={d('ui.headers.title')} />
-
         <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
         <Tabs
           headers={[
@@ -130,9 +122,9 @@ const App = () => {
           <RepoDisplay
             vscode={vscode}
             switchToSingleDisplay={switchToSingleDisplay}
-            issuesData={dummyData}
+            issuesData={suggestionsData}
           />
-          <SingleDisplay vscode={vscode} issuesData={dummyData} />
+          <SingleDisplay vscode={vscode} issuesData={suggestionsData} />
           <ResultsDisplay vscode={vscode} />
         </Tabs>
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
