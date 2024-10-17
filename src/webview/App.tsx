@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './App.css';
 import Header from './components/Atoms/Header';
 import Tabs from './components/Molecules/Tabs/Tabs';
@@ -19,7 +19,7 @@ const App = () => {
   const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
   const [suggestionsData, setSuggestionsData] = useState([]);
-
+  const [lastUpdated, setLastUpdated] = useState(new Date());
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
 
@@ -31,7 +31,6 @@ const App = () => {
     };
     updateWidth();
     window.addEventListener('resize', updateWidth);
-
     vscode.postMessage({ command: 'getSuggestions' });
 
     const messageListener = (event: MessageEvent) => {
@@ -39,10 +38,10 @@ const App = () => {
       switch (message.command) {
         case 'updateSuggestions':
           setSuggestionsData(message.suggestions);
+          setLastUpdated(new Date());
           break;
       }
     };
-
     window.addEventListener('message', messageListener);
 
     return () => {
@@ -57,19 +56,48 @@ const App = () => {
         vscode.postMessage({ command: 'getSuggestions' });
       }
     };
-
     document.addEventListener('visibilitychange', visibilityListener);
-
     return () => {
       document.removeEventListener('visibilitychange', visibilityListener);
     };
   }, []);
 
+  const config = useMemo(() => {
+    let totalValue = 0;
+    let issueCount = 0;
+
+    suggestionsData.forEach((file: any) => {
+      file.issues.forEach((issue: any) => {
+        issueCount++;
+        switch (issue.impact) {
+          case 'critical':
+            totalValue += 10;
+            break;
+          case 'serious':
+            totalValue += 7;
+            break;
+          case 'moderate':
+            totalValue += 5;
+            break;
+          case 'minor':
+            totalValue += 3;
+            break;
+        }
+      });
+    });
+
+    const percentage = Math.min(Math.round((totalValue / issueCount) * 10), 100);
+
+    const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
+    const lastUpdatedString = timeDiff === 0 ? 'Just now' : `${timeDiff}m ago`;
+
+    return {
+      lastUpdated: lastUpdatedString,
+      percentage: percentage,
+    };
+  }, [suggestionsData, lastUpdated]);
+
   const isWidthTooSmall = width < 304;
-  const config = {
-    lastUpdated: '5m ago',
-    percentage: 25,
-  };
 
   const switchToSingleDisplay = () => {
     setActiveTab(1); // SingleDisplay is 1
@@ -82,7 +110,6 @@ const App = () => {
           <LanguageSelector />
         </div>
         <Header title={d('ui.headers.title')} />
-
         <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
         <Tabs
           headers={[

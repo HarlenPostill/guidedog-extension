@@ -41,22 +41,22 @@ const Breakdown = ({ perc, oper, unde, robu }: BreakdownProps) => {
           <div className="issueCatP">
             <Icon name="Paw" width={24} height={24} />
             <div className="descText">{d('ui.boxes.breakdowns.perceivable')}</div>
-            <div className="percText">{perc}%</div>
+            <div className="percText">{Math.round(perc)}%</div>
           </div>
           <div className="issueCatO">
             <Icon name="Paw" width={24} height={24} />
             <div className="descText">{d('ui.boxes.breakdowns.operable')}</div>
-            <div className="percText">{oper}%</div>
+            <div className="percText">{Math.round(oper)}%</div>
           </div>
           <div className="issueCatU">
             <Icon name="Paw" width={24} height={24} />
             <div className="descText">{d('ui.boxes.breakdowns.understandable')}</div>
-            <div className="percText">{unde}%</div>
+            <div className="percText">{Math.round(unde)}%</div>
           </div>
           <div className="issueCatR">
             <Icon name="Paw" width={24} height={24} />
             <div className="descText">{d('ui.boxes.breakdowns.robust')}</div>
-            <div className="percText">{robu}%</div>
+            <div className="percText">{Math.round(robu)}%</div>
           </div>
         </div>
       </div>
