@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef } from 'react';
 import WaterLevelPawPrint from '../../Molecules/WaterLevelPawPrint/WaterLevelPawPrint';
 import ViolationsOverview from '../../Organisms/ViolationsOverview/ViolationsOverview';
 import Divider from '../../Atoms/Divider/Divider';
@@ -24,6 +24,8 @@ interface RepoDisplayProps {
 }
 
 const RepoDisplay = ({ vscode, switchToSingleDisplay, issuesData }: RepoDisplayProps) => {
+  const repoIssuesListRef = useRef<HTMLDivElement>(null);
+
   const { scoreBreakdown, violationsOverview } = useMemo(() => {
     let critical = 0,
       serious = 0,
@@ -66,17 +68,23 @@ const RepoDisplay = ({ vscode, switchToSingleDisplay, issuesData }: RepoDisplayP
     };
   }, [issuesData]);
 
+  const scrollToRepoIssuesList = () => {
+    repoIssuesListRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
       <ScoreBreakdown {...scoreBreakdown} />
       <Divider />
-      <ViolationsOverview {...violationsOverview} />
+      <ViolationsOverview {...violationsOverview} onSeeAllClick={scrollToRepoIssuesList} />
       <Divider />
-      <RepoIssuesList
-        vscode={vscode}
-        switchToSingleDisplay={switchToSingleDisplay}
-        issuesData={issuesData}
-      />
+      <div ref={repoIssuesListRef}>
+        <RepoIssuesList
+          vscode={vscode}
+          switchToSingleDisplay={switchToSingleDisplay}
+          issuesData={issuesData}
+        />
+      </div>
       <Divider />
     </div>
   );
