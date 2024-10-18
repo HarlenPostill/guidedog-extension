@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
 import './Tabs.css';
 
 interface TabProps {
@@ -11,28 +11,41 @@ interface TabProps {
 const Tabs = ({ headers, children, activeTab, setActiveTab }: TabProps) => {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const underlineRef = useRef<HTMLDivElement>(null);
+  const [underlineStyle, setUnderlineStyle] = useState({
+    width: 0,
+    transform: 'translateX(0px)',
+    opacity: 0,
+  });
 
   const updateUnderline = useCallback(() => {
     const activeTabElement = tabRefs.current[activeTab];
-    const underlineElement = underlineRef.current;
-    if (activeTabElement && underlineElement) {
-      underlineElement.style.transform = `translateX(${activeTabElement.offsetLeft}px)`;
-      underlineElement.style.width = `${activeTabElement.offsetWidth}px`;
+    if (activeTabElement) {
+      setUnderlineStyle({
+        width: activeTabElement.offsetWidth,
+        transform: `translateX(${activeTabElement.offsetLeft}px)`,
+        opacity: 1,
+      });
     }
   }, [activeTab]);
 
   useEffect(() => {
-    updateUnderline();
-    let rafId: number;
-    const handleResize = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateUnderline);
-    };
-    window.addEventListener('resize', handleResize);
+    const resizeObserver = new ResizeObserver(() => {
+      updateUnderline();
+    });
+
+    tabRefs.current.forEach(tabRef => {
+      if (tabRef) {
+        resizeObserver.observe(tabRef);
+      }
+    });
+
     return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(rafId);
+      resizeObserver.disconnect();
     };
+  }, [updateUnderline]);
+
+  useEffect(() => {
+    updateUnderline();
   }, [updateUnderline]);
 
   return (
@@ -47,7 +60,7 @@ const Tabs = ({ headers, children, activeTab, setActiveTab }: TabProps) => {
             {header}
           </button>
         ))}
-        <div ref={underlineRef} className="tab-underline" />
+        <div ref={underlineRef} className="tab-underline" style={underlineStyle} />
       </div>
       <div className="tab-content">{children[activeTab]}</div>
     </div>
