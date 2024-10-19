@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDictionary } from '../../../hooks/useDictionary';
 import './KeyDisplay.css';
 
@@ -10,6 +10,7 @@ interface KeyDisplayProps {
 const KeyDisplay = ({ vscode, keyDisplayComplete }: KeyDisplayProps) => {
     const d = useDictionary();
     const [key, setKey] = useState('');
+    const [isAnimating, setIsAnimating] = useState(false);
     const [isValid, setIsValid] = useState<boolean | null>(null); 
 
     const expectedKey = '1111'; 
@@ -30,12 +31,26 @@ const KeyDisplay = ({ vscode, keyDisplayComplete }: KeyDisplayProps) => {
         setIsValid(isValidKey);
         if (isValidKey) {
             vscode.postMessage({ command: 'saveKey', key });
+            keyDisplayComplete(true); 
+        } else {
+            keyDisplayComplete(false); 
         }
     };
 
+    useEffect(() => {
+        setIsAnimating(true);
+        const timer = setTimeout(() => {
+            setIsAnimating(false); 
+        }, 3000);
+
+        return () => clearTimeout(timer); 
+    }, []);
+
     return (
         <div className="onboarding-container">
-            <h1 className="title">{d('ui.boxes.keyDisplay.title')}</h1>
+            <h1 className={`key ${isAnimating ? 'animate' : ''}`}>
+                <h1 className="title">{d('ui.boxes.keyDisplay.title')}</h1>
+            </h1>
             <input
                 type="text"
                 border-color={isValid === false ? 'red' : 'black'}
@@ -47,10 +62,7 @@ const KeyDisplay = ({ vscode, keyDisplayComplete }: KeyDisplayProps) => {
                 className="placeholder"
             />
             {isValid === false && (
-                <div className="error-message">{d('ui.keyDisplay.keyStatus.error')}</div>
-            )}
-            {isValid === true && (
-                <div className="success-message">{d('ui.keyDisplay.keyStatus.valid')}</div>
+                <div className="error-message">{d('ui.boxes.keyDisplay.keyStatus.error')}</div>
             )}
         </div>
     );

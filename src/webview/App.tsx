@@ -100,13 +100,13 @@ const App = () => {
 
   const handleKeyComplete = (isValid: boolean) => {
     if (isValid) {
-      setCurrentStep('mainContent');
+      setCurrentStep('pawLoading');
     }
   };
 
-  // const handlePawLoadingComplete = () => {
-  //   setCurrentStep('mainContent');
-  // };
+  const handlePawLoadingComplete = () => {
+    setCurrentStep('mainContent');
+  };
 
   const config = {
     lastUpdated: '5m ago',
@@ -126,9 +126,9 @@ const App = () => {
         {currentStep === 'keyDisplay' && (
           <KeyDisplay vscode={vscode} keyDisplayComplete={handleKeyComplete} />
         )}
-        {/* {currentStep === 'pawLoading' && (
+        {currentStep === 'pawLoading' && (
           <PawLoadingDisplay loadingComplete={handlePawLoadingComplete} />
-        )} */}
+        )}
         {currentStep === 'mainContent' && (
           <div>
             <div className="language">

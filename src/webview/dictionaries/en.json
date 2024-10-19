@@ -52,7 +52,6 @@
         "title": "GuideDog uses an API Key to access your codebase",
         "input": "Please enter your API Key...",
         "keyStatus": {
-          "empty": "Empty key!",
           "error": "Invalid key!"
         }
       },

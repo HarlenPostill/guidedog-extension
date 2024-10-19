@@ -14,14 +14,14 @@
 }
 
 .placeholder{
-    width: 100%;
+    width: 93%;
     padding: 10px;
     text-align: left;
     font-weight: bold;
     letter-spacing: 1px;
-    text-indent: 10px;
     background-color: transparent;
-    border: none;
+    border: 1px solid #445A6E;
+    border-radius: 5px;
     color: #ccc;
 }
 
@@ -31,18 +31,25 @@
     outline: none;
 }
 
+.key.animate {
+    animation: drop ease-out forwards 1100ms; 
+}
+
+@keyframes drop {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .placeholder::placeholder{
     color: #445A6E;
-    border-color: #445A6E;
-    border-width: 2px;
+
 }
 
 .error-message{
     color: #FF0000;
-    margin-top: 10px;
-}
-
-.success-message{
-    color: #00FF00;
     margin-top: 10px;
 }

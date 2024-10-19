@@ -1,32 +1,76 @@
-.paw-loading-display {
+@keyframes backgroundTransition {
+    0% {
+        background: conic-gradient(
+            from 100deg at -45.56% 83.37%, 
+            #FDA1A2 46.44578039646149deg, 
+            #FDA1A2 98.27995777130127deg, 
+            #FDA1A2 260.27995347976685deg, 
+            #FDA1A2 313.76006841659546deg, 
+            #FDA1A2 360deg
+        );
+    }
+    50% {
+        background: conic-gradient(
+            from 100deg at -45.56% 83.37%, 
+            #FDA1A2 46.44578039646149deg, 
+            #FF6D6D 98.27995777130127deg, 
+            #FF6D6D 260.27995347976685deg, 
+            #FDA1A2 313.76006841659546deg, 
+            #FDA1A2 360deg
+        );
+    }
+
+    100% {
+        background: conic-gradient(
+            from 100deg at -45.56% 83.37%, 
+            #FDA1A2 46.44578039646149deg, 
+            #FDA1A2 98.27995777130127deg, 
+            #FDA1A2 260.27995347976685deg, 
+            #FDA1A2 313.76006841659546deg, 
+            #FDA1A2 360deg
+        );
+    }
+}
+
+@keyframes colorTransition {
+    0%, 100% {
+        color: #181818; 
+    }
+    50% {
+        color: #ccc; 
+    }
+}
+
+.loading-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: conic-gradient(from 100deg at -45.56% 83.37%, #FDA1A2 46.44578039646149deg, #FDA1A2 98.27995777130127deg, #FDA1A2 260.27995347976685deg, #FDA1A2 313.76006841659546deg, #FDA1A2 360deg);
+    overflow: hidden;
     background-blend-mode: difference;
-    animation: rotateBackground 5s linear infinite;
+    animation: backgroundTransition 10s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+    overflow: hidden;
 }
 
-@keyframes rotateBackground {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+.paw-loading {
+    transform: scale(0.5);
 }
 
-.paw-logo {
-    scale: 0.5;
-    animation: paw-bounce 1s infinite;
+.title-loading {
+    animation: colorTransition 10s ease-in-out infinite; 
 }
 
-@keyframes paw-bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+.text{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
+    opacity: 0;
+}
+
+.subtext {
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    margin-top: 50px;
 }
