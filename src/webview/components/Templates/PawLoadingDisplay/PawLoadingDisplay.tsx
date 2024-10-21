@@ -23,12 +23,17 @@ const PawLoadingDisplay = ({ loadingComplete }: PawLoadingDisplayProps) => {
 
     return (
         <div className="loading-container">
+            <div className="background-layer-1"></div>
+            <div className="background-layer-2"></div>
             <div className={`paw-loading ${isAnimating ? 'animate' : ''}`}>
                 <WaterLevelPawPrint value1={2} value2={1} value3={1} speed={500} />
             </div>
-            <h1 className="title-loading">Introducing GuideDog</h1>
-            <p className="title-loading">
-                Your personal AI Accessibility Assistant
+            <h1 className={`title-loading ${isAnimating ? 'animate' : ''}`}>
+                <span>{d('ui.boxes.guideOnboarding.titlePart1')}</span>
+                <span>{d('ui.boxes.guideOnboarding.titlePart2')}</span>
+            </h1>
+            <p className={`subtext-loading ${isAnimating ? 'animate' : ''}`}>
+                {d('ui.boxes.guideOnboarding.subtitle')}
             </p>
         </div>
     );
