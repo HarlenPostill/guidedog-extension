@@ -4,6 +4,7 @@ import { useDictionary } from '../../../hooks/useDictionary';
 import IssueButton from '../../Atoms/IssueButton/IssueButton';
 import { InsertDriveFileOutlined, MoreHoriz } from '@mui/icons-material';
 import ActionDropdown from '../../Atoms/ActionDropdown/ActionDropdown';
+import { getTimeOrDate } from '../../../helpers/timeHelper';
 
 interface HistoryIssueProps {
   fileName?: string;
@@ -11,7 +12,7 @@ interface HistoryIssueProps {
   issue: string;
   impact: string;
   issueString: string;
-  timeAdded?: string;
+  timeAdded: string;
 }
 
 const impactStyles = {
@@ -33,6 +34,13 @@ const impactStyles = {
 };
 
 type ImpactKey = keyof typeof impactStyles;
+
+const formatIssueType = (type: string) => {
+  return type
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
 
 const getImpactStyle = (impact: string): ImpactKey => {
   const lowerImpact = impact.toLowerCase();
@@ -91,6 +99,12 @@ const HistoryIssue = ({
       className={`issueFrame ${isHovered ? 'hovered' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
+      <div className="issueInfo">
+        <div className="infoText" style={{ color: impactStyles[getImpactStyle(impact)].title }}>
+          {formatIssueType(issue)}
+        </div>
+        <div className="infoText">{getTimeOrDate(timeAdded)}</div>
+      </div>
       <div className="issueInfo">
         <div className="issueFile">
           <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />

@@ -11,7 +11,7 @@ interface Issue {
   impact: string;
   type: string;
   improvement: string;
-  timeAdded?: string;
+  timeAdded: string;
 }
 
 interface FileIssue {
