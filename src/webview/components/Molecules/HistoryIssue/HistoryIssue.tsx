@@ -1,7 +1,6 @@
-import '../IssueLine/IssueLine.css';
+import './HistoryIssue.css';
 import React, { useRef, useState, useEffect } from 'react';
 import { useDictionary } from '../../../hooks/useDictionary';
-import IssueButton from '../../Atoms/IssueButton/IssueButton';
 import { InsertDriveFileOutlined, MoreHoriz } from '@mui/icons-material';
 import ActionDropdown from '../../Atoms/ActionDropdown/ActionDropdown';
 import { getTimeOrDate } from '../../../helpers/timeHelper';
@@ -99,13 +98,13 @@ const HistoryIssue = ({
       className={`issueFrame ${isHovered ? 'hovered' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
-      <div className="issueInfo">
+      <div className="historyIssueInfo">
         <div className="infoText" style={{ color: impactStyles[getImpactStyle(impact)].title }}>
           {formatIssueType(issue)}
         </div>
         <div className="infoText">{getTimeOrDate(timeAdded)}</div>
       </div>
-      <div className="issueInfo">
+      <div className="historyIssueInfo">
         <div className="issueFile">
           <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />
           <div className="fileName" style={{ color: impactStyles[getImpactStyle(impact)].title }}>

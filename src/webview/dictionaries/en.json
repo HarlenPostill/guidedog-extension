@@ -22,6 +22,16 @@
       "seeAll": "see all",
       "history": "history"
     },
+    "time": {
+      "now": "Just Now",
+      "minute": "minute",
+      "minutes": "minutes",
+      "hour": "hour",
+      "hours": "hours",
+      "day": "day",
+      "days": "days",
+      "suffix": "ago"
+    },
     "boxes": {
       "breakdowns": {
         "title": "BREAKDOWNS",

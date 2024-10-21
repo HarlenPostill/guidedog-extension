@@ -9,6 +9,7 @@ import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
 import HistoryDisplay from './components/Templates/HistoryDisplay/HistoryDisplay';
+import { getTimePeriodFromNow } from './helpers/timeHelper';
 
 declare const acquireVsCodeApi: () => {
   postMessage: (message: any) => void;
@@ -107,7 +108,7 @@ const App = () => {
     const percentage = Math.min(Math.round((totalValue / issueCount) * 10), 100);
 
     const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
-    const lastUpdatedString = timeDiff === 0 ? 'Just now' : `${timeDiff}m ago`;
+    const lastUpdatedString = getTimePeriodFromNow(timeDiff.toString());
 
     return {
       lastUpdated: lastUpdatedString,
