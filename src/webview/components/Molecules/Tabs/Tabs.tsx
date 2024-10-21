@@ -1,14 +1,14 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react';
+import React, { useRef, useEffect, useCallback, useState, ReactNode } from 'react';
 import './Tabs.css';
 
 interface TabProps {
   headers: string[];
-  children: React.ReactNode[];
+  children: ReactNode[];
   activeTab: number;
   setActiveTab: (index: number) => void;
 }
 
-const Tabs = ({ headers, children, activeTab, setActiveTab }: TabProps) => {
+const Tabs: React.FC<TabProps> = ({ headers, children, activeTab, setActiveTab }) => {
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const underlineRef = useRef<HTMLDivElement>(null);
   const [underlineStyle, setUnderlineStyle] = useState({
@@ -18,27 +18,29 @@ const Tabs = ({ headers, children, activeTab, setActiveTab }: TabProps) => {
   });
 
   const updateUnderline = useCallback(() => {
-    const activeTabElement = tabRefs.current[activeTab];
-    if (activeTabElement) {
-      setUnderlineStyle({
-        width: activeTabElement.offsetWidth,
-        transform: `translateX(${activeTabElement.offsetLeft}px)`,
-        opacity: 1,
-      });
+    if (activeTab >= 0 && activeTab < headers.length) {
+      const activeTabElement = tabRefs.current[activeTab];
+      if (activeTabElement) {
+        setUnderlineStyle({
+          width: activeTabElement.offsetWidth,
+          transform: `translateX(${activeTabElement.offsetLeft}px)`,
+          opacity: 1,
+        });
+      }
+    } else {
+      setUnderlineStyle({ width: 0, transform: 'translateX(0px)', opacity: 0 });
     }
-  }, [activeTab]);
+  }, [activeTab, headers.length]);
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver(() => {
       updateUnderline();
     });
-
     tabRefs.current.forEach(tabRef => {
       if (tabRef) {
         resizeObserver.observe(tabRef);
       }
     });
-
     return () => {
       resizeObserver.disconnect();
     };
@@ -47,6 +49,14 @@ const Tabs = ({ headers, children, activeTab, setActiveTab }: TabProps) => {
   useEffect(() => {
     updateUnderline();
   }, [updateUnderline]);
+
+  const renderContent = () => {
+    if (activeTab >= 0 && activeTab < children.length) {
+      return children[activeTab];
+    }
+    // Render the "secret" tab content if activeTab is out of range
+    return children[children.length - 1];
+  };
 
   return (
     <div className="tab-container">
@@ -62,7 +72,7 @@ const Tabs = ({ headers, children, activeTab, setActiveTab }: TabProps) => {
         ))}
         <div ref={underlineRef} className="tab-underline" style={underlineStyle} />
       </div>
-      <div className="tab-content">{children[activeTab]}</div>
+      <div className="tab-content">{renderContent()}</div>
     </div>
   );
 };

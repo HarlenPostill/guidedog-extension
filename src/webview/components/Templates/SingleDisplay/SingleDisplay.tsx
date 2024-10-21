@@ -16,9 +16,10 @@ interface FileIssues {
 interface SingleDisplayProps {
   vscode: any;
   issuesData: FileIssues[];
+  showHistoryView: () => void;
 }
 
-const SingleDisplay = ({ vscode, issuesData }: SingleDisplayProps) => {
+const SingleDisplay = ({ vscode, issuesData, showHistoryView }: SingleDisplayProps) => {
   const [filePath, setFilePath] = useState<string>('');
 
   useEffect(() => {
@@ -32,7 +33,13 @@ const SingleDisplay = ({ vscode, issuesData }: SingleDisplayProps) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-      <FileIssuesList hasSort={true} vscode={vscode} issuesData={issuesData} filePath={filePath} />
+      <FileIssuesList
+        hasSort={true}
+        vscode={vscode}
+        issuesData={issuesData}
+        filePath={filePath}
+        showHistoryView={showHistoryView}
+      />
     </div>
   );
 };

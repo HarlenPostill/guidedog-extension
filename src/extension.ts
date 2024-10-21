@@ -55,6 +55,9 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
         case 'removeIssue':
           this._removeIssue(message.fileName, message.lineNumber, message.issueType);
           break;
+        case 'getHistoryIssues':
+          this._sendHistoryIssues(webviewView);
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
@@ -128,9 +131,20 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
       const fileResult = results.find((file: any) => file.fileName === fileName);
       if (fileResult) {
-        fileResult.issues.push(removedIssue);
+        fileResult.issues.push({
+          ...removedIssue,
+          timeAdded: new Date().toISOString(),
+        });
       } else {
-        results.push({ fileName, issues: [removedIssue] });
+        results.push({
+          fileName,
+          issues: [
+            {
+              ...removedIssue,
+              timeAdded: new Date().toISOString(),
+            },
+          ],
+        });
       }
 
       await fs.writeFile(this._resultsPath, JSON.stringify(results, null, 2));
@@ -140,6 +154,23 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
     if (this._view) {
       this._sendSuggestions(this._view);
+    }
+  }
+
+  private async _sendHistoryIssues(webviewView: vscode.WebviewView) {
+    try {
+      const resultsData = await fs.readFile(this._resultsPath, 'utf8');
+      const results = JSON.parse(resultsData);
+      webviewView.webview.postMessage({
+        command: 'updateHistoryIssues',
+        historyIssues: results,
+      });
+    } catch (error) {
+      console.error(`Error reading or parsing results file: ${error}`);
+      webviewView.webview.postMessage({
+        command: 'updateHistoryIssues',
+        historyIssues: [],
+      });
     }
   }
 

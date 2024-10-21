@@ -23,6 +23,7 @@ interface RepoIssuesListProps {
   vscode: any;
   switchToSingleDisplay: () => void;
   issuesData: FileIssues[];
+  showHistoryView: () => void;
 }
 
 interface GroupedIssues {
@@ -72,6 +73,7 @@ const RepoIssuesList = ({
   issuesData,
   vscode,
   switchToSingleDisplay,
+  showHistoryView,
 }: RepoIssuesListProps) => {
   const d = useDictionary();
   const [removedIssues, setRemovedIssues] = useState<Set<string>>(new Set());
@@ -140,13 +142,7 @@ const RepoIssuesList = ({
           {d('ui.boxes.issueList.title')}
           {hasSort && <SwapVertOutlinedIcon sx={{ fontSize: 19 }} />}
         </div>
-        <Link
-          name={d('ui.links.history')}
-          hasIcon={true}
-          action={() => {
-            console.log('History not implemented');
-          }}
-        />
+        <Link name={d('ui.links.history')} hasIcon={true} action={showHistoryView} />
       </div>
       <div className="issuesContainer">
         {Object.entries(groupedIssues).map(([issueType, group]) => {

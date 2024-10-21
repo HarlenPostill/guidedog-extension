@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import './App.css';
 import Header from './components/Atoms/Header';
 import Tabs from './components/Molecules/Tabs/Tabs';
@@ -8,6 +8,7 @@ import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
 import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
+import HistoryDisplay from './components/Templates/HistoryDisplay/HistoryDisplay';
 
 declare const acquireVsCodeApi: () => {
   postMessage: (message: any) => void;
@@ -18,10 +19,17 @@ const vscode = acquireVsCodeApi();
 const App = () => {
   const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
+
   const [suggestionsData, setSuggestionsData] = useState([]);
+  const [historyIssues, setHistoryIssues] = useState([]);
+
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const divRef = useRef<HTMLDivElement>(null);
   const d = useDictionary();
+
+  const fetchHistoryIssues = useCallback(() => {
+    vscode.postMessage({ command: 'getHistoryIssues' });
+  }, []);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -32,6 +40,7 @@ const App = () => {
     updateWidth();
     window.addEventListener('resize', updateWidth);
     vscode.postMessage({ command: 'getSuggestions' });
+    fetchHistoryIssues();
 
     const messageListener = (event: MessageEvent) => {
       const message = event.data;
@@ -39,6 +48,9 @@ const App = () => {
         case 'updateSuggestions':
           setSuggestionsData(message.suggestions);
           setLastUpdated(new Date());
+          break;
+        case 'updateHistoryIssues':
+          setHistoryIssues(message.historyIssues);
           break;
       }
     };
@@ -48,7 +60,13 @@ const App = () => {
       window.removeEventListener('resize', updateWidth);
       window.removeEventListener('message', messageListener);
     };
-  }, []);
+  }, [fetchHistoryIssues]);
+
+  useEffect(() => {
+    if (![0, 1, 2].includes(activeTab)) {
+      fetchHistoryIssues();
+    }
+  }, [activeTab, fetchHistoryIssues]);
 
   useEffect(() => {
     const visibilityListener = () => {
@@ -99,8 +117,12 @@ const App = () => {
 
   const isWidthTooSmall = width < 304;
 
-  const switchToSingleDisplay = () => {
-    setActiveTab(1); // SingleDisplay is 1
+  const handleSetActiveTab = (index: number) => {
+    setActiveTab(index);
+  };
+
+  const showHistoryView = () => {
+    setActiveTab(3);
   };
 
   return (
@@ -118,14 +140,20 @@ const App = () => {
             `${d('ui.headers.tabTitle3')}`,
           ]}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}>
+          setActiveTab={handleSetActiveTab}>
           <RepoDisplay
             vscode={vscode}
-            switchToSingleDisplay={switchToSingleDisplay}
+            switchToSingleDisplay={() => setActiveTab(1)}
             issuesData={suggestionsData}
+            showHistoryView={showHistoryView}
           />
-          <SingleDisplay vscode={vscode} issuesData={suggestionsData} />
+          <SingleDisplay
+            vscode={vscode}
+            issuesData={suggestionsData}
+            showHistoryView={showHistoryView}
+          />
           <ResultsDisplay vscode={vscode} />
+          <HistoryDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
         </Tabs>
         <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
       </div>
