@@ -1,0 +1,53 @@
+.introduction-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.introduction-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.subtext-introdution {
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #CCC;
+}
+
+.subtext-introduction.pink {
+    font-size: 15px;
+    color: #FDA1A2;
+    margin-top: 0px;
+}
+
+.subtext-introduction.grey {
+    font-size: 15px;
+    color: #A3A3A3;
+}
+
+.feature-list {
+    list-style-type: none; 
+    padding: 0;
+    margin: 20px 0;
+}
+
+.feature-list li {
+display: flex;         
+align-items: center;
+font-size: 15px;
+margin-bottom: 15px;   
+}
+
+.feature-list li svg {
+margin-right: 8px;     
+color: #FDA1A2;     
+}
+
+start-button {
+    align-self: flex-end; 
+    padding: 10px 20px;
+}

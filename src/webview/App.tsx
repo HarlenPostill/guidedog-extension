@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Atoms/Header';
 import Tabs from './components/Molecules/Tabs/Tabs';
 import OnboardingDisplay from './components/Templates/OnboardingDisplay/OnboardingDisplay';
+import IntroductionDisplay from './components/Templates/IntroductionDisplay/IntorductionDisplay';
 import KeyDisplay from './components/Templates/KeyDisplay/KeyDisplay';
 import PawLoadingDisplay from './components/Templates/PawLoadingDisplay/PawLoadingDisplay';
 import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
@@ -98,9 +99,13 @@ const App = () => {
     setCurrentStep('keyDisplay'); 
   };
 
+  const handleIntroductionComplete = () => {
+    setCurrentStep('pawLoading'); 
+  };
+
   const handleKeyComplete = (isValid: boolean) => {
     if (isValid) {
-      setCurrentStep('pawLoading');
+      setCurrentStep('IntroductionDisplay');
     }
   };
 
@@ -122,6 +127,9 @@ const App = () => {
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
       {currentStep === 'onboarding' && (
           <OnboardingDisplay onboardingComplete={handleOnboardingComplete} />
+        )}
+        {currentStep === 'IntroductionDisplay' && (
+          <IntroductionDisplay introductionComplete={handleIntroductionComplete} />
         )}
         {currentStep === 'keyDisplay' && (
           <KeyDisplay vscode={vscode} keyDisplayComplete={handleKeyComplete} />
