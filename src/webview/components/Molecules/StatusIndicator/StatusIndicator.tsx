@@ -14,15 +14,15 @@ const StatusIndicator = ({ percentage, lastUpdated }: StatusIndicatorProps) => {
   let colorClass = '';
   if (percentage !== undefined) {
     if (percentage <= 25) {
-      status = 'critical';
-      colorClass = 'critical';
+      status = 'acceptable';
+      colorClass = 'acceptable';
     } else if (percentage <= 50) {
       status = 'moderate';
       colorClass = 'moderate';
-    } else if (percentage < 100) {
-      status = 'acceptable';
-      colorClass = 'acceptable';
-    } else {
+    } else if (percentage <= 100) {
+      status = 'critical';
+      colorClass = 'critical';
+    } else if (percentage = 0){
       status = 'perfect';
       colorClass = 'perfect';
     }
