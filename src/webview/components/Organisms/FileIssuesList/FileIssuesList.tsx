@@ -23,9 +23,16 @@ interface FileIssuesListProps {
   vscode: any;
   issuesData: FileIssue[];
   filePath: string;
+  showHistoryView: () => void;
 }
 
-const FileIssuesList = ({ hasSort = false, issuesData, vscode, filePath }: FileIssuesListProps) => {
+const FileIssuesList = ({
+  hasSort = false,
+  issuesData,
+  vscode,
+  filePath,
+  showHistoryView,
+}: FileIssuesListProps) => {
   const d = useDictionary();
   const [localIssues, setLocalIssues] = useState<Issue[]>([]);
 
@@ -53,13 +60,7 @@ const FileIssuesList = ({ hasSort = false, issuesData, vscode, filePath }: FileI
           {d('ui.boxes.issueList.title')}
           {hasSort && <SwapVertOutlinedIcon sx={{ fontSize: 19 }} />}
         </div>
-        <Link
-          name={d('ui.links.history')}
-          hasIcon={true}
-          action={() => {
-            console.log('History not implemented');
-          }}
-        />
+        <Link name={d('ui.links.history')} hasIcon={true} action={showHistoryView} />
       </div>
       <div className="fileNameContainer">
         <div className="fileName">

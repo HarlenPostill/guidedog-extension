@@ -1,48 +1,64 @@
 {
-    "ui": {
-        "headers": {
-            "title": "Guidedog Summary",
-            "tabTitle1": "Whole Repo",
-            "tabTitle2": "Single File",
-            "tabTitle3": "Results",
-            "status": {
-                "critical": "Critical",
-                "moderate": "Moderate",
-                "acceptable": "Acceptable",
-                "perfect": "Perfect"
-            }
-        },
-        "toolTips": {
-            "WCAG": "This graph represents the overall quantity of violations present across your entire project"
-        },
-        "errors": {
-            "widthSmall": "Expand Sidebar to Continue"
-        },
-        "links": {
-            "seeAll": "see all",
-            "history": "history"
-        },
-        "boxes": {
-            "breakdowns": {
-                "title": "BREAKDOWNS",
-                "total": "Overall score",
-                "perceivable": "Perceivable",
-                "operable": "Operable",
-                "understandable": "Understandable",
-                "robust": "Robust"
-            },
-            "guideLinesViolations": {
-                "title": "WCAG GUIDELINE VIOLATIONS",
-                "suffix": "Violations"
-            },
-            "issueList": {
-                "title": "LIST OF ISSUES",
-                "linePrefix": "Line ",
-                "issuePillSuffix": " issues"
-            }
-        },
-        "text": {
-            "lastUpdated": "Last Updated"
-        }
+  "ui": {
+    "headers": {
+      "title": "Guidedog Summary",
+      "tabTitle1": "Whole Repo",
+      "tabTitle2": "Single File",
+      "tabTitle3": "Results",
+      "status": {
+        "critical": "Critical",
+        "moderate": "Moderate",
+        "acceptable": "Acceptable",
+        "perfect": "Perfect"
+      }
+    },
+    "toolTips": {
+      "WCAG": "This graph represents the overall quantity of violations present across your entire project"
+    },
+    "errors": {
+      "widthSmall": "Expand Sidebar to Continue"
+    },
+    "links": {
+      "seeAll": "see all",
+      "history": "history"
+    },
+    "time": {
+      "now": "Just Now",
+      "minute": "minute",
+      "minutes": "minutes",
+      "hour": "hour",
+      "hours": "hours",
+      "day": "day",
+      "days": "days",
+      "suffix": "ago"
+    },
+    "boxes": {
+      "breakdowns": {
+        "title": "BREAKDOWNS",
+        "total": "Overall score",
+        "perceivable": "Perceivable",
+        "operable": "Operable",
+        "understandable": "Understandable",
+        "robust": "Robust"
+      },
+      "guideLinesViolations": {
+        "title": "WCAG GUIDELINE VIOLATIONS",
+        "suffix": "Violations"
+      },
+      "issueList": {
+        "title": "LIST OF ISSUES",
+        "linePrefix": "Line ",
+        "issuePillSuffix": " issues"
+      },
+      "history": {
+        "title": "ISSUES HISTORY",
+        "linePrefix": "Line ",
+        "subTitle": "History",
+        "issuePillSuffix": " issues"
+      }
+    },
+    "text": {
+      "lastUpdated": "Last Updated"
     }
+  }
 }
