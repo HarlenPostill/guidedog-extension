@@ -21,9 +21,15 @@ interface RepoDisplayProps {
   vscode: any;
   switchToSingleDisplay: () => void;
   issuesData: FileIssues[];
+  showHistoryView: () => void;
 }
 
-const RepoDisplay = ({ vscode, switchToSingleDisplay, issuesData }: RepoDisplayProps) => {
+const RepoDisplay = ({
+  vscode,
+  switchToSingleDisplay,
+  issuesData,
+  showHistoryView,
+}: RepoDisplayProps) => {
   const repoIssuesListRef = useRef<HTMLDivElement>(null);
 
   const { scoreBreakdown, violationsOverview } = useMemo(() => {
@@ -84,6 +90,7 @@ const RepoDisplay = ({ vscode, switchToSingleDisplay, issuesData }: RepoDisplayP
           vscode={vscode}
           switchToSingleDisplay={switchToSingleDisplay}
           issuesData={issuesData}
+          showHistoryView={showHistoryView}
         />
       </div>
       <Divider />
