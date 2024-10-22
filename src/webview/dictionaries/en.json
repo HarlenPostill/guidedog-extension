@@ -25,7 +25,7 @@
         "boxes": {
             "breakdowns": {
                 "title": "BREAKDOWNS",
-                "total": "Overall score",
+                "total": "Critical Issues",
                 "perceivable": "Perceivable",
                 "operable": "Operable",
                 "understandable": "Understandable",

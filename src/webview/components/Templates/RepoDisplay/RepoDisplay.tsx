@@ -55,10 +55,11 @@ const RepoDisplay = ({ vscode, switchToSingleDisplay, issuesData }: RepoDisplayP
 
     return {
       scoreBreakdown: {
-        perc: (critical / total) * 100 || 0,
-        oper: (serious / total) * 100 || 0,
-        unde: (moderate / total) * 100 || 0,
-        robu: (minor / total) * 100 || 0,
+        perc: minor,
+        oper: moderate,
+        unde: serious,
+        robu: critical,
+        total: total
       },
       violationsOverview: {
         A: minor,

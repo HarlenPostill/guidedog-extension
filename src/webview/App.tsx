@@ -65,6 +65,8 @@ const App = () => {
   const config = useMemo(() => {
     let totalValue = 0;
     let issueCount = 0;
+    let criticalCount = 0;
+    let seriousCount = 0;
 
     suggestionsData.forEach((file: any) => {
       file.issues.forEach((issue: any) => {
@@ -72,9 +74,11 @@ const App = () => {
         switch (issue.impact) {
           case 'critical':
             totalValue += 10;
+            criticalCount +=1;
             break;
           case 'serious':
             totalValue += 7;
+            seriousCount +=1;
             break;
           case 'moderate':
             totalValue += 5;
@@ -86,7 +90,7 @@ const App = () => {
       });
     });
 
-    const percentage = Math.min(Math.round((totalValue / issueCount) * 10), 100);
+    const percentage = issueCount > 0 ? Math.round(((criticalCount + seriousCount) / issueCount) * 100) : 0;
 
     const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
     const lastUpdatedString = timeDiff === 0 ? 'Just now' : `${timeDiff}m ago`;
