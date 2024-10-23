@@ -7,7 +7,7 @@ import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 import IssueLine from '../../Molecules/IssueLine/IssueLine';
 
 interface Issue {
-  location: number;
+  lineNumber: number;
   impact: string;
   type: string;
   improvement: string;
@@ -23,6 +23,7 @@ interface RepoIssuesListProps {
   vscode: any;
   switchToSingleDisplay: () => void;
   issuesData: FileIssues[];
+  showHistoryView: () => void;
 }
 
 interface GroupedIssues {
@@ -72,6 +73,7 @@ const RepoIssuesList = ({
   issuesData,
   vscode,
   switchToSingleDisplay,
+  showHistoryView,
 }: RepoIssuesListProps) => {
   const d = useDictionary();
   const [removedIssues, setRemovedIssues] = useState<Set<string>>(new Set());
@@ -105,7 +107,12 @@ const RepoIssuesList = ({
       .join(' ');
   };
 
-  const handleRemoveIssue = (id: string, issueType: string) => {
+  const handleRemoveIssue = (
+    id: string,
+    issueType: string,
+    fileName: string,
+    lineNumber: number
+  ) => {
     setRemovedIssues(prev => {
       const newSet = new Set(prev).add(id);
       const updatedGroupIssues = groupedIssues[issueType].issues.filter(item => item.id !== id);
@@ -113,6 +120,13 @@ const RepoIssuesList = ({
         setTimeout(() => setRemovedIssues(new Set(newSet)), 0);
       }
       return newSet;
+    });
+
+    vscode.postMessage({
+      command: 'removeIssue',
+      fileName: fileName,
+      lineNumber: lineNumber,
+      issueType: issueType,
     });
   };
 
@@ -128,13 +142,7 @@ const RepoIssuesList = ({
           {d('ui.boxes.issueList.title')}
           {hasSort && <SwapVertOutlinedIcon sx={{ fontSize: 19 }} />}
         </div>
-        <Link
-          name={d('ui.links.history')}
-          hasIcon={true}
-          action={() => {
-            console.log('History not implemented');
-          }}
-        />
+        <Link name={d('ui.links.history')} hasIcon={true} action={showHistoryView} />
       </div>
       <div className="issuesContainer">
         {Object.entries(groupedIssues).map(([issueType, group]) => {
@@ -161,14 +169,16 @@ const RepoIssuesList = ({
                 <IssueLine
                   key={item.id}
                   fileName={item.fileName}
-                  lineNum={item.issue.location}
+                  lineNum={item.issue.lineNumber}
                   issueString={item.issue.improvement}
                   onMoreClick={() => {
                     console.log('More clicked for', item.fileName, item.issue);
                   }}
                   switchToSingleDisplay={switchToSingleDisplay}
                   vscode={vscode}
-                  onRemove={() => handleRemoveIssue(item.id, issueType)}
+                  onRemove={() =>
+                    handleRemoveIssue(item.id, issueType, item.fileName, item.issue.lineNumber)
+                  }
                 />
               ))}
             </div>

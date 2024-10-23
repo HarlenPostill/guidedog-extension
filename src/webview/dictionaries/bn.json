@@ -6,14 +6,14 @@
             "tabTitle2": "একক ফাইল",
             "tabTitle3": "ফলাফল",
             "status": {
-                "Perceivable": "উপলব্ধিযোগ্য",
-                "Operable": "পরিচালনাযোগ্য",
-                "Understandable": "বোধগম্য",
-                "Critical": "সমালোচনামূলক"
+                "critical": "সমালোচনামূলক",
+                "moderate": "পরিমিত",
+                "acceptable": "গ্রহণযোগ্য",
+                "perfect": "পারফেক্ট"
             }
         },
         "toolTips": {
-            "WCAG": "This graph represents the overall quantity of violations present across your entire project"
+            "WCAG": "এই গ্রাফটি আপনার সমগ্র প্রকল্প জুড়ে উপস্থিত লঙ্ঘনের সামগ্রিক পরিমাণকে উপস্থাপন করে"
         },
         "errors": {
             "widthSmall": "চালিয়ে যেতে সাইডবার প্রসারিত করুন"
@@ -23,6 +23,14 @@
             "history": "ইতিহাস"
         },
         "boxes": {
+            "breakdowns": {
+                "title": "ব্রেকডাউন",
+                "total": "সামগ্রিক স্কোর",
+                "perceivable": "উপলব্ধিযোগ্য",
+                "operable": "পরিচালনাযোগ্য",
+                "understandable": "বোধগম্য",
+                "robust": "মজবুত"
+            },
             "guideLinesViolations": {
                 "title": "WCAG নির্দেশিকা লঙ্ঘন",
                 "suffix": "লঙ্ঘন"

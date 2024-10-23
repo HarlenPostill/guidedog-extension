@@ -5,9 +5,7 @@ import './languageDropdown.css';
 
 const languages = [
   { code: 'EN', name: 'English' },
-  { code: 'VI', name: 'Vietnamese' },
   { code: 'KO', name: 'Korean' },
-  { code: 'MS', name: 'Malay' },
   { code: 'ZH', name: 'Mandarin' },
   { code: 'ES', name: 'Spanish' },
   { code: 'HI', name: 'Hindi' },

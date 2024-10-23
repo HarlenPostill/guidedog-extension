@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import './App.css';
 import Header from './components/Atoms/Header';
 import Tabs from './components/Molecules/Tabs/Tabs';
@@ -12,6 +12,8 @@ import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
 import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
+import HistoryDisplay from './components/Templates/HistoryDisplay/HistoryDisplay';
+import { getTimePeriodFromNow } from './helpers/timeHelper';
 
 declare const acquireVsCodeApi: () => {
   postMessage: (message: any) => void;
@@ -23,9 +25,17 @@ const App = () => {
   const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
 
+  const [suggestionsData, setSuggestionsData] = useState([]);
+  const [historyIssues, setHistoryIssues] = useState([]);
+
+  const [lastUpdated, setLastUpdated] = useState(new Date());
   const divRef = useRef<HTMLDivElement>(null);
   const [currentStep, setCurrentStep] = useState('onboarding');
   const d = useDictionary();
+
+  const fetchHistoryIssues = useCallback(() => {
+    vscode.postMessage({ command: 'getHistoryIssues' });
+  }, []);
 
   useEffect(() => {
     const updateWidth = () => {
@@ -35,63 +45,85 @@ const App = () => {
     };
     updateWidth();
     window.addEventListener('resize', updateWidth);
+    vscode.postMessage({ command: 'getSuggestions' });
+    fetchHistoryIssues();
+
+    const messageListener = (event: MessageEvent) => {
+      const message = event.data;
+      switch (message.command) {
+        case 'updateSuggestions':
+          setSuggestionsData(message.suggestions);
+          setLastUpdated(new Date());
+          break;
+        case 'updateHistoryIssues':
+          setHistoryIssues(message.historyIssues);
+          break;
+      }
+    };
+    window.addEventListener('message', messageListener);
+
     return () => {
       window.removeEventListener('resize', updateWidth);
+      window.removeEventListener('message', messageListener);
+    };
+  }, [fetchHistoryIssues]);
+
+  useEffect(() => {
+    if (![0, 1, 2].includes(activeTab)) {
+      fetchHistoryIssues();
+    }
+  }, [activeTab, fetchHistoryIssues]);
+
+  useEffect(() => {
+    const visibilityListener = () => {
+      if (!document.hidden) {
+        vscode.postMessage({ command: 'getSuggestions' });
+      }
+    };
+    document.addEventListener('visibilitychange', visibilityListener);
+    return () => {
+      document.removeEventListener('visibilitychange', visibilityListener);
     };
   }, []);
 
-  const dummyData = [
-    {
-      fileName: 'src/pages/HomePage.tsx',
-      issues: [
-        {
-          location: 13,
-          impact: 'moderate',
-          type: 'landmark-one-main',
-          improvement: '<div className="main w-screen h-screen bg-poke-lemon-yellow">',
-        },
-      ],
-    },
-    {
-      fileName: 'src/pages/PokemonPage.tsx',
-      issues: [
-        {
-          location: 12,
-          impact: 'serious',
-          type: 'page-has-heading-one',
-          improvement: "<h1 className='text-4xl mr-4 font-bold'>Pokemon Details</h1>",
-        },
-        {
-          location: 30,
-          impact: 'critical',
-          type: 'region',
-          improvement: "<main className='pt-24 flex flex-col justify-start items-center'>",
-        },
-      ],
-    },
-    {
-      fileName: 'src/pages/PageNotFound.tsx',
-      issues: [
-        {
-          location: 3,
-          impact: 'moderate',
-          type: 'landmark-one-main',
-          improvement: "<main className='flex flex-col justify-center items-center pt-32'>",
-        },
-      ],
-    },
-    {
-      fileName: 'src/components/NavBar.tsx',
-      issues: [
-        {
-          location: 1,
-          impact: 'critical',
-          type: 'region',
-          improvement: "<nav className='w-full'>{/* Navbar items */}</nav>",
-        },
-      ],
-    },
-  ];
+  const config = useMemo(() => {
+    let totalValue = 0;
+    let issueCount = 0;
+    let criticalCount = 0;
+    let seriousCount = 0;
+
+    suggestionsData.forEach((file: any) => {
+      file.issues.forEach((issue: any) => {
+        issueCount++;
+        switch (issue.impact) {
+          case 'critical':
+            totalValue += 10;
+            criticalCount +=1;
+            break;
+          case 'serious':
+            totalValue += 7;
+            seriousCount +=1;
+            break;
+          case 'moderate':
+            totalValue += 5;
+            break;
+          case 'minor':
+            totalValue += 3;
+            break;
+        }
+      });
+    });
+
+    const percentage = issueCount > 0 ? Math.round(((criticalCount + seriousCount) / issueCount) * 100) : 0;
+
+    const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
+    const lastUpdatedString = getTimePeriodFromNow(timeDiff.toString());
+
+    return {
+      lastUpdated: lastUpdatedString,
+      percentage: percentage,
+    };
+  }, [suggestionsData, lastUpdated]);
 
   const isWidthTooSmall = width < 304;
 
@@ -116,15 +148,19 @@ const App = () => {
   const config = {
     lastUpdated: '5m ago',
     percentage: 77,
+
+  const handleSetActiveTab = (index: number) => {
+    setActiveTab(index);
   };
 
-  const switchToSingleDisplay = () => {
-    setActiveTab(1); // SingleDisplay is 1
+  const showHistoryView = () => {
+    setActiveTab(3);
   };
 
   return (
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
+
       {currentStep === 'onboarding' && (
           <OnboardingDisplay onboardingComplete={handleOnboardingComplete} />
         )}
@@ -151,20 +187,26 @@ const App = () => {
                 `${d('ui.headers.tabTitle3')}`,
               ]}
               activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            >
+              setActiveTab={handleSetActiveTab}>
               <RepoDisplay
                 vscode={vscode}
                 switchToSingleDisplay={switchToSingleDisplay}
-                issuesData={dummyData}
+                issuesData={suggestionsData}
+                showHistoryView={showHistoryView}
               />
-              <SingleDisplay vscode={vscode} />
+              <SingleDisplay
+                vscode={vscode}
+                issuesData={suggestionsData}
+                showHistoryView={showHistoryView}
+              />
               <ResultsDisplay vscode={vscode} />
+              <HistoryDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
             </Tabs>
             <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
           </div>
         )}
       </div>
+      
       {isWidthTooSmall && (
         <div className="width-overlay">
           <p className="width-overlay__message">{d('ui.errors.widthSmall')}</p>

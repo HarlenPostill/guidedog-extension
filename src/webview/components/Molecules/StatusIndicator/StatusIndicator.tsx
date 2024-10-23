@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './StatusIndicator.css';
 import Icon from '../../Atoms/Icon/Icon';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { useDictionary } from '../../../hooks/useDictionary';
 
 interface StatusIndicatorProps {
@@ -11,36 +12,37 @@ interface StatusIndicatorProps {
 const StatusIndicator = ({ percentage, lastUpdated }: StatusIndicatorProps) => {
   let status = '';
   let colorClass = '';
-  if (percentage) {
+  if (percentage !== undefined) {
     if (percentage <= 25) {
-      status = 'Perceivable';
-      colorClass = 'perceivable';
+      status = 'acceptable';
+      colorClass = 'acceptable';
     } else if (percentage <= 50) {
-      status = 'Operable';
-      colorClass = 'operable';
-    } else if (percentage <= 75) {
-      status = 'Understandable';
-      colorClass = 'understandable';
-    } else {
-      status = 'Critical';
+      status = 'moderate';
+      colorClass = 'moderate';
+    } else if (percentage <= 100) {
+      status = 'critical';
       colorClass = 'critical';
+    } else if (percentage = 0){
+      status = 'perfect';
+      colorClass = 'perfect';
     }
   }
 
   const d = useDictionary();
 
   return (
-    <div className={`status-indicator ${colorClass}`}>
-      <div className="status">
+    <div className={`status-indicator-container ${colorClass}`}>
+      <div className="status-bar">
         <span>{d(`ui.headers.status.${status}`)}</span>
         <span className="paw-icon">
           <Icon name="Paw" width={24} height={24} />
         </span>
       </div>
+      <div className="divider"></div>
       <div className="last-updated">
         {d('ui.text.lastUpdated')} <span>{lastUpdated}</span>
         <button className="refresh-button">
-          <Icon name="RefreshIcon" width={24} height={24} style={{ fill: 'white' }} />
+          <AutorenewIcon width={24} height={24} style={{ fill: '#599CD8' }} />
         </button>
       </div>
     </div>

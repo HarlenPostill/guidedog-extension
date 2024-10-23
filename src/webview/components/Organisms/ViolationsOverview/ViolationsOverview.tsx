@@ -6,14 +6,16 @@ import ViolationSeverity from '../../Atoms/ViolationSeverity/ViolationSeverity';
 import { useDictionary } from '../../../hooks/useDictionary';
 import ToolTip from '../../Atoms/ToolTip/ToolTip';
 
-interface ViolationsOverview {
+interface ViolationsOverviewProps {
   A: number;
   AA: number;
   AAA: number;
+  onSeeAllClick: () => void;
 }
 
-const ViolationsOverview = ({ A, AA, AAA }: ViolationsOverview) => {
+const ViolationsOverview = ({ A, AA, AAA, onSeeAllClick }: ViolationsOverviewProps) => {
   const d = useDictionary();
+
   return (
     <div className="violationsOverview">
       <div className="headerGroup">
@@ -21,12 +23,7 @@ const ViolationsOverview = ({ A, AA, AAA }: ViolationsOverview) => {
           <div>{d('ui.boxes.guideLinesViolations.title')}</div>
           <ToolTip text={d('ui.toolTips.WCAG')} />
         </div>
-        <Link
-          name={d('ui.links.seeAll')}
-          action={function (): void {
-            throw new Error('Function not implemented.');
-          }}
-        />
+        <Link name={d('ui.links.seeAll')} action={onSeeAllClick} />
       </div>
       <div className="graphValues">
         <WaterLevelPawPrint value1={A} value2={AA} value3={AAA} />

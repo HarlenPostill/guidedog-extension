@@ -6,10 +6,10 @@
             "tabTitle2": "Один файл",
             "tabTitle3": "Результаты",
             "status": {
-                "Perceivable": "Воспринимаемый",
-                "Operable": "Работоспособный",
-                "Understandable": "Понятно",
-                "Critical": "Критический"
+                "critical": "Критический",
+                "moderate": "Умеренный",
+                "acceptable": "Приемлемый",
+                "perfect": "Идеальный"
             }
         },
         "toolTips": {
@@ -23,8 +23,16 @@
             "history": "история"
         },
         "boxes": {
+            "breakdowns": {
+                "title": "РАЗБОЙКИ",
+                "total": "Общий балл",
+                "perceivable": "Воспринимаемый",
+                "operable": "Работоспособный",
+                "understandable": "Понятно",
+                "robust": "Крепкий"
+            },
             "guideLinesViolations": {
-                "title": "Нарушения руководства WCAG",
+                "title": "НАРУШЕНИЯ РУКОВОДСТВ WCAG",
                 "suffix": "Нарушения"
             },
             "issueList": {

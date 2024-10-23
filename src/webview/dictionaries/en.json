@@ -6,10 +6,10 @@
       "tabTitle2": "Single File",
       "tabTitle3": "Results",
       "status": {
-        "Perceivable": "Perceivable",
-        "Operable": "Operable",
-        "Understandable": "Understandable",
-        "Critical": "Critical"
+        "critical": "Critical",
+        "moderate": "Moderate",
+        "acceptable": "Acceptable",
+        "perfect": "Perfect"
       }
     },
     "toolTips": {
@@ -22,10 +22,20 @@
       "seeAll": "see all",
       "history": "history"
     },
+    "time": {
+      "now": "Just Now",
+      "minute": "minute",
+      "minutes": "minutes",
+      "hour": "hour",
+      "hours": "hours",
+      "day": "day",
+      "days": "days",
+      "suffix": "ago"
+    },
     "boxes": {
       "breakdowns": {
         "title": "BREAKDOWNS",
-        "total": "Overall score",
+        "total": "Critical Issues",
         "perceivable": "Perceivable",
         "operable": "Operable",
         "understandable": "Understandable",
@@ -59,6 +69,12 @@
       "issueList": {
         "title": "LIST OF ISSUES",
         "linePrefix": "Line ",
+        "issuePillSuffix": " issues"
+      },
+      "history": {
+        "title": "ISSUES HISTORY",
+        "linePrefix": "Line ",
+        "subTitle": "History",
         "issuePillSuffix": " issues"
       }
     },
