@@ -26,6 +26,7 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
     this._postActiveFilePath(webviewView);
     this._loadSuggestions(webviewView);
+    this._checkGuideDogFolder(webviewView);
 
     // scan for active editor changes
     vscode.window.onDidChangeActiveTextEditor(() => {
@@ -58,10 +59,38 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
         case 'getHistoryIssues':
           this._sendHistoryIssues(webviewView);
           break;
+        case 'checkGuideDogFolder':
+          this._checkGuideDogFolder(webviewView);
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
     });
+  }
+
+  private async _checkGuideDogFolder(webviewView: vscode.WebviewView) {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+      return;
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const guideDogPath = path.join(rootPath, '.guidedog');
+
+    try {
+      await fs.access(guideDogPath);
+      // Folder exists, skip animation
+      webviewView.webview.postMessage({
+        command: 'guideDogFolderExists',
+        exists: true,
+      });
+    } catch {
+      // Folder doesn't exist, show animation
+      webviewView.webview.postMessage({
+        command: 'guideDogFolderExists',
+        exists: false,
+      });
+    }
   }
 
   private async _loadSuggestions(webviewView: vscode.WebviewView) {

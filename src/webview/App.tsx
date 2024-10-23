@@ -24,6 +24,7 @@ const vscode = acquireVsCodeApi();
 const App = () => {
   const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
+  const [skipIntro, setSkipIntro] = useState(false);
 
   const [suggestionsData, setSuggestionsData] = useState([]);
   const [historyIssues, setHistoryIssues] = useState([]);
@@ -46,6 +47,7 @@ const App = () => {
     updateWidth();
     window.addEventListener('resize', updateWidth);
     vscode.postMessage({ command: 'getSuggestions' });
+    vscode.postMessage({ command: 'checkGuideDogFolder' });
     fetchHistoryIssues();
 
     const messageListener = (event: MessageEvent) => {
@@ -57,6 +59,12 @@ const App = () => {
           break;
         case 'updateHistoryIssues':
           setHistoryIssues(message.historyIssues);
+          break;
+        case 'guideDogFolderExists':
+          if (message.exists) {
+            setCurrentStep('mainContent');
+            setSkipIntro(true);
+          }
           break;
       }
     };
@@ -78,13 +86,16 @@ const App = () => {
     const visibilityListener = () => {
       if (!document.hidden) {
         vscode.postMessage({ command: 'getSuggestions' });
+        if (skipIntro) {
+          setCurrentStep('mainContent');
+        }
       }
     };
     document.addEventListener('visibilitychange', visibilityListener);
     return () => {
       document.removeEventListener('visibilitychange', visibilityListener);
     };
-  }, []);
+  }, [skipIntro]);
 
   const config = useMemo(() => {
     let totalValue = 0;
@@ -129,11 +140,11 @@ const App = () => {
   const isWidthTooSmall = width < 304;
 
   const handleOnboardingComplete = () => {
-    setCurrentStep('keyDisplay'); 
+    setCurrentStep('keyDisplay');
   };
 
   const handleIntroductionComplete = () => {
-    setCurrentStep('pawLoading'); 
+    setCurrentStep('pawLoading');
   };
 
   const handleKeyComplete = (isValid: boolean) => {
@@ -155,10 +166,8 @@ const App = () => {
   };
 
   return (
-    
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
-
         {currentStep === 'onboarding' && (
           <OnboardingDisplay onboardingComplete={handleOnboardingComplete} />
         )}
