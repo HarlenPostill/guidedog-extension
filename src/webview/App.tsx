@@ -178,7 +178,7 @@ const App = () => {
           <KeyDisplay vscode={vscode} keyDisplayComplete={handleKeyComplete} />
         )}
         {currentStep === 'pawLoading' && (
-          <PawLoadingDisplay loadingComplete={handlePawLoadingComplete} />
+          <PawLoadingDisplay vscode={vscode} loadingComplete={handlePawLoadingComplete} />
         )}
         {currentStep === 'mainContent' && (
           <div>

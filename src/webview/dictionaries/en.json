@@ -44,21 +44,25 @@
       "guideOnboarding": {
         "titlePart1": "Introducing ",
         "titlePart2": "GuideDog",
-        "loadingText": "Installing GuideDog...", 
+        "loadingText": "Installing GuideDog...",
         "subtitle": "Your personal AI Accessibility Assistant",
         "text": "Your AI-powered assistant for building accessible and inclusive web experiences.",
         "description": "GuideDog uses AI to help you find and fix accessibility issues in your codebase. Say goodbye to manual checks and ensure your projects meet WCAG standards without a hassle.",
         "features": {
-            "list1": "AI Accessibility Scanner",
-            "list2": "Codebase-wide analysis",
-            "list3": "Instant Fixes",
-            "list4": "Detailed reports with actionable insights"
+          "list1": "AI Accessibility Scanner",
+          "list2": "Codebase-wide analysis",
+          "list3": "Instant Fixes",
+          "list4": "Detailed reports with actionable insights"
         },
         "button": "Ask GuideDog"
       },
       "keyDisplay": {
         "title": "GuideDog uses an API Key to access your codebase",
         "input": "Please enter your API Key...",
+        "installing": "Installing and configuring GuideDog...",
+        "installComplete": "Setup complete!",
+        "installError": "Installation failed. Please try again.",
+        "tooShort": "API key must be at least 10 characters long",
         "keyStatus": {
           "error": "Invalid key!"
         }

@@ -1,49 +1,84 @@
 .onboarding-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.placeholder{
-    width: 93%;
-    padding: 10px;
-    text-align: left;
-    font-weight: bold;
-    letter-spacing: 1px;
-    background-color: transparent;
-    border: 1px solid #445A6E;
-    border-radius: 5px;
-    color: #ccc;
+.placeholder {
+  width: 93%;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  letter-spacing: 1px;
+  background-color: transparent;
+  border: 1px solid #445a6e;
+  border-radius: 5px;
+  color: #ccc;
 }
 
-.placeholder:focus{
-    border-color: #71bbff;
-    border-width: 2px;;
-    outline: none;
+.placeholder:focus {
+  border-color: #71bbff;
+  border-width: 2px;
+  outline: none;
 }
 
 .key.animate {
-    animation: drop ease-out forwards 1100ms; 
+  animation: drop ease-out forwards 1100ms;
 }
 
 @keyframes drop {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.placeholder::placeholder{
-    color: #445A6E;
-
+.placeholder::placeholder {
+  color: #445a6e;
 }
 
-.error-message{
-    color: #FF0000;
-    margin-top: 10px;
+.error-message {
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 4px;
+  background-color: #f0f0f0;
+  border-radius: 2px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #4caf50;
+  transition: width 0.3s ease-in-out;
+}
+
+.install-status {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.status-text {
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.placeholder.error {
+  border-color: #ff4444;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 14px;
+  margin-top: 8px;
 }
