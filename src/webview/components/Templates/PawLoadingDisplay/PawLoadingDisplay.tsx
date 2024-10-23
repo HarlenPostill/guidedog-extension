@@ -10,16 +10,31 @@ interface PawLoadingDisplayProps {
 
 const PawLoadingDisplay = ({ loadingComplete, vscode }: PawLoadingDisplayProps) => {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [checkStatus, setCheckStatus] = useState<'idle' | 'running' | 'complete' | 'error'>('idle');
   const d = useDictionary();
 
   useEffect(() => {
-    setIsAnimating(true);
-    const timer = setTimeout(() => {
-      loadingComplete();
-    }, 10000);
+    const handleMessage = (event: MessageEvent) => {
+      const message = event.data;
+      if (message.command === 'checkStatus') {
+        setCheckStatus(message.status);
 
-    return () => clearTimeout(timer);
+        if (message.status === 'complete' || message.status === 'error') {
+          setTimeout(() => {
+            loadingComplete();
+          }, 10000);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
   }, [loadingComplete]);
+
+  useEffect(() => {
+    setIsAnimating(true);
+    vscode.postMessage({ command: 'runGuideDogCheck' });
+  }, [vscode]);
 
   return (
     <div className="loading-container">
@@ -29,10 +44,14 @@ const PawLoadingDisplay = ({ loadingComplete, vscode }: PawLoadingDisplayProps) 
         <WaterLevelPawPrint value1={2} value2={1} value3={1} speed={500} />
       </div>
       <h1 className={`title-loading ${isAnimating ? 'animate' : ''}`}>
-        {d('ui.boxes.guideOnboarding.loadingText')}
+        {checkStatus === 'running'
+          ? d('ui.boxes.guideOnboarding.checkingText')
+          : d('ui.boxes.guideOnboarding.loadingText')}
       </h1>
       <p className={`subtext-loading ${isAnimating ? 'animate' : ''}`}>
-        {d('ui.boxes.guideOnboarding.subtitle')}
+        {checkStatus === 'error'
+          ? d('ui.boxes.guideOnboarding.errorText')
+          : d('ui.boxes.guideOnboarding.subtitle')}
       </p>
     </div>
   );

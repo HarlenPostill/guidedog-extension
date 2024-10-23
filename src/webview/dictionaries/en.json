@@ -44,6 +44,8 @@
       "guideOnboarding": {
         "titlePart1": "Introducing ",
         "titlePart2": "GuideDog",
+        "checkingText": "Checking your project...",
+        "errorText": "An error occurred while checking your project",
         "loadingText": "Installing GuideDog...",
         "subtitle": "Your personal AI Accessibility Assistant",
         "text": "Your AI-powered assistant for building accessible and inclusive web experiences.",

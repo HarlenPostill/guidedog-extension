@@ -105,6 +105,42 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
             });
           }
           break;
+        case 'runGuideDogCheck':
+          try {
+            const process = exec('npx @marcelqt/guidedog check', {
+              cwd: vscode.workspace.workspaceFolders?.[0].uri.fsPath,
+            });
+
+            // Send start message
+            webviewView.webview.postMessage({
+              command: 'checkStatus',
+              status: 'running',
+            });
+
+            // Wait for process to complete
+            process.on('exit', code => {
+              webviewView.webview.postMessage({
+                command: 'checkStatus',
+                status: code === 0 ? 'complete' : 'error',
+              });
+            });
+
+            // Handle potential errors
+            process.on('error', error => {
+              webviewView.webview.postMessage({
+                command: 'checkStatus',
+                status: 'error',
+                error: error.message,
+              });
+            });
+          } catch (error: any) {
+            webviewView.webview.postMessage({
+              command: 'checkStatus',
+              status: 'error',
+              error: error.message,
+            });
+          }
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
