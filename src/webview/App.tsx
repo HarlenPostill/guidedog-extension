@@ -93,11 +93,11 @@ const App = () => {
         switch (issue.impact) {
           case 'critical':
             totalValue += 10;
-            criticalCount +=1;
+            criticalCount += 1;
             break;
           case 'serious':
             totalValue += 7;
-            seriousCount +=1;
+            seriousCount += 1;
             break;
           case 'moderate':
             totalValue += 5;
@@ -109,7 +109,8 @@ const App = () => {
       });
     });
 
-    const percentage = issueCount > 0 ? Math.round(((criticalCount + seriousCount) / issueCount) * 100) : 0;
+    const percentage =
+      issueCount > 0 ? Math.round(((criticalCount + seriousCount) / issueCount) * 100) : 0;
 
     const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
     const lastUpdatedString = getTimePeriodFromNow(timeDiff.toString());

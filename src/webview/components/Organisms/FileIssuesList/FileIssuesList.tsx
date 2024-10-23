@@ -5,6 +5,7 @@ import { useDictionary } from '../../../hooks/useDictionary';
 import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 import { InsertDriveFileOutlined } from '@mui/icons-material';
 import IssueFix from '../../Molecules/IssueFix/IssueFix';
+import NoIssues from '../../Molecules/NoIssues/NoIssues';
 
 interface Issue {
   lineNumber: number;
@@ -62,29 +63,36 @@ const FileIssuesList = ({
         </div>
         <Link name={d('ui.links.history')} hasIcon={true} action={showHistoryView} />
       </div>
-      <div className="fileNameContainer">
-        <div className="fileName">
-          <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />
-          <div>{fileName}</div>
+
+      {localIssues.length === 0 ? (
+        <NoIssues filename={fileName} showHistoryView={showHistoryView} />
+      ) : (
+        <div>
+          <div className="fileNameContainer">
+            <div className="fileName">
+              <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />
+              <div>{fileName}</div>
+            </div>
+            <div className="issuePill">
+              {localIssues.length} {d('ui.boxes.issueList.issuePillSuffix')}
+            </div>
+          </div>
+          <div className="issuesContainer">
+            {localIssues.map((issue, index) => (
+              <IssueFix
+                key={`${issue.lineNumber}-${index}`}
+                fileName={filePath}
+                issue={issue.type}
+                impact={issue.impact}
+                lineNum={issue.lineNumber}
+                issueString={issue.improvement}
+                vscode={vscode}
+                onRemove={() => handleRemove(issue)}
+              />
+            ))}
+          </div>
         </div>
-        <div className="issuePill">
-          {localIssues.length} {d('ui.boxes.issueList.issuePillSuffix')}
-        </div>
-      </div>
-      <div className="issuesContainer">
-        {localIssues.map((issue, index) => (
-          <IssueFix
-            key={`${issue.lineNumber}-${index}`}
-            fileName={filePath}
-            issue={issue.type}
-            impact={issue.impact}
-            lineNum={issue.lineNumber}
-            issueString={issue.improvement}
-            vscode={vscode}
-            onRemove={() => handleRemove(issue)}
-          />
-        ))}
-      </div>
+      )}
     </div>
   );
 };
