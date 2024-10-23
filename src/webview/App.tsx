@@ -145,10 +145,6 @@ const App = () => {
     setCurrentStep('mainContent');
   };
 
-  const config = {
-    lastUpdated: '5m ago',
-    percentage: 77,
-
   const handleSetActiveTab = (index: number) => {
     setActiveTab(index);
   };
@@ -158,10 +154,11 @@ const App = () => {
   };
 
   return (
+    
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
 
-      {currentStep === 'onboarding' && (
+        {currentStep === 'onboarding' && (
           <OnboardingDisplay onboardingComplete={handleOnboardingComplete} />
         )}
         {currentStep === 'IntroductionDisplay' && (
@@ -190,7 +187,7 @@ const App = () => {
               setActiveTab={handleSetActiveTab}>
               <RepoDisplay
                 vscode={vscode}
-                switchToSingleDisplay={switchToSingleDisplay}
+                switchToSingleDisplay={() => setActiveTab(1)}
                 issuesData={suggestionsData}
                 showHistoryView={showHistoryView}
               />
@@ -206,7 +203,6 @@ const App = () => {
           </div>
         )}
       </div>
-      
       {isWidthTooSmall && (
         <div className="width-overlay">
           <p className="width-overlay__message">{d('ui.errors.widthSmall')}</p>
