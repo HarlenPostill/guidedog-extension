@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import './App.css';
 import Header from './components/Atoms/Header';
 import Tabs from './components/Molecules/Tabs/Tabs';
+import OnboardingDisplay from './components/Templates/OnboardingDisplay/OnboardingDisplay';
+import IntroductionDisplay from './components/Templates/IntroductionDisplay/IntorductionDisplay';
+import KeyDisplay from './components/Templates/KeyDisplay/KeyDisplay';
+import PawLoadingDisplay from './components/Templates/PawLoadingDisplay/PawLoadingDisplay';
 import RepoDisplay from './components/Templates/RepoDisplay/RepoDisplay';
 import ResultsDisplay from './components/Templates/ResultsDisplay/ResultsDisplay';
 import SingleDisplay from './components/Templates/SingleDisplay/SingleDisplay';
@@ -26,6 +30,7 @@ const App = () => {
 
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const divRef = useRef<HTMLDivElement>(null);
+  const [currentStep, setCurrentStep] = useState('onboarding');
   const d = useDictionary();
 
   const fetchHistoryIssues = useCallback(() => {
@@ -123,6 +128,24 @@ const App = () => {
 
   const isWidthTooSmall = width < 304;
 
+  const handleOnboardingComplete = () => {
+    setCurrentStep('keyDisplay'); 
+  };
+
+  const handleIntroductionComplete = () => {
+    setCurrentStep('pawLoading'); 
+  };
+
+  const handleKeyComplete = (isValid: boolean) => {
+    if (isValid) {
+      setCurrentStep('IntroductionDisplay');
+    }
+  };
+
+  const handlePawLoadingComplete = () => {
+    setCurrentStep('mainContent');
+  };
+
   const handleSetActiveTab = (index: number) => {
     setActiveTab(index);
   };
@@ -132,36 +155,54 @@ const App = () => {
   };
 
   return (
+    
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
-        <div className="language">
-          <LanguageSelector />
-        </div>
-        <Header title={d('ui.headers.title')} />
-        <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
-        <Tabs
-          headers={[
-            `${d('ui.headers.tabTitle1')}`,
-            `${d('ui.headers.tabTitle2')}`,
-            `${d('ui.headers.tabTitle3')}`,
-          ]}
-          activeTab={activeTab}
-          setActiveTab={handleSetActiveTab}>
-          <RepoDisplay
-            vscode={vscode}
-            switchToSingleDisplay={() => setActiveTab(1)}
-            issuesData={suggestionsData}
-            showHistoryView={showHistoryView}
-          />
-          <SingleDisplay
-            vscode={vscode}
-            issuesData={suggestionsData}
-            showHistoryView={showHistoryView}
-          />
-          <ResultsDisplay vscode={vscode} />
-          <HistoryDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
-        </Tabs>
-        <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
+
+        {currentStep === 'onboarding' && (
+          <OnboardingDisplay onboardingComplete={handleOnboardingComplete} />
+        )}
+        {currentStep === 'IntroductionDisplay' && (
+          <IntroductionDisplay introductionComplete={handleIntroductionComplete} />
+        )}
+        {currentStep === 'keyDisplay' && (
+          <KeyDisplay vscode={vscode} keyDisplayComplete={handleKeyComplete} />
+        )}
+        {currentStep === 'pawLoading' && (
+          <PawLoadingDisplay loadingComplete={handlePawLoadingComplete} />
+        )}
+        {currentStep === 'mainContent' && (
+          <div>
+            <div className="language">
+              <LanguageSelector />
+            </div>
+            <Header title={d('ui.headers.title')} />
+            <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
+            <Tabs
+              headers={[
+                `${d('ui.headers.tabTitle1')}`,
+                `${d('ui.headers.tabTitle2')}`,
+                `${d('ui.headers.tabTitle3')}`,
+              ]}
+              activeTab={activeTab}
+              setActiveTab={handleSetActiveTab}>
+              <RepoDisplay
+                vscode={vscode}
+                switchToSingleDisplay={() => setActiveTab(1)}
+                issuesData={suggestionsData}
+                showHistoryView={showHistoryView}
+              />
+              <SingleDisplay
+                vscode={vscode}
+                issuesData={suggestionsData}
+                showHistoryView={showHistoryView}
+              />
+              <ResultsDisplay vscode={vscode} />
+              <HistoryDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
+            </Tabs>
+            <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
+          </div>
+        )}
       </div>
       {isWidthTooSmall && (
         <div className="width-overlay">

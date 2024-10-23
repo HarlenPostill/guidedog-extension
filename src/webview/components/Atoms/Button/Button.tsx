@@ -5,9 +5,10 @@ type ButtonProps = {
   text: string;
   onClick: () => void;
   variant?: 'filled' | 'outlined';
+  className?: string;
 };
 
-const Button = ({ text, onClick, variant = 'filled' }: ButtonProps) => {
+const Button = ({ className='' , text, onClick, variant = 'filled' }: ButtonProps) => {
   return (
     <button className={`button ${variant}`} onClick={onClick}>
       {text}
