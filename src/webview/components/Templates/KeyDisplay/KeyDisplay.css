@@ -7,12 +7,6 @@
     overflow: hidden;
 }
 
-.title{
-    color: #ccc;
-    margin-bottom: 20px;
-    gap: 10px;
-}
-
 .placeholder{
     width: 93%;
     padding: 10px;

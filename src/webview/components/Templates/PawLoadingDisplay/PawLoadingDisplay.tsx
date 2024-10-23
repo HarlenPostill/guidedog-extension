@@ -29,8 +29,7 @@ const PawLoadingDisplay = ({ loadingComplete }: PawLoadingDisplayProps) => {
                 <WaterLevelPawPrint value1={2} value2={1} value3={1} speed={500} />
             </div>
             <h1 className={`title-loading ${isAnimating ? 'animate' : ''}`}>
-                <span>{d('ui.boxes.guideOnboarding.titlePart1')}</span>
-                <span>{d('ui.boxes.guideOnboarding.titlePart2')}</span>
+                {d('ui.boxes.guideOnboarding.loadingText')}
             </h1>
             <p className={`subtext-loading ${isAnimating ? 'animate' : ''}`}>
                 {d('ui.boxes.guideOnboarding.subtitle')}

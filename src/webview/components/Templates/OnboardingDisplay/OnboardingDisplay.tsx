@@ -25,11 +25,11 @@ const OnboardingDisplay = ({ onboardingComplete }: OnboardingDisplayProps)  => {
       <div className={`paw ${isAnimating ? 'animate' : ''}`}>
         <WaterLevelPawPrint value1={2} value2={1} value3={1} speed={500} />
       </div>
-      <h1 className={`text ${isAnimating ? 'animate' : ''}`}>
+      <h1 className={`onboarding-text ${isAnimating ? 'animate' : ''}`}>
         <span className="title-part1">{d('ui.boxes.guideOnboarding.titlePart1')}</span>
         <span className="title-part2">{d('ui.boxes.guideOnboarding.titlePart2')}</span>
       </h1>
-      <p className={`subtext ${isAnimating ? 'animate' : ''}`}>
+      <p className={`onboarding-subtext ${isAnimating ? 'animate' : ''}`}>
         {d('ui.boxes.guideOnboarding.subtitle')}
       </p>
     </div>

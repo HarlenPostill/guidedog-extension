@@ -49,7 +49,9 @@ const KeyDisplay = ({ vscode, keyDisplayComplete }: KeyDisplayProps) => {
     return (
         <div className="onboarding-container">
             <h1 className={`key ${isAnimating ? 'animate' : ''}`}>
-                <h1 className="title">{d('ui.boxes.keyDisplay.title')}</h1>
+                <span className="title" style={{ marginBottom: '20px' }}>
+                    {d('ui.boxes.keyDisplay.title')}
+                </span>
             </h1>
             <input
                 type="text"
