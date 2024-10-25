@@ -29,15 +29,15 @@
 }
 
 .perfect .status-bar {
-  color: #FDA1A2;
+  color: #fda1a2;
 }
 
 .acceptable .status-bar {
-  color: #4FED95;
+  color: #4fed95;
 }
 
 .moderate .status-bar {
-  color: #FFF568;
+  color: #fff568;
 }
 
 .critical .status-bar {
@@ -61,8 +61,8 @@
 
 .divider {
   width: 2px;
-  height: 24px; 
-  background: #445A6E;
+  height: 24px;
+  background: #445a6e;
   border-radius: 99px;
   margin: 0 15px;
   align-self: stretch;
@@ -74,10 +74,25 @@
   height: 24px;
   background: none;
   cursor: pointer;
-  color: #599CD8;
+  color: #599cd8;
   transition: filter 0.2s ease;
+  align-items: center;
+  justify-content: center;
 }
 
 .refresh-button:hover {
   filter: brightness(0.6);
+}
+
+.refresh-button svg.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

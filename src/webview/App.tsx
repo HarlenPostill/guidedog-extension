@@ -13,7 +13,6 @@ import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
 import HistoryDisplay from './components/Templates/HistoryDisplay/HistoryDisplay';
-import { getTimePeriodFromNow } from './helpers/timeHelper';
 
 declare const acquireVsCodeApi: () => {
   postMessage: (message: any) => void;
@@ -24,11 +23,12 @@ const vscode = acquireVsCodeApi();
 const App = () => {
   const [width, setWidth] = useState(0);
   const [activeTab, setActiveTab] = useState(0);
+  const [skipIntro, setSkipIntro] = useState(false);
 
   const [suggestionsData, setSuggestionsData] = useState([]);
   const [historyIssues, setHistoryIssues] = useState([]);
 
-  const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [lastUpdated, setLastUpdated] = useState('');
   const divRef = useRef<HTMLDivElement>(null);
   const [currentStep, setCurrentStep] = useState('onboarding');
   const d = useDictionary();
@@ -46,6 +46,7 @@ const App = () => {
     updateWidth();
     window.addEventListener('resize', updateWidth);
     vscode.postMessage({ command: 'getSuggestions' });
+    vscode.postMessage({ command: 'checkGuideDogFolder' });
     fetchHistoryIssues();
 
     const messageListener = (event: MessageEvent) => {
@@ -53,10 +54,15 @@ const App = () => {
       switch (message.command) {
         case 'updateSuggestions':
           setSuggestionsData(message.suggestions);
-          setLastUpdated(new Date());
           break;
         case 'updateHistoryIssues':
           setHistoryIssues(message.historyIssues);
+          break;
+        case 'guideDogFolderExists':
+          if (message.exists) {
+            setCurrentStep('mainContent');
+            setSkipIntro(true);
+          }
           break;
       }
     };
@@ -78,13 +84,16 @@ const App = () => {
     const visibilityListener = () => {
       if (!document.hidden) {
         vscode.postMessage({ command: 'getSuggestions' });
+        if (skipIntro) {
+          setCurrentStep('mainContent');
+        }
       }
     };
     document.addEventListener('visibilitychange', visibilityListener);
     return () => {
       document.removeEventListener('visibilitychange', visibilityListener);
     };
-  }, []);
+  }, [skipIntro]);
 
   const config = useMemo(() => {
     let totalValue = 0;
@@ -117,11 +126,11 @@ const App = () => {
     const percentage =
       issueCount > 0 ? Math.round(((criticalCount + seriousCount) / issueCount) * 100) : 0;
 
-    const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
-    const lastUpdatedString = getTimePeriodFromNow(timeDiff.toString());
+    // const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
+    // const lastUpdatedString = getTimePeriodFromNow(timeDiff.toString());
 
     return {
-      lastUpdated: lastUpdatedString,
+      // lastUpdated: lastUpdatedString,
       percentage: percentage,
     };
   }, [suggestionsData, lastUpdated]);
@@ -129,11 +138,11 @@ const App = () => {
   const isWidthTooSmall = width < 304;
 
   const handleOnboardingComplete = () => {
-    setCurrentStep('keyDisplay'); 
+    setCurrentStep('keyDisplay');
   };
 
   const handleIntroductionComplete = () => {
-    setCurrentStep('pawLoading'); 
+    setCurrentStep('pawLoading');
   };
 
   const handleKeyComplete = (isValid: boolean) => {
@@ -144,6 +153,7 @@ const App = () => {
 
   const handlePawLoadingComplete = () => {
     setCurrentStep('mainContent');
+    vscode.postMessage({ command: 'reloadWebview' });
   };
 
   const handleSetActiveTab = (index: number) => {
@@ -155,10 +165,8 @@ const App = () => {
   };
 
   return (
-    
     <div ref={divRef} className="app-container">
       <div className={`app-content ${isWidthTooSmall ? 'app-content--blurred' : ''}`}>
-
         {currentStep === 'onboarding' && (
           <OnboardingDisplay onboardingComplete={handleOnboardingComplete} />
         )}
@@ -169,7 +177,7 @@ const App = () => {
           <KeyDisplay vscode={vscode} keyDisplayComplete={handleKeyComplete} />
         )}
         {currentStep === 'pawLoading' && (
-          <PawLoadingDisplay loadingComplete={handlePawLoadingComplete} />
+          <PawLoadingDisplay vscode={vscode} loadingComplete={handlePawLoadingComplete} />
         )}
         {currentStep === 'mainContent' && (
           <div>
@@ -177,7 +185,7 @@ const App = () => {
               <LanguageSelector />
             </div>
             <Header title={d('ui.headers.title')} />
-            <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
+            <StatusIndicator percentage={config.percentage} vscode={vscode} />
             <Tabs
               headers={[
                 `${d('ui.headers.tabTitle1')}`,
@@ -197,10 +205,10 @@ const App = () => {
                 issuesData={suggestionsData}
                 showHistoryView={showHistoryView}
               />
-              <ResultsDisplay vscode={vscode} />
+              <ResultsDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
               <HistoryDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
             </Tabs>
-            <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
+            {/* <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div> */}
           </div>
         )}
       </div>

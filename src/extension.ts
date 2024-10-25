@@ -1,7 +1,10 @@
 import * as vscode from 'vscode';
 import { exec } from 'child_process';
+import { promisify } from 'util';
 import path from 'path';
 import * as fs from 'fs/promises';
+
+const execAsync = promisify(exec);
 
 export function activate(context: vscode.ExtensionContext) {
   const provider = new GuideDogSidebarProvider(context.extensionUri);
@@ -26,6 +29,7 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
 
     this._postActiveFilePath(webviewView);
     this._loadSuggestions(webviewView);
+    this._checkGuideDogFolder(webviewView);
 
     // scan for active editor changes
     vscode.window.onDidChangeActiveTextEditor(() => {
@@ -33,7 +37,7 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
     });
 
     // Listen for messages from the react end webview
-    webviewView.webview.onDidReceiveMessage(message => {
+    webviewView.webview.onDidReceiveMessage(async message => {
       switch (message.command) {
         case 'buttonClick':
           vscode.window.showInformationMessage('Running git branch in the background...');
@@ -58,10 +62,148 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
         case 'getHistoryIssues':
           this._sendHistoryIssues(webviewView);
           break;
+        case 'checkGuideDogFolder':
+          this._checkGuideDogFolder(webviewView);
+          break;
+        case 'initGuidedog':
+          try {
+            // Send initial status
+            webviewView.webview.postMessage({
+              command: 'installStatus',
+              status: 'installing',
+              progress: 0,
+            });
+
+            // Install package
+            await execAsync('npm install @marcelqt/guidedog', {
+              cwd: vscode.workspace.workspaceFolders?.[0].uri.fsPath,
+            });
+
+            // Update progress
+            webviewView.webview.postMessage({
+              command: 'installStatus',
+              status: 'installing',
+              progress: 50,
+            });
+
+            // Run init command
+            await execAsync(`npx @marcelqt/guidedog init --apiKey "${message.apiKey}"`, {
+              cwd: vscode.workspace.workspaceFolders?.[0].uri.fsPath,
+            });
+
+            // Send success
+            webviewView.webview.postMessage({
+              command: 'installStatus',
+              status: 'complete',
+              progress: 100,
+            });
+          } catch (error: any) {
+            webviewView.webview.postMessage({
+              command: 'installStatus',
+              status: 'error',
+              error: error.message,
+            });
+          }
+          break;
+        case 'runGuideDogCheck':
+          try {
+            const process = exec('npx @marcelqt/guidedog check', {
+              cwd: vscode.workspace.workspaceFolders?.[0].uri.fsPath,
+            });
+
+            webviewView.webview.postMessage({
+              command: 'checkStatus',
+              status: 'running',
+            });
+
+            process.on('exit', code => {
+              webviewView.webview.postMessage({
+                command: 'checkStatus',
+                status: code === 0 ? 'complete' : 'error',
+              });
+
+              if (code === 0) {
+                vscode.commands.executeCommand('workbench.action.reloadWindow');
+              }
+            });
+
+            // Handle potential errors
+            process.on('error', error => {
+              webviewView.webview.postMessage({
+                command: 'checkStatus',
+                status: 'error',
+                error: error.message,
+              });
+            });
+          } catch (error: any) {
+            webviewView.webview.postMessage({
+              command: 'checkStatus',
+              status: 'error',
+              error: error.message,
+            });
+          }
+          break;
+        case 'getFileModTime':
+          this._getFileModTime(webviewView);
+          break;
+        case 'reloadWebview':
+          vscode.window
+            .showInformationMessage('GuideDog check completed. Reloading window...', 'Reload')
+            .then(selection => {
+              if (selection === 'Reload') {
+                vscode.commands.executeCommand('workbench.action.reloadWindow');
+              }
+            });
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
     });
+  }
+
+  private async _getFileModTime(webviewView: vscode.WebviewView) {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+      return;
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const suggestionsPath = path.join(rootPath, '.guidedog', 'suggestions.json');
+
+    try {
+      const stats = await fs.stat(suggestionsPath);
+      webviewView.webview.postMessage({
+        command: 'fileModTime',
+        modTime: stats.mtime.toISOString(),
+      });
+    } catch (error) {
+      console.error('Error getting file modification time:', error);
+    }
+  }
+
+  private async _checkGuideDogFolder(webviewView: vscode.WebviewView) {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+      return;
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const guideDogPath = path.join(rootPath, '.guidedog');
+
+    try {
+      await fs.access(guideDogPath);
+      // Folder exists, skip animation
+      webviewView.webview.postMessage({
+        command: 'guideDogFolderExists',
+        exists: true,
+      });
+    } catch {
+      // Folder doesn't exist, show animation
+      webviewView.webview.postMessage({
+        command: 'guideDogFolderExists',
+        exists: false,
+      });
+    }
   }
 
   private async _loadSuggestions(webviewView: vscode.WebviewView) {
