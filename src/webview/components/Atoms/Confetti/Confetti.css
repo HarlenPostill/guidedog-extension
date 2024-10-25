@@ -1,0 +1,7 @@
+#confettiCanvas {
+    height: 100vh;
+    pointer-events: none;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+}
