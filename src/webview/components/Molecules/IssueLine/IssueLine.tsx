@@ -75,22 +75,22 @@ const IssueLine = ({
   }, []);
 
   return (
-    <div
-      className={`issueFrame ${isHovered ? 'hovered' : ''}`}
+    <div className={`issueFrame ${isHovered ? 'hovered' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}>
       <div className="issueInfo">
-        <div className="issueFile">
-          <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />
-          <div className="fileName">{extractedFileName}</div>
-        </div>
-        <div className="issueLine">
-          <div className="fileName">
-            {d('ui.boxes.issueList.linePrefix')}
-            {lineNum}
+        <div className="issueLine-header">
+          <div className="issueFile">
+            <InsertDriveFileOutlined style={{ width: '16px', height: '16px' }} />
+            <div className="fileName">{extractedFileName}</div>
           </div>
-          <div className="issueDesc">{issueString}</div>
+          <div className="issueLine">
+            <div className="fileName lineColor">
+              {d('ui.boxes.issueList.linePrefix')}
+              {lineNum}
+            </div>
+          </div>
         </div>
         <div ref={dropdownRef} style={{ position: 'relative' }}>
           <MoreHoriz
@@ -108,6 +108,8 @@ const IssueLine = ({
           />
         </div>
       </div>
+      <div className="issueDesc">{issueString}</div>
+      <div className="devider-horizontal"></div>
     </div>
   );
 };
