@@ -2,6 +2,7 @@
   display: flex;
   padding: 5px 10px;
   align-items: flex-start;
+  flex-direction: column;
   gap: 2px;
   align-self: stretch;
   border-radius: 5px;
@@ -14,21 +15,38 @@
 
 .issueInfo {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  flex: 1 0 0;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
+
+.devider-horizontal {
+  width: 100%;
+  height: 1px;
+  background-color: #FDA1A2;
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
 }
 
 .issueFile {
   display: flex;
   align-items: flex-start;
   gap: 2px;
-  align-self: stretch;
+}
+
+.issueLine-header{
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.issueLine-header .lineColor {
+  color: #A3A3A3;
 }
 
 .issueLine {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 2px;
@@ -36,12 +54,14 @@
 }
 
 .issueDesc {
-  display: -webkit-box;
+  display: block;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  line-clamp: 1;
   align-self: stretch;
   overflow: hidden;
+  max-width: 90%;
   color: #fff;
+  white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 12px;
   font-weight: 700;
@@ -51,7 +71,8 @@
   margin-top: 0;
 }
 
-.issueFrame.hovered .issueDesc {
+.issueFrame.hovered .issueDesc,
+.issueFrame.hovered .devider-horizontal {
   opacity: 1;
   max-height: 1.5em;
   margin-top: 4px;

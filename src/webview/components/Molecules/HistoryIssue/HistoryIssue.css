@@ -1,4 +1,4 @@
-.issueFrame {
+.issueFrame-history {
   display: flex;
   flex-direction: column;
   padding: 5px 10px;
@@ -9,7 +9,7 @@
   transition: background-color 0.3s ease;
 }
 
-.issueFrame.hovered {
+.issueFrame-history.hovered {
   background-color: rgba(36, 36, 36, 0.8);
 }
 
@@ -38,9 +38,10 @@
   flex: 1 0 0;
 }
 
-.issueDesc {
+.issueDesc-history {
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 1;
   -webkit-line-clamp: 1;
   align-self: stretch;
   overflow: hidden;
@@ -54,7 +55,7 @@
   margin-top: 0;
 }
 
-.issueFrame.hovered .issueDesc {
+.issueFrame-history.hovered .issueDesc-history {
   opacity: 1;
   max-height: 1.5em;
   margin-top: 4px;

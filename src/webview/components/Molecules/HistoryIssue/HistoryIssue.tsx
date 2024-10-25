@@ -95,7 +95,7 @@ const HistoryIssue = ({
 
   return (
     <div
-      className={`issueFrame ${isHovered ? 'hovered' : ''}`}
+      className={`issueFrame-history ${isHovered ? 'hovered' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <div className="historyIssueInfo">
@@ -116,7 +116,7 @@ const HistoryIssue = ({
             {d('ui.boxes.issueList.linePrefix')}
             {lineNum}
           </div>
-          <div className="issueDesc">{issueString}</div>
+          <div className="issueDesc-history">{issueString}</div>
         </div>
         <div ref={dropdownRef} style={{ position: 'relative' }}>
           <MoreHoriz
