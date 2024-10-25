@@ -186,7 +186,11 @@ const App = () => {
               <LanguageSelector />
             </div>
             <Header title={d('ui.headers.title')} />
-            <StatusIndicator percentage={config.percentage} lastUpdated={config.lastUpdated} />
+            <StatusIndicator
+              percentage={config.percentage}
+              lastUpdated={config.lastUpdated}
+              vscode={vscode}
+            />
             <Tabs
               headers={[
                 `${d('ui.headers.tabTitle1')}`,

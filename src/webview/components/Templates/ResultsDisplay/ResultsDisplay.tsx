@@ -134,9 +134,9 @@ const ResultsDisplay = ({ issuesData, refreshHistory }: ResultsDisplayProps) => 
           {
             colorMap: {
               type: 'continuous',
-              min: -10,
-              max: 10,
-              color: ['#fda1a226', '#FDA1A2'],
+              min: 0,
+              max: totalIssues,
+              color: ['#fda1a200', '#FDA1A2'],
             },
           },
         ]}

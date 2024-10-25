@@ -7,9 +7,10 @@ import { useDictionary } from '../../../hooks/useDictionary';
 interface StatusIndicatorProps {
   percentage?: number;
   lastUpdated: string;
+  vscode: any;
 }
 
-const StatusIndicator = ({ percentage, lastUpdated }: StatusIndicatorProps) => {
+const StatusIndicator = ({ percentage, lastUpdated, vscode }: StatusIndicatorProps) => {
   let status = '';
   let colorClass = '';
   if (percentage !== undefined) {
@@ -22,13 +23,19 @@ const StatusIndicator = ({ percentage, lastUpdated }: StatusIndicatorProps) => {
     } else if (percentage <= 100) {
       status = 'critical';
       colorClass = 'critical';
-    } else if (percentage = 0){
+    } else if ((percentage = 0)) {
       status = 'perfect';
       colorClass = 'perfect';
     }
   }
 
   const d = useDictionary();
+
+  const RefreshResults = () => {
+    vscode.postMessage({
+      command: 'runGuideDogCheck',
+    });
+  };
 
   return (
     <div className={`status-indicator-container ${colorClass}`}>
@@ -41,7 +48,7 @@ const StatusIndicator = ({ percentage, lastUpdated }: StatusIndicatorProps) => {
       <div className="divider"></div>
       <div className="last-updated">
         {d('ui.text.lastUpdated')} <span>{lastUpdated}</span>
-        <button className="refresh-button">
+        <button className="refresh-button" onClick={() => RefreshResults()}>
           <AutorenewIcon width={24} height={24} style={{ fill: '#599CD8' }} />
         </button>
       </div>
