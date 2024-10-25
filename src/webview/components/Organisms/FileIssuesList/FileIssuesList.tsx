@@ -6,6 +6,7 @@ import SwapVertOutlinedIcon from '@mui/icons-material/SwapVertOutlined';
 import { InsertDriveFileOutlined } from '@mui/icons-material';
 import IssueFix from '../../Molecules/IssueFix/IssueFix';
 import NoIssues from '../../Molecules/NoIssues/NoIssues';
+import Confetti from '../../Atoms/Confetti/Confetti';
 
 interface Issue {
   lineNumber: number;
@@ -56,6 +57,8 @@ const FileIssuesList = ({
 
   return (
     <div className="fileIssuesList">
+      {localIssues.length === 0 && <Confetti />} 
+
       <div className="headerGroup">
         <div className="title">
           {d('ui.boxes.issueList.title')}
