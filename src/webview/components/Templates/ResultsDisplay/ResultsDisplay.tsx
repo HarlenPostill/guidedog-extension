@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { axisClasses } from '@mui/x-charts/ChartsAxis';
@@ -29,6 +29,53 @@ const ResultsDisplay = ({ issuesData, refreshHistory }: ResultsDisplayProps) => 
     refreshHistory();
   }, [refreshHistory]);
 
+  // Calculate impact counts per file
+  const impactData = useMemo(() => {
+    const impacts = ['critical', 'serious', 'moderate', 'minor'];
+    const impactCounts = impacts.map(impact => {
+      let maxCount = 0;
+      let fileName = '';
+
+      issuesData.forEach(file => {
+        const count = file.issues.filter(issue => issue.impact === impact).length;
+        if (count > maxCount) {
+          maxCount = count;
+          fileName = file.fileName.split('/').pop() || file.fileName;
+        }
+      });
+
+      return {
+        impact,
+        count: maxCount,
+        fileName,
+      };
+    });
+
+    return impactCounts;
+  }, [issuesData]);
+
+  const dailyData = useMemo(() => {
+    const dateIssues = new Map();
+
+    issuesData.forEach(file => {
+      file.issues.forEach(issue => {
+        if (issue.timeAdded) {
+          const date = new Date(issue.timeAdded).toLocaleDateString();
+          dateIssues.set(date, (dateIssues.get(date) || 0) + 1);
+        }
+      });
+    });
+
+    const sortedDates = Array.from(dateIssues.keys()).sort(
+      (a, b) => new Date(a).getTime() - new Date(b).getTime()
+    );
+
+    return {
+      dates: sortedDates,
+      counts: sortedDates.map(date => dateIssues.get(date)),
+    };
+  }, [issuesData]);
+
   const totalIssues = issuesData.reduce((sum, fileIssue) => sum + fileIssue.issues.length, 0);
 
   return (
@@ -36,7 +83,11 @@ const ResultsDisplay = ({ issuesData, refreshHistory }: ResultsDisplayProps) => 
       <AccessibilityScore score={totalIssues} />
       <Divider />
       <BarChart
-        series={[{ data: [35, 44, 24, 34] }]}
+        series={[
+          {
+            data: impactData.map(d => d.count),
+          },
+        ]}
         height={250}
         sx={{
           [`.${axisClasses.root}`]: {
@@ -51,19 +102,34 @@ const ResultsDisplay = ({ issuesData, refreshHistory }: ResultsDisplayProps) => 
         }}
         xAxis={[
           {
-            data: ['qtip.xlsx', 'button.tsx', 'index.html', 'Index.tsx'],
+            data: impactData.map(d => `${d.fileName}\n(${d.impact})`),
             scaleType: 'band',
             colorMap: {
               type: 'ordinal',
               colors: ['#FF6D6D', '#FF9D68', '#FDA1A2', '#FFF568'],
             },
+            tickLabelStyle: {
+              angle: 45,
+              textAnchor: 'start',
+              fontSize: 12,
+            },
           },
         ]}
-        margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+        margin={{ top: 10, bottom: 70, left: 40, right: 10 }}
       />
       <Divider />
       <LineChart
-        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+        xAxis={[
+          {
+            data: dailyData.dates,
+            scaleType: 'point',
+            tickLabelStyle: {
+              angle: 45,
+              textAnchor: 'start',
+              fontSize: 12,
+            },
+          },
+        ]}
         yAxis={[
           {
             colorMap: {
@@ -76,7 +142,7 @@ const ResultsDisplay = ({ issuesData, refreshHistory }: ResultsDisplayProps) => 
         ]}
         series={[
           {
-            data: [2, 5.5, 2, 8.5, 1.5, 5],
+            data: dailyData.counts,
             area: true,
           },
         ]}
@@ -91,10 +157,8 @@ const ResultsDisplay = ({ issuesData, refreshHistory }: ResultsDisplayProps) => 
               fill: '#455A6E',
             },
           },
-          '& .MuiAreaElement-series-Germany': {
-            fill: "url('#myGradient')",
-          },
         }}
+        margin={{ top: 10, bottom: 70, left: 40, right: 10 }}
       />
     </div>
   );
