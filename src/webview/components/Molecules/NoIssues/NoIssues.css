@@ -8,6 +8,8 @@
   text-align: center;
   font-size: 12px;
   font-weight: 700;
+  position: relative;
+  overflow: hidden;
 }
 
 .noIssueTitle {
@@ -30,4 +32,56 @@
   text-align: center;
   font-size: 12px;
   font-weight: 700;
+}
+
+.night {
+  position: relative;
+  width: 100%;
+  height: 150px; 
+  z-index: 0; 
+  overflow: hidden;
+}
+
+.paw {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: rotate(180deg); 
+  opacity: 0;
+}
+
+.paw:nth-child(1) {
+  top: 0;
+  left: 40%; 
+  animation-delay: 0s; 
+}
+
+.paw:nth-child(2) {
+  top: 30px;
+  left: 50%; 
+  animation-delay: 2s; 
+}
+
+.paw:nth-child(3) {
+  top: 60px;
+  left: 40%; 
+  animation-delay: 4s; 
+}
+
+.paw {
+  animation: popDown 0.5s ease-in-out forwards;
+}
+
+@keyframes popDown {
+  0% {
+    transform: translateY(-30px) scale(0.5) rotate(180deg); 
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5; 
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(180deg); 
+    opacity: 1; 
+  }
 }
