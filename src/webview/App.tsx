@@ -13,7 +13,6 @@ import { useDictionary } from './hooks/useDictionary';
 import StatusIndicator from './components/Molecules/StatusIndicator/StatusIndicator';
 import LanguageSelector from './components/Atoms/LanguageSelector/LanguageSelector';
 import HistoryDisplay from './components/Templates/HistoryDisplay/HistoryDisplay';
-import { getTimePeriodFromNow } from './helpers/timeHelper';
 
 declare const acquireVsCodeApi: () => {
   postMessage: (message: any) => void;
@@ -29,7 +28,7 @@ const App = () => {
   const [suggestionsData, setSuggestionsData] = useState([]);
   const [historyIssues, setHistoryIssues] = useState([]);
 
-  const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [lastUpdated, setLastUpdated] = useState('');
   const divRef = useRef<HTMLDivElement>(null);
   const [currentStep, setCurrentStep] = useState('onboarding');
   const d = useDictionary();
@@ -55,7 +54,6 @@ const App = () => {
       switch (message.command) {
         case 'updateSuggestions':
           setSuggestionsData(message.suggestions);
-          setLastUpdated(new Date());
           break;
         case 'updateHistoryIssues':
           setHistoryIssues(message.historyIssues);
@@ -128,11 +126,11 @@ const App = () => {
     const percentage =
       issueCount > 0 ? Math.round(((criticalCount + seriousCount) / issueCount) * 100) : 0;
 
-    const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
-    const lastUpdatedString = getTimePeriodFromNow(timeDiff.toString());
+    // const timeDiff = Math.floor((new Date().getTime() - lastUpdated.getTime()) / 60000);
+    // const lastUpdatedString = getTimePeriodFromNow(timeDiff.toString());
 
     return {
-      lastUpdated: lastUpdatedString,
+      // lastUpdated: lastUpdatedString,
       percentage: percentage,
     };
   }, [suggestionsData, lastUpdated]);
@@ -155,6 +153,7 @@ const App = () => {
 
   const handlePawLoadingComplete = () => {
     setCurrentStep('mainContent');
+    vscode.postMessage({ command: 'reloadWebview' });
   };
 
   const handleSetActiveTab = (index: number) => {
@@ -186,11 +185,7 @@ const App = () => {
               <LanguageSelector />
             </div>
             <Header title={d('ui.headers.title')} />
-            <StatusIndicator
-              percentage={config.percentage}
-              lastUpdated={config.lastUpdated}
-              vscode={vscode}
-            />
+            <StatusIndicator percentage={config.percentage} vscode={vscode} />
             <Tabs
               headers={[
                 `${d('ui.headers.tabTitle1')}`,
@@ -213,7 +208,7 @@ const App = () => {
               <ResultsDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
               <HistoryDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
             </Tabs>
-            <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>
+            {/* <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div> */}
           </div>
         )}
       </div>

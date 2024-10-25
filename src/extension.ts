@@ -111,18 +111,20 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
               cwd: vscode.workspace.workspaceFolders?.[0].uri.fsPath,
             });
 
-            // Send start message
             webviewView.webview.postMessage({
               command: 'checkStatus',
               status: 'running',
             });
 
-            // Wait for process to complete
             process.on('exit', code => {
               webviewView.webview.postMessage({
                 command: 'checkStatus',
                 status: code === 0 ? 'complete' : 'error',
               });
+
+              if (code === 0) {
+                vscode.commands.executeCommand('workbench.action.reloadWindow');
+              }
             });
 
             // Handle potential errors
@@ -141,10 +143,42 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
             });
           }
           break;
+        case 'getFileModTime':
+          this._getFileModTime(webviewView);
+          break;
+        case 'reloadWebview':
+          vscode.window
+            .showInformationMessage('GuideDog check completed. Reloading window...', 'Reload')
+            .then(selection => {
+              if (selection === 'Reload') {
+                vscode.commands.executeCommand('workbench.action.reloadWindow');
+              }
+            });
+          break;
         default:
           console.error(`Unknown command: ${message.command}`);
       }
     });
+  }
+
+  private async _getFileModTime(webviewView: vscode.WebviewView) {
+    const workspaceFolders = vscode.workspace.workspaceFolders;
+    if (!workspaceFolders) {
+      return;
+    }
+
+    const rootPath = workspaceFolders[0].uri.fsPath;
+    const suggestionsPath = path.join(rootPath, '.guidedog', 'suggestions.json');
+
+    try {
+      const stats = await fs.stat(suggestionsPath);
+      webviewView.webview.postMessage({
+        command: 'fileModTime',
+        modTime: stats.mtime.toISOString(),
+      });
+    } catch (error) {
+      console.error('Error getting file modification time:', error);
+    }
   }
 
   private async _checkGuideDogFolder(webviewView: vscode.WebviewView) {
