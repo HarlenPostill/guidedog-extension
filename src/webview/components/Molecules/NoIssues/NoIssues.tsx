@@ -26,15 +26,13 @@ const NoIssues = ({ filename, showHistoryView }: NoIssuesProps) => {
       <div className="noIssueTitle">
         <div>{d('ui.boxes.noIssues.title')}</div>
         <div className="noIssueTag">
-          <div>{d('ui.boxes.noIssues.startString')}</div>
-          <div style={{ color: '#FDA1A2' }}>{d('ui.boxes.noIssues.middleString')}</div>
-          <div>{d('ui.boxes.noIssues.endString')}</div>
+          {d('ui.boxes.noIssues.startString')}
+          <span style={{ color: '#FDA1A2' }}>{d('ui.boxes.noIssues.middleString')}</span>
+          {d('ui.boxes.noIssues.endString')}
+          {`${filename} ${d('ui.boxes.noIssues.compliance')}`}
         </div>
       </div>
 
-      <div>{`${filename} ${d('ui.boxes.noIssues.compliance')}`}</div>
-      
-      {/* Button */}
       <Button text={d('ui.boxes.noIssues.button')} onClick={showHistoryView} />
     </div>
   );

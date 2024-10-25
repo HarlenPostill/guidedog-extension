@@ -58,10 +58,10 @@
       },
       "noIssues": {
         "title": "No Issues Found",
-        "startString": "Looks like your ",
+        "startString": "Looks like you are ",
         "middleString": "Pawfect ",
         "endString": "to go",
-        "compliance": "is compliant with current WCAG 2.0 Guidelines",
+        "compliance": "and is compliant with WCAG 2.0 Guidelines",
         "button": "See History"
       }
     },

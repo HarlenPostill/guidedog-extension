@@ -3,20 +3,21 @@
   width: auto;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 30px;
   color: #a3a3a3;
   text-align: center;
   font-size: 12px;
   font-weight: 700;
   position: relative;
   overflow: hidden;
+  padding: 20px;
 }
 
 .noIssueTitle {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 5px;
+  flex-direction: column;
+  gap: 10px;
   color: #fff;
   text-align: center;
   font-size: 18px;
@@ -27,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   gap: 3px;
   color: #a3a3a3;
   text-align: center;
@@ -46,30 +48,31 @@
   position: absolute;
   width: 24px;
   height: 24px;
+  color: #FDA1A2;
   transform: rotate(180deg); 
   opacity: 0;
 }
 
 .paw:nth-child(1) {
-  top: 0;
-  left: 40%; 
+  top: 10%;
+  left: 45%; 
   animation-delay: 0s; 
 }
 
 .paw:nth-child(2) {
-  top: 30px;
-  left: 50%; 
-  animation-delay: 2s; 
+  top: 45%;
+  left: 55%; 
+  animation-delay: 0.5s; 
 }
 
 .paw:nth-child(3) {
-  top: 60px;
-  left: 40%; 
-  animation-delay: 4s; 
+  top: 80%;
+  left: 45%; 
+  animation-delay: 1s; 
 }
 
 .paw {
-  animation: popDown 0.5s ease-in-out forwards;
+  animation: popDown 0.2s ease-in-out forwards;
 }
 
 @keyframes popDown {
