@@ -54,12 +54,14 @@
 }
 
 .issueDesc {
-  display: -webkit-box;
+  display: block;
   -webkit-box-orient: vertical;
   line-clamp: 1;
   align-self: stretch;
   overflow: hidden;
+  max-width: 90%;
   color: #fff;
+  white-space: nowrap;
   text-overflow: ellipsis;
   font-size: 12px;
   font-weight: 700;
