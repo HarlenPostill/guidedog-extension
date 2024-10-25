@@ -95,7 +95,7 @@ const HistoryIssue = ({
 
   return (
     <div
-      className={`issueFrame ${isHovered ? 'hovered' : ''}`}
+      className={`issueFrame-history ${isHovered ? 'hovered' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <div className="historyIssueInfo">
