@@ -206,7 +206,7 @@ const App = () => {
                 issuesData={suggestionsData}
                 showHistoryView={showHistoryView}
               />
-              <ResultsDisplay vscode={vscode} />
+              <ResultsDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
               <HistoryDisplay issuesData={historyIssues} refreshHistory={fetchHistoryIssues} />
             </Tabs>
             <div className="dev-width-display">Current width: {width}px, Ideal is 343px</div>

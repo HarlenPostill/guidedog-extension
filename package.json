@@ -79,6 +79,7 @@
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^6.1.2",
     "@mui/material": "^6.1.2",
+    "@mui/x-charts": "^7.21.0",
     "i": "^0.3.7",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
