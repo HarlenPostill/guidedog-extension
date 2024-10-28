@@ -4,7 +4,7 @@
             "title": "盲導犬の概要",
             "tabTitle1": "リポジトリ全体",
             "tabTitle2": "単一ファイル",
-            "tabTitle3": "結果",
+            "tabTitle3": "洞察",
             "status": {
                 "critical": "致命的",
                 "moderate": "適度",
@@ -22,14 +22,52 @@
             "seeAll": "すべて見る",
             "history": "歴史"
         },
+        "time": {
+            "now": "ちょうど今",
+            "minute": "分",
+            "minutes": "分",
+            "hour": "時間",
+            "hours": "時間",
+            "day": "日",
+            "days": "日",
+            "suffix": "前"
+        },
         "boxes": {
             "breakdowns": {
                 "title": "故障",
-                "total": "総合スコア",
+                "total": "重大な問題",
                 "perceivable": "知覚可能",
                 "operable": "操作可能",
                 "understandable": "理解できる",
                 "robust": "屈強"
+            },
+            "guideOnboarding": {
+                "titlePart1": "ご紹介",
+                "titlePart2": "盲導犬",
+                "checkingText": "プロジェクトを確認しています...",
+                "errorText": "プロジェクトのチェック中にエラーが発生しました",
+                "loadingText": "GuideDog をインストールしています...",
+                "subtitle": "あなた専用の AI アクセシビリティ アシスタント",
+                "text": "アクセシブルで包括的な Web エクスペリエンスを構築するための AI を活用したアシスタント。",
+                "description": "GuideDog は AI を使用して、コードベース内のアクセシビリティの問題を見つけて修正できるようにします。手動チェックに別れを告げ、プロジェクトが手間をかけずに WCAG 標準を満たしていることを確認します。",
+                "features": {
+                    "list1": "AI アクセシビリティ スキャナー",
+                    "list2": "コードベース全体の分析",
+                    "list3": "即時修正",
+                    "list4": "実用的な洞察を含む詳細なレポート"
+                },
+                "button": "ガイドドッグに聞く"
+            },
+            "keyDisplay": {
+                "title": "GuideDog は API キーを使用してコードベースにアクセスします",
+                "input": "API キーを入力してください...",
+                "installing": "GuideDog のインストールと設定中...",
+                "installComplete": "セットアップ完了！",
+                "installError": "インストールに失敗しました。もう一度試してください。",
+                "tooShort": "API キーの長さは 10 文字以上である必要があります",
+                "keyStatus": {
+                    "error": "無効なキーです!"
+                }
             },
             "guideLinesViolations": {
                 "title": "WCAG ガイドライン違反",
@@ -39,6 +77,23 @@
                 "title": "問題のリスト",
                 "linePrefix": "ライン",
                 "issuePillSuffix": "問題"
+            },
+            "history": {
+                "title": "問題の歴史",
+                "linePrefix": "ライン",
+                "subTitle": "歴史",
+                "issuePillSuffix": "問題"
+            },
+            "noIssues": {
+                "title": "問題は見つかりませんでした",
+                "startString": "あなたもそうだね",
+                "middleString": "ポーフェクト",
+                "endString": "持ち帰り",
+                "compliance": "WCAG 2.0 ガイドラインに準拠しています",
+                "button": "歴史を見る"
+            },
+            "AccessibilityScore": {
+                "title": "合計の問題が修正されました"
             }
         },
         "text": {

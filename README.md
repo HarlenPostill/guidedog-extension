@@ -1,71 +1,87 @@
-# guidedog README
+GuideDog 🐾
 
-This is the README for your extension "guidedog". After writing up a brief description, we recommend including the following sections.
+Your path to accessible code.
 
-## Features
+Overview
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+GuideDog is a powerful VS Code extension for developers aiming to improve the accessibility of their codebases. GuideDog leverages OpenAI’s advanced language models to scan code for accessibility issues, provide detailed breakdowns of accessibility scores, and offer actionable insights with inline fixes. Built for accessibility-focused development, GuideDog simplifies code compliance with key standards, making it easier to deliver inclusive software to all users.
 
-For example if there is an image subfolder under your extension project workspace:
+Key Features
 
-\!\[feature X\]\(images/feature-x.png\)
+    •	Full Codebase Accessibility Scanning: Analyse entire codebases with an OpenAI API key, uncovering accessibility issues across files and modules.
+    •	Accessibility Score Breakdown: Receive comprehensive accessibility scores for your codebase with easy-to-understand insights and suggestions.
+    •	Prioritised Issue Reporting: GuideDog prioritises detected issues based on their importance, enabling developers to focus on critical accessibility improvements.
+    •	Inline Fix Suggestions: See detailed, inline suggestions to fix issues directly in your code, saving time and boosting productivity.
+    •	Visual Data Insights: Access rich data visualisations and graphs for a deeper understanding of accessibility in your project.
+    •	Automatic Updates: The extension continuously updates its accessibility database and scanning algorithms, ensuring the latest standards and practices.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+• Entirely supported in over 10 languages! natively in the front-end
 
-## Requirements
+Installation
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+    1.	Prerequisites:
+    •	A valid OpenAI API key
+    •	VS Code version 1.5 or later
+    2.	Installation Process:
+    •	Open VS Code.
+    •	Navigate to Extensions (or press Ctrl+Shift+X).
+    •	Search for “GuideDog”.
+    •	Click Install to add GuideDog to your extensions.
 
-## Extension Settings
+Setup and Configuration
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+    1.	Add OpenAI API Key:
+    •	After installation, go to Settings → Extensions → GuideDog.
+    •	Enter your OpenAI API key in the API Key field to enable scanning and code generation.
+    2.	Adjust Preferences (Optional):
+    •	Issue Severity Threshold: Adjust the minimum severity of issues shown.
+    •	Auto-Fix Inline Suggestions: Enable auto-application of inline fix suggestions for common issues.
 
-For example:
+Usage Guide
 
-This extension contributes the following settings:
+Running an Accessibility Scan
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+    1.	Start a Scan:
+    •	Right-click on your project folder and select GuideDog → Run Accessibility Scan.
+    •	The scan will analyse your codebase and generate an accessibility score.
+    2.	Review Accessibility Score and Insights:
+    •	Upon completion, GuideDog will display an overall score, highlighting key metrics and issues.
+    •	Navigate to the GuideDog Panel in the sidebar to view detailed breakdowns, including data visualisations.
 
-## Known Issues
+Issue Breakdown and Fixes
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+    •	Issue Prioritisation:
 
-## Release Notes
+Issues are ranked by importance (Critical, High, Medium, Low) so you can prioritise the most impactful fixes.
+• Inline Fix Suggestions:
+Hover over highlighted issues to view suggested fixes directly in the code editor. Click Apply Fix to implement them instantly.
 
-Users appreciate release notes as you update your extension.
+Understanding the Accessibility Score
 
-### 1.0.0
+GuideDog calculates a composite accessibility score based on several metrics:
 
-Initial release of ...
+    •	Readability Compliance: Measures text size, colour contrast, and readability standards.
+    •	Navigation and Focus Control: Evaluates focus management, tab order, and screen reader accessibility.
+    •	Keyboard Accessibility: Ensures that interactive elements are usable via keyboard-only navigation.
+    •	Alt Text and Labels: Checks for proper labelling and alt text on images and interactive elements.
 
-### 1.0.1
+Each section contributes to the overall score, providing a comprehensive view of accessibility.
 
-Fixed issue #.
+Visual Data Insights
 
-### 1.1.0
+GuideDog presents data insights through graphs and charts, including:
 
-Added features X, Y, and Z.
+    •	Issue Distribution by Severity: A bar graph shows the number and severity of accessibility issues.
+    •	Component-Specific Accessibility Scores: View scores for different sections of your codebase (e.g., forms, navigation).
+    •	Trends Over Time: Track improvements over time as you resolve issues and re-scan the code.
 
----
+FAQ
 
-## Following extension guidelines
+Q: Does GuideDog support different coding languages?
+A: GuideDog supports all languages compatible with OpenAI’s code generation and analysis, including HTML, JavaScript, Python, and more.
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+Q: How does GuideDog rank issue importance?
+A: GuideDog ranks issues based on accessibility best practices and impact on user experience, with Critical issues having the highest impact.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Q: Can I customise the accessibility standards GuideDog checks?
+A: GuideDog currently aligns with WCAG 2.1 standards and will be updated as new guidelines emerge. Customisation options for specific rules are in development.

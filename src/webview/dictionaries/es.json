@@ -4,7 +4,7 @@
             "title": "Resumen del perro guía",
             "tabTitle1": "Repositorio completo",
             "tabTitle2": "Fila india",
-            "tabTitle3": "Resultados",
+            "tabTitle3": "Perspectivas",
             "status": {
                 "critical": "Crítico",
                 "moderate": "Moderado",
@@ -16,20 +16,58 @@
             "WCAG": "Este gráfico representa la cantidad total de infracciones presentes en todo el proyecto."
         },
         "errors": {
-            "widthSmall": "Expanda la barra lateral para continuar"
+            "widthSmall": "Expandir la barra lateral para continuar"
         },
         "links": {
             "seeAll": "ver todo",
             "history": "historia"
         },
+        "time": {
+            "now": "En este momento",
+            "minute": "minuto",
+            "minutes": "minutos",
+            "hour": "hora",
+            "hours": "horas",
+            "day": "día",
+            "days": "días",
+            "suffix": "atrás"
+        },
         "boxes": {
             "breakdowns": {
                 "title": "AVERÍAS",
-                "total": "Puntuación general",
+                "total": "Cuestiones críticas",
                 "perceivable": "Perceptible",
                 "operable": "Operable",
                 "understandable": "Comprensible",
                 "robust": "Robusto"
+            },
+            "guideOnboarding": {
+                "titlePart1": "Presentando",
+                "titlePart2": "perro guía",
+                "checkingText": "Revisando tu proyecto...",
+                "errorText": "Se produjo un error al verificar su proyecto.",
+                "loadingText": "Instalando GuideDog...",
+                "subtitle": "Su asistente personal de accesibilidad con IA",
+                "text": "Su asistente con tecnología de inteligencia artificial para crear experiencias web accesibles e inclusivas.",
+                "description": "GuideDog utiliza IA para ayudarle a encontrar y solucionar problemas de accesibilidad en su código base. Dígale adiós a las comprobaciones manuales y asegúrese de que sus proyectos cumplan con los estándares WCAG sin problemas.",
+                "features": {
+                    "list1": "Escáner de accesibilidad de IA",
+                    "list2": "Análisis de toda la base de código",
+                    "list3": "Soluciones instantáneas",
+                    "list4": "Informes detallados con información procesable"
+                },
+                "button": "Preguntar al perro guía"
+            },
+            "keyDisplay": {
+                "title": "GuideDog utiliza una clave API para acceder a su base de código",
+                "input": "Por favor ingrese su clave API...",
+                "installing": "Instalando y configurando GuideDog...",
+                "installComplete": "¡Configuración completa!",
+                "installError": "La instalación falló. Por favor inténtalo de nuevo.",
+                "tooShort": "La clave API debe tener al menos 10 caracteres",
+                "keyStatus": {
+                    "error": "¡Clave no válida!"
+                }
             },
             "guideLinesViolations": {
                 "title": "VIOLACIONES DE LAS DIRECTRICES WCAG",
@@ -39,6 +77,23 @@
                 "title": "LISTA DE CUESTIONES",
                 "linePrefix": "Línea",
                 "issuePillSuffix": "asuntos"
+            },
+            "history": {
+                "title": "HISTORIA DE PROBLEMAS",
+                "linePrefix": "Línea",
+                "subTitle": "Historia",
+                "issuePillSuffix": "asuntos"
+            },
+            "noIssues": {
+                "title": "No se encontraron problemas",
+                "startString": "Parece que lo eres",
+                "middleString": "Perfecto",
+                "endString": "ir",
+                "compliance": "y cumple con las pautas WCAG 2.0",
+                "button": "Ver Historia"
+            },
+            "AccessibilityScore": {
+                "title": "TOTAL DE PROBLEMAS SOLUCIONADOS"
             }
         },
         "text": {

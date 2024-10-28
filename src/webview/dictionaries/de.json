@@ -4,7 +4,7 @@
             "title": "Zusammenfassung des Blindenhundes",
             "tabTitle1": "Ganzes Repo",
             "tabTitle2": "Einzelne Datei",
-            "tabTitle3": "Ergebnisse",
+            "tabTitle3": "Einblicke",
             "status": {
                 "critical": "Kritisch",
                 "moderate": "Mäßig",
@@ -22,14 +22,52 @@
             "seeAll": "alles sehen",
             "history": "Geschichte"
         },
+        "time": {
+            "now": "Soeben",
+            "minute": "Minute",
+            "minutes": "Minuten",
+            "hour": "Stunde",
+            "hours": "Std.",
+            "day": "Tag",
+            "days": "Tage",
+            "suffix": "vor"
+        },
         "boxes": {
             "breakdowns": {
                 "title": "Pannen",
-                "total": "Gesamtpunktzahl",
+                "total": "Kritische Probleme",
                 "perceivable": "Spürbar",
                 "operable": "Bedienbar",
                 "understandable": "Verständlich",
                 "robust": "Robust"
+            },
+            "guideOnboarding": {
+                "titlePart1": "Wir stellen vor",
+                "titlePart2": "GuideDog",
+                "checkingText": "Überprüfen Sie Ihr Projekt...",
+                "errorText": "Beim Überprüfen Ihres Projekts ist ein Fehler aufgetreten",
+                "loadingText": "GuideDog wird installiert...",
+                "subtitle": "Ihr persönlicher KI-Assistent für Barrierefreiheit",
+                "text": "Ihr KI-gestützter Assistent zum Aufbau barrierefreier und integrativer Web-Erlebnisse.",
+                "description": "GuideDog nutzt KI, um Ihnen dabei zu helfen, Barrierefreiheitsprobleme in Ihrer Codebasis zu finden und zu beheben. Verabschieden Sie sich von manuellen Prüfungen und stellen Sie problemlos sicher, dass Ihre Projekte den WCAG-Standards entsprechen.",
+                "features": {
+                    "list1": "KI-Barrierefreiheitsscanner",
+                    "list2": "Codebasisweite Analyse",
+                    "list3": "Sofortige Korrekturen",
+                    "list4": "Detaillierte Berichte mit umsetzbaren Erkenntnissen"
+                },
+                "button": "Fragen Sie GuideDog"
+            },
+            "keyDisplay": {
+                "title": "GuideDog verwendet einen API-Schlüssel, um auf Ihre Codebasis zuzugreifen",
+                "input": "Bitte geben Sie Ihren API-Schlüssel ein...",
+                "installing": "GuideDog installieren und konfigurieren...",
+                "installComplete": "Einrichtung abgeschlossen!",
+                "installError": "Die Installation ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+                "tooShort": "Der API-Schlüssel muss mindestens 10 Zeichen lang sein",
+                "keyStatus": {
+                    "error": "Ungültiger Schlüssel!"
+                }
             },
             "guideLinesViolations": {
                 "title": "Verstöße gegen die WCAG-Richtlinien",
@@ -39,6 +77,23 @@
                 "title": "LISTE DER PROBLEME",
                 "linePrefix": "Linie",
                 "issuePillSuffix": "Probleme"
+            },
+            "history": {
+                "title": "GESCHICHTE DER PROBLEME",
+                "linePrefix": "Linie",
+                "subTitle": "Geschichte",
+                "issuePillSuffix": "Probleme"
+            },
+            "noIssues": {
+                "title": "Keine Probleme gefunden",
+                "startString": "Sieht so aus, als wären Sie es",
+                "middleString": "Pawfect",
+                "endString": "gehen",
+                "compliance": "und entspricht den WCAG 2.0-Richtlinien",
+                "button": "Siehe Geschichte"
+            },
+            "AccessibilityScore": {
+                "title": "TOTAL PROBLEME BEHOBEN"
             }
         },
         "text": {

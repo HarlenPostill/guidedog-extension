@@ -4,7 +4,7 @@
             "title": "导盲犬总结",
             "tabTitle1": "整个回购协议",
             "tabTitle2": "单个文件",
-            "tabTitle3": "结果",
+            "tabTitle3": "见解",
             "status": {
                 "critical": "批判的",
                 "moderate": "缓和",
@@ -22,14 +22,52 @@
             "seeAll": "查看全部",
             "history": "历史"
         },
+        "time": {
+            "now": "现在",
+            "minute": "分钟",
+            "minutes": "分钟",
+            "hour": "小时",
+            "hours": "小时",
+            "day": "天",
+            "days": "天",
+            "suffix": "前"
+        },
         "boxes": {
             "breakdowns": {
                 "title": "故障",
-                "total": "总分",
+                "total": "关键问题",
                 "perceivable": "可感知的",
                 "operable": "可操作",
                 "understandable": "可以理解",
                 "robust": "强壮的"
+            },
+            "guideOnboarding": {
+                "titlePart1": "介绍",
+                "titlePart2": "导盲犬",
+                "checkingText": "正在检查您的项目...",
+                "errorText": "检查您的项目时发生错误",
+                "loadingText": "正在安装导盲犬...",
+                "subtitle": "您的个人AI无障碍助手",
+                "text": "您的人工智能助手，用于构建可访问且包容的网络体验。",
+                "description": "GuideDog 使用 AI 帮助您查找并修复代码库中的可访问性问题。告别手动检查，确保您的项目轻松满足 WCAG 标准。",
+                "features": {
+                    "list1": "AI无障碍扫描仪",
+                    "list2": "代码库范围的分析",
+                    "list3": "即时修复",
+                    "list4": "包含可操作见解的详细报告"
+                },
+                "button": "询问导盲犬"
+            },
+            "keyDisplay": {
+                "title": "GuideDog 使用 API 密钥访问您的代码库",
+                "input": "请输入您的 API 密钥...",
+                "installing": "安装和配置 GuideDog...",
+                "installComplete": "设置完成！",
+                "installError": "安装失败。请再试一次。",
+                "tooShort": "API 密钥长度必须至少为 10 个字符",
+                "keyStatus": {
+                    "error": "无效密钥！"
+                }
             },
             "guideLinesViolations": {
                 "title": "违反 WCAG 准则",
@@ -39,6 +77,23 @@
                 "title": "问题清单",
                 "linePrefix": "线",
                 "issuePillSuffix": "问题"
+            },
+            "history": {
+                "title": "问题历史",
+                "linePrefix": "线",
+                "subTitle": "历史",
+                "issuePillSuffix": "问题"
+            },
+            "noIssues": {
+                "title": "没有发现问题",
+                "startString": "看来你是",
+                "middleString": "波菲克特",
+                "endString": "去",
+                "compliance": "并符合 WCAG 2.0 指南",
+                "button": "查看历史"
+            },
+            "AccessibilityScore": {
+                "title": "已解决的问题总数"
             }
         },
         "text": {

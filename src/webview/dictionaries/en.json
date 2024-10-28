@@ -1,103 +1,103 @@
 {
-  "ui": {
-    "headers": {
-      "title": "Guidedog Summary",
-      "tabTitle1": "Whole Repo",
-      "tabTitle2": "Single File",
-      "tabTitle3": "Insights",
-      "status": {
-        "critical": "Critical",
-        "moderate": "Moderate",
-        "acceptable": "Acceptable",
-        "perfect": "Perfect"
-      }
-    },
-    "toolTips": {
-      "WCAG": "This graph represents the overall quantity of violations present across your entire project"
-    },
-    "errors": {
-      "widthSmall": "Expand Sidebar to Continue"
-    },
-    "links": {
-      "seeAll": "see all",
-      "history": "history"
-    },
-    "time": {
-      "now": "Just Now",
-      "minute": "minute",
-      "minutes": "minutes",
-      "hour": "hour",
-      "hours": "hours",
-      "day": "day",
-      "days": "days",
-      "suffix": "ago"
-    },
-    "boxes": {
-      "breakdowns": {
-        "title": "BREAKDOWNS",
-        "total": "Critical Issues",
-        "perceivable": "Perceivable",
-        "operable": "Operable",
-        "understandable": "Understandable",
-        "robust": "Robust"
-      },
-      "guideOnboarding": {
-        "titlePart1": "Introducing ",
-        "titlePart2": "GuideDog",
-        "checkingText": "Checking your project...",
-        "errorText": "An error occurred while checking your project",
-        "loadingText": "Installing GuideDog...",
-        "subtitle": "Your personal AI Accessibility Assistant",
-        "text": "Your AI-powered assistant for building accessible and inclusive web experiences.",
-        "description": "GuideDog uses AI to help you find and fix accessibility issues in your codebase. Say goodbye to manual checks and ensure your projects meet WCAG standards without a hassle.",
-        "features": {
-          "list1": "AI Accessibility Scanner",
-          "list2": "Codebase-wide analysis",
-          "list3": "Instant Fixes",
-          "list4": "Detailed reports with actionable insights"
+    "ui": {
+        "headers": {
+            "title": "Guidedog Summary",
+            "tabTitle1": "Whole Repo",
+            "tabTitle2": "Single File",
+            "tabTitle3": "Insights",
+            "status": {
+                "critical": "Critical",
+                "moderate": "Moderate",
+                "acceptable": "Acceptable",
+                "perfect": "Perfect"
+            }
         },
-        "button": "Ask GuideDog"
-      },
-      "keyDisplay": {
-        "title": "GuideDog uses an API Key to access your codebase",
-        "input": "Please enter your API Key...",
-        "installing": "Installing and configuring GuideDog...",
-        "installComplete": "Setup complete!",
-        "installError": "Installation failed. Please try again.",
-        "tooShort": "API key must be at least 10 characters long",
-        "keyStatus": {
-          "error": "Invalid key!"
+        "toolTips": {
+            "WCAG": "This graph represents the overall quantity of violations present across your entire project"
+        },
+        "errors": {
+            "widthSmall": "Expand Sidebar to Continue"
+        },
+        "links": {
+            "seeAll": "see all",
+            "history": "history"
+        },
+        "time": {
+            "now": "Just Now",
+            "minute": "minute",
+            "minutes": "minutes",
+            "hour": "hour",
+            "hours": "hours",
+            "day": "day",
+            "days": "days",
+            "suffix": "ago"
+        },
+        "boxes": {
+            "breakdowns": {
+                "title": "BREAKDOWNS",
+                "total": "Critical Issues",
+                "perceivable": "Perceivable",
+                "operable": "Operable",
+                "understandable": "Understandable",
+                "robust": "Robust"
+            },
+            "guideOnboarding": {
+                "titlePart1": "Introducing ",
+                "titlePart2": "GuideDog",
+                "checkingText": "Checking your project...",
+                "errorText": "An error occurred while checking your project",
+                "loadingText": "Installing GuideDog...",
+                "subtitle": "Your personal AI Accessibility Assistant",
+                "text": "Your AI-powered assistant for building accessible and inclusive web experiences.",
+                "description": "GuideDog uses AI to help you find and fix accessibility issues in your codebase. Say goodbye to manual checks and ensure your projects meet WCAG standards without a hassle.",
+                "features": {
+                    "list1": "AI Accessibility Scanner",
+                    "list2": "Codebase-wide analysis",
+                    "list3": "Instant Fixes",
+                    "list4": "Detailed reports with actionable insights"
+                },
+                "button": "Ask GuideDog"
+            },
+            "keyDisplay": {
+                "title": "GuideDog uses an API Key to access your codebase",
+                "input": "Please enter your API Key...",
+                "installing": "Installing and configuring GuideDog...",
+                "installComplete": "Setup complete!",
+                "installError": "Installation failed. Please try again.",
+                "tooShort": "API key must be at least 10 characters long",
+                "keyStatus": {
+                    "error": "Invalid key!"
+                }
+            },
+            "guideLinesViolations": {
+                "title": "WCAG GUIDELINE VIOLATIONS",
+                "suffix": "Violations"
+            },
+            "issueList": {
+                "title": "LIST OF ISSUES",
+                "linePrefix": "Line ",
+                "issuePillSuffix": " issues"
+            },
+            "history": {
+                "title": "ISSUES HISTORY",
+                "linePrefix": "Line ",
+                "subTitle": "History",
+                "issuePillSuffix": " issues"
+            },
+            "noIssues": {
+                "title": "No Issues Found",
+                "startString": "Looks like you are ",
+                "middleString": "Pawfect ",
+                "endString": "to go",
+                "compliance": "and is compliant with WCAG 2.0 Guidelines",
+                "button": "See History"
+            },
+            "AccessibilityScore": {
+                "title": "TOTAL ISSUES FIXED"
+            }
+        },
+        "text": {
+            "lastUpdated": "Last Updated"
         }
-      },
-      "guideLinesViolations": {
-        "title": "WCAG GUIDELINE VIOLATIONS",
-        "suffix": "Violations"
-      },
-      "issueList": {
-        "title": "LIST OF ISSUES",
-        "linePrefix": "Line ",
-        "issuePillSuffix": " issues"
-      },
-      "history": {
-        "title": "ISSUES HISTORY",
-        "linePrefix": "Line ",
-        "subTitle": "History",
-        "issuePillSuffix": " issues"
-      },
-      "noIssues": {
-        "title": "No Issues Found",
-        "startString": "Looks like you are ",
-        "middleString": "Pawfect ",
-        "endString": "to go",
-        "compliance": "and is compliant with WCAG 2.0 Guidelines",
-        "button": "See History"
-      },
-      "AccessibilityScore": {
-        "title": "TOTAL ISSUES FIXED"
-      }
-    },
-    "text": {
-      "lastUpdated": "Last Updated"
     }
-  }
 }

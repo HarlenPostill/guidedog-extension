@@ -4,7 +4,7 @@
             "title": "Resumo do cão-guia",
             "tabTitle1": "Repositório inteiro",
             "tabTitle2": "Arquivo Único",
-            "tabTitle3": "Resultados",
+            "tabTitle3": "Percepções",
             "status": {
                 "critical": "Crítico",
                 "moderate": "Moderado",
@@ -22,14 +22,52 @@
             "seeAll": "ver tudo",
             "history": "história"
         },
+        "time": {
+            "now": "Agora mesmo",
+            "minute": "minuto",
+            "minutes": "minutos",
+            "hour": "hora",
+            "hours": "horas",
+            "day": "dia",
+            "days": "dias",
+            "suffix": "atrás"
+        },
         "boxes": {
             "breakdowns": {
                 "title": "AVALIAÇÕES",
-                "total": "Pontuação geral",
+                "total": "Questões Críticas",
                 "perceivable": "Perceptível",
                 "operable": "Operável",
                 "understandable": "Compreensível",
                 "robust": "Robusto"
+            },
+            "guideOnboarding": {
+                "titlePart1": "Apresentando",
+                "titlePart2": "Cão-guia",
+                "checkingText": "Verificando seu projeto...",
+                "errorText": "Ocorreu um erro ao verificar seu projeto",
+                "loadingText": "Instalando o GuideDog...",
+                "subtitle": "Seu assistente pessoal de acessibilidade com IA",
+                "text": "Seu assistente com tecnologia de IA para criar experiências web acessíveis e inclusivas.",
+                "description": "GuideDog usa IA para ajudá-lo a encontrar e corrigir problemas de acessibilidade em sua base de código. Diga adeus às verificações manuais e garanta que seus projetos atendam aos padrões WCAG sem complicações.",
+                "features": {
+                    "list1": "Scanner de acessibilidade de IA",
+                    "list2": "Análise em toda a base de código",
+                    "list3": "Correções instantâneas",
+                    "list4": "Relatórios detalhados com insights acionáveis"
+                },
+                "button": "Pergunte ao cão-guia"
+            },
+            "keyDisplay": {
+                "title": "GuideDog usa uma chave de API para acessar sua base de código",
+                "input": "Por favor insira sua chave API...",
+                "installing": "Instalando e configurando o GuideDog...",
+                "installComplete": "Configuração concluída!",
+                "installError": "A instalação falhou. Por favor, tente novamente.",
+                "tooShort": "A chave de API deve ter pelo menos 10 caracteres",
+                "keyStatus": {
+                    "error": "Chave inválida!"
+                }
             },
             "guideLinesViolations": {
                 "title": "VIOLAÇÕES DAS DIRETRIZES WCAG",
@@ -39,6 +77,23 @@
                 "title": "LISTA DE QUESTÕES",
                 "linePrefix": "Linha",
                 "issuePillSuffix": "problemas"
+            },
+            "history": {
+                "title": "HISTÓRICO DE PROBLEMAS",
+                "linePrefix": "Linha",
+                "subTitle": "História",
+                "issuePillSuffix": "problemas"
+            },
+            "noIssues": {
+                "title": "Nenhum problema encontrado",
+                "startString": "Parece que você está",
+                "middleString": "Pawfect",
+                "endString": "ir",
+                "compliance": "e está em conformidade com as Diretrizes WCAG 2.0",
+                "button": "Ver histórico"
+            },
+            "AccessibilityScore": {
+                "title": "TOTAL DE PROBLEMAS CORRIGIDOS"
             }
         },
         "text": {
