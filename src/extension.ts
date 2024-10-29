@@ -184,6 +184,7 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
   private async _checkGuideDogFolder(webviewView: vscode.WebviewView) {
     const workspaceFolders = vscode.workspace.workspaceFolders;
     if (!workspaceFolders) {
+      vscode.window.showErrorMessage('GuideDog folder not found.');
       return;
     }
 
@@ -357,6 +358,12 @@ class GuideDogSidebarProvider implements vscode.WebviewViewProvider {
       vscode.window.showInformationMessage(`Opened ${fileName} at line ${lineNumber}`);
     } catch (error) {
       vscode.window.showErrorMessage(`Failed to open file: ${error}`);
+      if (this._view) {
+        this._view.webview.postMessage({
+          command: 'fileError',
+          message: `Failed to open the file ${fileName}`,
+        });
+      }
     }
   }
 
